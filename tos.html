@@ -1,341 +1,403 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Nora | Legal</title>
 
-<meta name="description" content="Nora Terms of Service and Privacy Policy. Transparent, privacy-first Discord moderation bot." />
+<meta name="description" content="Nora Terms of Service and Privacy Policy. Transparent privacy-first moderation and automation for Discord.">
 
-<link rel="icon" type="image/png" href="noraapp.png" />
+<link rel="icon" type="image/png" href="noraapp.png">
 
 <style>
-:root {
-  --bg:#0b0f1a;
-  --bg-soft:#12182b;
-  --card:rgba(255,255,255,0.06);
-  --card-hover:rgba(255,255,255,0.12);
-  --border:rgba(255,255,255,0.08);
-  --primary:#aeefff;
-  --accent:#7aa2ff;
-  --text:#ffffff;
-  --muted:rgba(255,255,255,0.7);
-  --radius:18px;
+
+:root{
+--bg:#0b0f1a;
+--bg-soft:#12182b;
+--card:rgba(255,255,255,0.06);
+--card-hover:rgba(255,255,255,0.12);
+--border:rgba(255,255,255,0.08);
+--primary:#aeefff;
+--accent:#7aa2ff;
+--text:#ffffff;
+--muted:rgba(255,255,255,0.7);
+--radius:18px;
 }
 
-* { box-sizing:border-box; }
+*{box-sizing:border-box}
 
-body {
-  margin:0;
-  font-family:"Inter","Segoe UI",system-ui,sans-serif;
-  background:
-    radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
-    radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
+body{
+margin:0;
+font-family:"Inter","Segoe UI",system-ui,sans-serif;
+background:
+radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
+radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
+var(--bg);
+color:var(--text);
+min-height:100vh;
 }
 
-a { color:var(--primary); text-decoration:none; }
+a{color:var(--primary);text-decoration:none}
 
-header {
-  position:sticky;
-  top:0;
-  z-index:1000;
-  backdrop-filter:blur(10px);
-  background:rgba(10,14,30,.75);
-  border-bottom:1px solid var(--border);
+header{
+position:sticky;
+top:0;
+z-index:1000;
+backdrop-filter:blur(10px);
+background:rgba(10,14,30,.75);
+border-bottom:1px solid var(--border);
 }
 
-.nav {
-  max-width:1200px;
-  margin:0 auto;
-  padding:1rem 1.5rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+.nav{
+max-width:1200px;
+margin:0 auto;
+padding:1rem 1.5rem;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
-.brand {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:700;
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:700;
 }
 
-.brand img {
-  width:40px;
-  height:40px;
-  border-radius:10px;
+.brand img{
+width:40px;
+height:40px;
+border-radius:10px;
 }
 
-.nav-links {
-  display:flex;
-  gap:18px;
-  font-weight:600;
-  color:var(--muted);
+.nav-links{
+display:flex;
+gap:18px;
+font-weight:600;
+color:var(--muted);
 }
 
 .nav-links a.active,
-.nav-links a:hover { color:var(--primary); }
+.nav-links a:hover{color:var(--primary)}
 
-.container {
-  max-width:1000px;
-  margin:0 auto;
-  padding:4rem 1.5rem;
+.container{
+max-width:1000px;
+margin:0 auto;
+padding:4rem 1.5rem;
 }
 
-.hero {
-  text-align:center;
-  padding-top:2rem;
+.hero{text-align:center;padding-top:2rem}
+
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:999px;
+background:rgba(174,239,255,0.12);
+color:var(--primary);
+font-weight:700;
+font-size:.75rem;
+margin-bottom:18px;
 }
 
-.badge {
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:999px;
-  background:rgba(174,239,255,0.12);
-  color:var(--primary);
-  font-weight:700;
-  font-size:.75rem;
-  margin-bottom:18px;
+.hero h1{font-size:clamp(2.2rem,4vw,3rem);margin-bottom:12px}
+
+.hero p{color:var(--muted);max-width:720px;margin:0 auto 36px}
+
+.switch-wrap{display:flex;justify-content:center;margin-bottom:48px}
+
+.switch{
+position:relative;
+display:grid;
+grid-template-columns:1fr 1fr;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:999px;
+padding:6px;
+width:360px;
 }
 
-.hero h1 {
-  font-size:clamp(2.2rem,4vw,3rem);
-  margin-bottom:12px;
+.switch button{
+position:relative;
+z-index:2;
+background:none;
+border:none;
+padding:14px 0;
+font-weight:800;
+color:var(--muted);
+cursor:pointer;
 }
 
-.hero p {
-  color:var(--muted);
-  max-width:720px;
-  margin:0 auto 36px;
+.switch button.active{color:#000}
+
+.indicator{
+position:absolute;
+top:6px;
+bottom:6px;
+width:50%;
+background:var(--primary);
+border-radius:999px;
+z-index:1;
+transition:transform .45s cubic-bezier(.4,0,.2,1);
 }
 
-.switch-wrap {
-  display:flex;
-  justify-content:center;
-  margin-bottom:48px;
+.switch[data-active="privacy"] .indicator{transform:translateX(100%)}
+
+.legal-card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:42px;
+line-height:1.75;
+color:var(--muted);
 }
 
-.switch {
-  position:relative;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:999px;
-  padding:6px;
-  width:360px;
+.legal-card h2{color:var(--primary);margin-top:0}
+
+.legal-card h3{color:var(--text);margin-top:32px}
+
+.hidden{display:none}
+
+footer{
+border-top:1px solid var(--border);
+padding:32px 1.5rem;
+text-align:center;
+color:var(--muted);
 }
 
-.switch button {
-  position:relative;
-  z-index:2;
-  background:none;
-  border:none;
-  padding:14px 0;
-  font-weight:800;
-  color:var(--muted);
-  cursor:pointer;
-  transition:.3s;
-}
-
-.switch button.active { color:#000; }
-
-.indicator {
-  position:absolute;
-  top:6px;
-  bottom:6px;
-  width:50%;
-  background:var(--primary);
-  border-radius:999px;
-  z-index:1;
-  transition:transform .45s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 10px 30px rgba(174,239,255,.35);
-}
-
-.switch[data-active="privacy"] .indicator {
-  transform:translateX(100%);
-}
-
-.legal-card {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:42px;
-  line-height:1.7;
-  color:var(--muted);
-  animation:fadeIn .5s ease;
-}
-
-.legal-card h2 {
-  color:var(--primary);
-  margin-top:0;
-}
-
-.legal-card h3 {
-  color:var(--text);
-  margin-top:32px;
-}
-
-.hidden { display:none; }
-
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(8px); }
-  to { opacity:1; transform:none; }
-}
-
-footer {
-  border-top:1px solid var(--border);
-  padding:32px 1.5rem;
-  text-align:center;
-  color:var(--muted);
-}
-
-@media(max-width:800px){
-  .nav-links{ display:none; }
-  .switch{ width:100%; }
-}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="nav">
-    <div class="brand">
-      <img src="Nora Logo (Updated Bot Logo).png" alt="Nora">
-      <span>Nora</span>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="team.html">Team</a>
-      <a href="ai-helper.html">Kite AI</a>
-      <a href="AI.html">Nora AI</a>
-      <a href="tos.html" class="active">Legal</a>
-    </nav>
-  </div>
+<div class="nav">
+
+<div class="brand">
+<img src="Nora Logo (Updated Bot Logo).png">
+<span>Nora</span>
+</div>
+
+<nav class="nav-links">
+<a href="index.html">Home</a>
+<a href="team.html">Team</a>
+<a href="ai-helper.html">Kite AI</a>
+<a href="AI.html">Nora AI</a>
+<a href="tos.html" class="active">Legal</a>
+</nav>
+
+</div>
 </header>
 
 <main class="container">
 
 <section class="hero">
-  <div class="badge">LEGAL</div>
-  <h1>Terms & Privacy</h1>
-  <p>Nora only uses the permissions it’s given, doesn’t do anything outside its purpose, and keeps control with the server owner.</p>
+<div class="badge">LEGAL</div>
+<h1>Terms of Service & Privacy Policy</h1>
+<p>
+These documents explain how Nora operates, how server data is handled,
+and the responsibilities of administrators who use the service.
+</p>
 </section>
 
 <div class="switch-wrap">
-  <div class="switch" id="switch" data-active="tos">
-    <div class="indicator"></div>
-    <button id="btnTos" class="active">Terms of Service</button>
-    <button id="btnPrivacy">Privacy Policy</button>
-  </div>
+<div class="switch" id="switch" data-active="tos">
+<div class="indicator"></div>
+<button id="btnTos" class="active">Terms of Service</button>
+<button id="btnPrivacy">Privacy Policy</button>
+</div>
 </div>
 
-<!-- TERMS -->
 <div class="legal-card" id="tosContent">
-  <h2>Terms of Service</h2>
 
-  <h3>1. Acceptance of Terms</h3>
-  <p>By inviting, accessing, or using Nora ("the Service"), you agree to be bound by these Terms of Service and Discord’s Terms of Service. If you do not agree, you must not use Nora.</p>
+<h2>Terms of Service</h2>
 
-  <h3>2. Description of Service</h3>
-  <p>Nora is an AI-powered moderation, utility, and community management bot for Discord. Features may include moderation tools, AI assistance, leveling systems, welcome notifications, logging, and server configuration utilities.</p>
+<h3>1. Agreement to Terms</h3>
+<p>
+By inviting, installing, or using Nora within a Discord server,
+you acknowledge that you have read and agreed to these Terms of Service.
+If you do not agree with these terms you must remove the bot from your server.
+</p>
 
-  <h3>3. Eligibility</h3>
-  <p>You must comply with Discord’s Terms of Service and Community Guidelines. Server owners and administrators are responsible for ensuring Nora is used lawfully within their server.</p>
+<h3>2. Relationship with Discord</h3>
+<p>
+Nora operates through the Discord platform and relies on the Discord API.
+Users must comply with Discord's Terms of Service and Community Guidelines.
+Violations of Discord policies may result in removal of access to the service.
+</p>
 
-  <h3>4. Server Administrator Responsibility</h3>
-  <p>Server owners and authorized moderators are solely responsible for configuring Nora, enabling or disabling features, assigning permissions, and managing how Nora operates within their server.</p>
+<h3>3. Description of the Service</h3>
+<p>
+Nora is a community moderation and management tool designed for Discord servers.
+The service provides configurable tools that allow administrators to automate
+moderation workflows, manage server settings, and improve community interaction.
+</p>
 
-  <h3>5. AI & Automated Features</h3>
-  <p>Nora may provide AI-generated suggestions or automated moderation actions. These are provided for assistance only. Human moderators retain full authority and responsibility for moderation decisions.</p>
+<h3>4. Moderation Responsibility</h3>
+<p>
+Nora provides automation tools but does not replace human moderation.
+Server administrators remain fully responsible for moderation decisions,
+role assignments, and the configuration of automated systems.
+</p>
 
-  <h3>6. Leveling & Engagement Systems</h3>
-  <p>If enabled, Nora’s leveling system processes minimal activity-related data (such as message counts or event triggers) strictly within the server to calculate progression. Leveling data is isolated per server and not shared across servers.</p>
+<h3>5. Command and Permission Usage</h3>
+<p>
+Nora operates using the permissions granted to it by server administrators.
+Commands may only execute actions that the bot has been granted permission to perform.
+Improper permission configuration may result in unexpected behavior.
+</p>
 
-  <h3>7. Welcome & Event Features</h3>
-  <p>When the welcomer feature is enabled via commands (e.g., set welcomer), Nora listens for member join events to send welcome messages in the configured channel. This may include mentioning the user and displaying their Discord profile image.</p>
+<h3>6. AI Assistance Features</h3>
+<p>
+Some Nora features may include AI-generated responses or automated moderation suggestions.
+These systems are designed to assist moderators but should not be relied upon as the
+sole authority for moderation decisions.
+</p>
 
-  <h3>8. Prohibited Use</h3>
-  <p>You may not use Nora to violate laws, Discord policies, harass users, collect unauthorized personal data, or abuse automation features.</p>
+<h3>7. Feature Availability</h3>
+<p>
+Features may be updated, modified, or removed at any time as the service evolves.
+New features may be introduced as part of development improvements.
+</p>
 
-  <h3>9. Availability & Changes</h3>
-  <p>Nora is provided “as-is” without uptime guarantees. Features may be modified, limited, or discontinued at any time.</p>
+<h3>8. Acceptable Use</h3>
+<p>
+Users may not use Nora for unlawful activity, harassment, data harvesting,
+or attempts to abuse the Discord platform.
+</p>
 
-  <h3>10. Limitation of Liability</h3>
-  <p>To the fullest extent permitted by law, Nora and its developers shall not be liable for damages, data loss, moderation outcomes, or service interruptions.</p>
+<h3>9. Service Availability</h3>
+<p>
+Nora is provided on an "as available" basis. Service interruptions may occur
+due to infrastructure maintenance, software updates, or external service issues.
+</p>
 
-  <h3>11. Termination</h3>
-  <p>Access to Nora may be suspended or terminated for violations of these Terms or misuse of the Service.</p>
+<h3>10. Termination</h3>
+<p>
+Access to the service may be suspended or restricted if the system is abused
+or used in violation of these Terms.
+</p>
+
+<h3>11. Limitation of Liability</h3>
+<p>
+To the maximum extent permitted by law, Nora and its developer are not liable
+for damages resulting from service interruptions, configuration errors,
+or moderation outcomes performed through the system.
+</p>
+  
+<p><strong>Last Updated:</strong> March 10, 2026</p>
+
 </div>
 
-<!-- PRIVACY -->
 <div class="legal-card hidden" id="privacyContent">
-  <h2>Privacy Policy</h2>
 
-  <h3>1. Privacy-First Principle</h3>
-  <p>Nora is designed with privacy as a core principle. Server data belongs to the server and its members, not Nora, its developers, or its founder.</p>
+<h2>Privacy Policy</h2>
 
-  <h3>2. Data Collected</h3>
-  <p>Nora collects only minimal data required to function. This may include server IDs, channel IDs, role IDs, command configuration, and feature-specific data.</p>
+<h3>1. Privacy-First Design</h3>
+<p>
+Nora is designed with privacy as a core principle.
+The system only processes the minimum data necessary for functionality.
+</p>
 
-  <h3>3. Leveling System Data</h3>
-  <p>If enabled, Nora processes limited activity indicators (such as message events or participation triggers) to calculate user levels. This data exists only within the server where it was generated and is not shared or aggregated globally.</p>
+<h3>2. Operational Data</h3>
+<p>
+The system may store limited operational information required to function.
+This includes server identifiers, configuration settings, and command usage triggers.
+</p>
 
-  <h3>4. Welcome & Join Events</h3>
-  <p>When the welcomer feature is enabled, Nora temporarily processes Discord join events to send welcome messages. This may include mentioning the joining user and displaying their Discord avatar. No join data is sold, profiled, or reused.</p>
+<h3>3. Server Configuration Data</h3>
+<p>
+Configuration settings may include enabled features,
+configured channels, role identifiers, moderation settings,
+and leveling configuration information.
+</p>
 
-  <h3>5. Message Content</h3>
-  <p>Message content may be processed in-memory for moderation or AI context but is not permanently stored unless explicitly required for a configured moderation feature.</p>
+<h3>4. Message Processing</h3>
+<p>
+Message content may be temporarily processed for moderation filters or AI context.
+This processing occurs in memory and is not permanently stored unless a
+specific feature requires it.
+</p>
 
-  <h3>6. No Developer Access</h3>
-  <p>Nora developers and its founder do not view, monitor, or access server messages or private user data.</p>
+<h3>5. Leveling System Data</h3>
+<p>
+When the leveling system is enabled, Nora may record user activity indicators
+such as message events or interaction counts to calculate progression.
+</p>
 
-  <h3>7. Data Isolation</h3>
-  <p>Each server’s data is isolated. Data from one server is never visible to or shared with another server.</p>
+<h3>6. Join Event Processing</h3>
+<p>
+When a server enables the welcome system, Nora listens for member join events
+to generate welcome messages.
+</p>
 
-  <h3>8. Data Sharing</h3>
-  <p>No data is sold, rented, or shared with third parties. Nora does not use server data for advertising or analytics beyond service operation.</p>
+<h3>7. Data Isolation</h3>
+<p>
+Each server's data is isolated. Data generated in one server
+is never shared with or visible to other servers.
+</p>
 
-  <h3>9. Data Deletion</h3>
-  <p>Server owners may delete configuration or feature data through commands or by removing Nora from the server. Removal of the bot deletes associated server data.</p>
+<h3>8. Data Sharing</h3>
+<p>
+Nora does not sell, rent, or distribute server data to third parties.
+Data collected is used solely for operating the service.
+</p>
 
-  <h3>10. Policy Updates</h3>
-  <p>This Privacy Policy may be updated to reflect feature changes or legal requirements. Updates will be communicated through official Nora channels.</p>
+<h3>9. Data Retention</h3>
+<p>
+Data is retained only as long as necessary for the feature that generated it.
+Removing Nora from a server deletes configuration data associated with that server.
+</p>
+
+<h3>10. Security Practices</h3>
+<p>
+Reasonable security practices are implemented to protect configuration data
+from unauthorized access.
+</p>
+
+<h3>11. Policy Updates</h3>
+<p>
+This policy may be updated periodically as the system evolves.
+Updated versions will be published on the Nora website.
+</p>
+
+<p><strong>Last Updated:</strong> March 10, 2026</p>
+
 </div>
 
 </main>
 
 <footer>
-© 2026 Nora | Privacy-First AI & Moderation for Discord
+© 2026 Nora | Privacy-First Discord Systems
 </footer>
 
 <script>
-const switcher = document.getElementById('switch');
-const tosBtn = document.getElementById('btnTos');
-const privBtn = document.getElementById('btnPrivacy');
-const tos = document.getElementById('tosContent');
-const privacy = document.getElementById('privacyContent');
 
-tosBtn.onclick = () => {
-  switcher.dataset.active = "tos";
-  tosBtn.classList.add('active');
-  privBtn.classList.remove('active');
-  tos.classList.remove('hidden');
-  privacy.classList.add('hidden');
-};
+const switcher=document.getElementById('switch')
+const tosBtn=document.getElementById('btnTos')
+const privBtn=document.getElementById('btnPrivacy')
+const tos=document.getElementById('tosContent')
+const privacy=document.getElementById('privacyContent')
 
-privBtn.onclick = () => {
-  switcher.dataset.active = "privacy";
-  privBtn.classList.add('active');
-  tosBtn.classList.remove('active');
-  privacy.classList.remove('hidden');
-  tos.classList.add('hidden');
-};
+tosBtn.onclick=()=>{
+switcher.dataset.active="tos"
+tosBtn.classList.add('active')
+privBtn.classList.remove('active')
+tos.classList.remove('hidden')
+privacy.classList.add('hidden')
+}
+
+privBtn.onclick=()=>{
+switcher.dataset.active="privacy"
+privBtn.classList.add('active')
+tosBtn.classList.remove('active')
+privacy.classList.remove('hidden')
+tos.classList.add('hidden')
+}
+
 </script>
 
 </body>
 </html>
+```
