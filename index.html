@@ -1,329 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nora — Privacy-First Discord Bot</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Nora is a privacy-first Discord moderation & AI assistant bot. Transparent, safe, and fully controlled by server owners." />
-  <meta property="og:title" content="Nora — Privacy-First Discord Bot" />
-  <meta property="og:description" content="Modern AI moderation for Discord. No developer access. No hidden logging." />
-  <meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png" />
-  <meta property="og:type" content="website" />
+<title>Nora — Privacy-First Discord Bot</title>
 
-  <link rel="icon" type="image/png" href="noraapp.png" />
+<meta name="description" content="Nora is a privacy-first Discord moderation and AI assistant bot built for transparency, safety, and full server control.">
 
-  <style>
-    :root {
-      --bg: #0b0f1a;
-      --bg-soft: #12182b;
-      --card: rgba(255,255,255,0.06);
-      --card-hover: rgba(255,255,255,0.12);
-      --border: rgba(255,255,255,0.08);
-      --primary: #aeefff;
-      --accent: #7aa2ff;
-      --text: #ffffff;
-      --muted: rgba(255,255,255,0.7);
-      --radius: 18px;
-    }
+<meta property="og:title" content="Nora — Privacy-First Discord Bot">
+<meta property="og:description" content="Modern AI moderation for Discord with privacy and transparency.">
+<meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
+<meta property="og:type" content="website">
 
-    * { box-sizing: border-box; }
+<link rel="icon" type="image/png" href="noraapp.png">
 
-    body {
-      margin: 0;
-      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-      background: radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
-                  radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
-                  var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+<style>
 
-    a { color: inherit; text-decoration: none; }
+:root{
+--bg:#0b0f1a;
+--bg-soft:#12182b;
+--card:rgba(255,255,255,0.06);
+--card-hover:rgba(255,255,255,0.12);
+--border:rgba(255,255,255,0.08);
+--primary:#aeefff;
+--accent:#7aa2ff;
+--text:#ffffff;
+--muted:rgba(255,255,255,0.7);
+--radius:18px;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      background: rgba(10,14,30,0.75);
-      border-bottom: 1px solid var(--border);
-    }
+*{
+box-sizing:border-box;
+}
 
-    .nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+body{
+margin:0;
+font-family:"Inter","Segoe UI",system-ui,sans-serif;
+background:
+radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
+radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
+var(--bg);
+color:var(--text);
+min-height:100vh;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      letter-spacing: 0.4px;
-    }
+a{
+color:inherit;
+text-decoration:none;
+}
 
-    .brand img {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-    }
+header{
+position:sticky;
+top:0;
+z-index:1000;
+backdrop-filter:blur(10px);
+background:rgba(10,14,30,0.75);
+border-bottom:1px solid var(--border);
+}
 
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      font-weight: 600;
-      color: var(--muted);
-    }
+.nav{
+max-width:1200px;
+margin:auto;
+padding:1rem 1.5rem;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
 
-    .nav-links a:hover { color: var(--text); }
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:700;
+letter-spacing:.4px;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem;
-    }
+.brand img{
+width:40px;
+height:40px;
+border-radius:10px;
+}
 
-    section { margin-bottom: 6rem; }
+.nav-links{
+display:flex;
+gap:18px;
+font-weight:600;
+color:var(--muted);
+}
 
-    .hero {
-      text-align: center;
-      padding-top: 2rem;
-    }
+.nav-links a:hover{
+color:var(--text);
+}
 
-    .badge {
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(174,239,255,0.12);
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.6px;
-      margin-bottom: 18px;
-    }
+.container{
+max-width:1200px;
+margin:auto;
+padding:4rem 1.5rem;
+}
 
-    .hero h1 {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      line-height: 1.1;
-      margin: 0 0 18px;
-    }
+section{
+margin-bottom:6rem;
+}
 
-    .hero p {
-      max-width: 760px;
-      margin: 0 auto 32px;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
+.hero{
+text-align:center;
+padding-top:2rem;
+}
 
-    .cta {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:999px;
+background:rgba(174,239,255,0.12);
+color:var(--primary);
+font-weight:700;
+font-size:.75rem;
+letter-spacing:.6px;
+margin-bottom:18px;
+}
 
-    .btn {
-      padding: 14px 26px;
-      border-radius: 999px;
-      font-weight: 800;
-      border: none;
-      cursor: pointer;
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
+.hero h1{
+font-size:clamp(2.2rem,4vw,3.2rem);
+line-height:1.1;
+margin:0 0 18px;
+}
 
-    .btn-primary {
-      background: var(--primary);
-      color: #000;
-      box-shadow: 0 10px 30px rgba(174,239,255,0.25);
-    }
+.hero p{
+max-width:760px;
+margin:0 auto 32px;
+color:var(--muted);
+font-size:1.05rem;
+}
 
-    .btn-primary:hover { transform: translateY(-4px); }
+.cta{
+display:flex;
+justify-content:center;
+gap:16px;
+flex-wrap:wrap;
+}
 
-    .btn-ghost {
-      background: transparent;
-      border: 2px solid var(--border);
-      color: var(--text);
-    }
+.btn{
+padding:14px 26px;
+border-radius:999px;
+font-weight:800;
+border:none;
+cursor:pointer;
+transition:.25s;
+display:inline-flex;
+align-items:center;
+gap:10px;
+}
 
-    .btn-ghost:hover { border-color: var(--primary); }
+.btn-primary{
+background:var(--primary);
+color:#000;
+box-shadow:0 10px 30px rgba(174,239,255,.25);
+}
 
-    .trust {
-      text-align: center;
-    }
+.btn-primary:hover{
+transform:translateY(-4px);
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
+.btn-ghost{
+background:transparent;
+border:2px solid var(--border);
+}
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px;
-      transition: .25s;
-    }
+.btn-ghost:hover{
+border-color:var(--primary);
+}
 
-    .card:hover { background: var(--card-hover); transform: translateY(-6px); }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px;
+}
 
-    .card h3 { margin-top: 0; }
-    .card p { color: var(--muted); }
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:26px;
+transition:.25s;
+}
 
-    .cmd {
-      font-family: monospace;
-      background: rgba(0,0,0,0.35);
-      padding: 8px 12px;
-      border-radius: 10px;
-      display: inline-block;
-      margin-bottom: 10px;
-    }
+.card:hover{
+background:var(--card-hover);
+transform:translateY(-6px);
+}
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 1.5rem;
-      text-align: center;
-      color: var(--muted);
-    }
+.card p{
+color:var(--muted);
+}
 
-    @media (max-width: 800px) {
-      .nav-links { display: none; }
-    }
-  </style>
+.cmd{
+font-family:monospace;
+background:rgba(0,0,0,.35);
+padding:8px 12px;
+border-radius:10px;
+display:inline-block;
+margin-bottom:10px;
+}
+
+.update-list{
+display:flex;
+flex-direction:column;
+gap:28px;
+}
+
+.update-card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:34px;
+transition:.25s;
+}
+
+.update-card:hover{
+background:var(--card-hover);
+transform:translateY(-6px);
+}
+
+.update-meta{
+font-size:.8rem;
+letter-spacing:.6px;
+color:var(--primary);
+font-weight:700;
+margin-bottom:6px;
+}
+
+footer{
+border-top:1px solid var(--border);
+padding:32px 1.5rem;
+text-align:center;
+color:var(--muted);
+}
+
+@media(max-width:800px){
+.nav-links{
+display:none;
+}
+}
+
+</style>
 </head>
+
 <body>
 
 <header>
-  <div class="nav">
-    <div class="brand">
-      <img src="Nora Logo (Updated Bot Logo).png" alt="Nora" />
-      <span>Nora</span>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="team.html">Team</a>
-      <a href="ai-helper.html">Kite AI</a>
-      <a href="AI.html">Nora AI</a>
-      <a href="tos.html">Legal</a>
-    </nav>
-  </div>
+<div class="nav">
+
+<div class="brand">
+<img src="Nora Logo (Updated Bot Logo).png" alt="Nora">
+<span>Nora</span>
+</div>
+
+<nav class="nav-links">
+<a href="index.html">Home</a>
+<a href="team.html">Team</a>
+<a href="ai-helper.html">Kite AI</a>
+<a href="AI.html">Nora AI</a>
+<a href="tos.html">Legal</a>
+</nav>
+
+</div>
 </header>
 
 <main class="container">
 
-  <section class="hero">
-    <div class="badge">PRIVACY-FIRST DISCORD BOT</div>
-    <h1>Moderation & AI <br>Built for Trust</h1>
-    <p>
-      Nora is a modern Discord moderation and AI bot designed with one rule:
-      your server data stays yours. No hidden access. No silent logging.
-    </p>
-  </section>
+<section class="hero">
 
-  <section class="trust">
-    <h2>Trusted on Top.gg</h2>
-    <p class="muted">
-      Help Nora grow by voting, rating, or adding it to your server.
-      Every vote increases visibility.
-    </p>
+<div class="badge">PRIVACY-FIRST DISCORD BOT</div>
 
-    <div class="cta" style="margin-top: 24px;">
-      <a class="btn btn-primary" href="https://top.gg/bot/1375943730951098549/vote" target="_blank">
-        Vote on Top.gg
-      </a>
-      <a class="btn btn-ghost" href="https://top.gg/bot/1375943730951098549" target="_blank">
-        View Profile
-      </a>
-    </div>
-  </section>
+<h1>Moderation & AI Built for Trust</h1>
 
-  <section>
-    <h2>Core Principles</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Privacy by Default</h3>
-        <p>Server content is never accessible to developers. Data stays isolated and controlled.</p>
-      </div>
-      <div class="card">
-        <h3>AI-Assisted Moderation (BETA)</h3>
-        <p>Nora assists moderators by identifying harmful patterns, not replacing human judgment.</p>
-      </div>
-      <div class="card">
-        <h3>Moderator-First Design</h3>
-        <p>Commands, logs, and controls are built to be predictable, fast, and auditable.</p>
-      </div>
-    </div>
-  </section>
+<p>
+Nora is a modern Discord moderation and AI assistant bot designed around
+one simple rule: server data belongs to the server that created it.
+No hidden logging. No developer access to private content.
+Communities stay in control.
+</p>
 
-  <section>
-    <h2>Example Commands</h2>
-    <div class="grid">
-      <div class="card"><div class="cmd">/ban</div><p>Securely remove disruptive members.</p></div>
-      <div class="card"><div class="cmd">/mute</div><p>Temporary moderation with clear time limits.</p></div>
-      <div class="card"><div class="cmd">/ask</div><p>AI assistance inside Discord conversations.</p></div>
-      <div class="card"><div class="cmd">/privacy</div><p>View or delete stored server data instantly.</p></div>
-    </div>
-  </section>
+<div class="cta">
 
-  <section>
-    <h2>Latest Updates</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>AI Upgrade</h3>
-        <p>
-          Nora has been upgraded from ChatGPT (gpt-4o-mini) to ChatGPT (gpt-4.1-mini),
-          delivering improved performance and more reliable AI responses.
-        </p>
-      </div>
+<a class="btn btn-primary" href="https://top.gg/bot/1375943730951098549/vote" target="_blank">
+Vote on Top.gg
+</a>
 
-      <div class="card">
-        <h3>Series N & Leveling</h3>
-        <p>
-          Series N introduces a new pack of commands with its own category and leveling system.
-          The Leveling Series N system is now fully rolled out, including major improvements
-          to how leveling functions.
-        </p>
-      </div>
+<a class="btn btn-ghost" href="https://top.gg/bot/1375943730951098549" target="_blank">
+View Profile
+</a>
 
-      <div class="card">
-        <h3>Server-Specific Progress</h3>
-        <p>
-          Leveling Series N is now server-specific, ensuring progress and rankings
-          remain isolated per server. This update also resolved issues related to
-          Modify Level.
-        </p>
-      </div>
+</div>
 
-      <div class="card">
-        <h3>Leaderboard Command</h3>
-        <p>
-          A new <span class="cmd">/leaderboard</span> command allows users to view ranking
-          progress within the leveling system directly in Discord.
-        </p>
-      </div>
+</section>
 
-      <div class="card">
-        <h3>Performance Improvements</h3>
-        <p>
-          Nora can now operate continuously throughout the entire month without disabling
-          commands due to rate limits, resulting in faster and more responsive behavior.
-        </p>
-      </div>
-    </div>
-  </section>
+<section>
+
+<h2>Core Principles</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Privacy by Default</h3>
+<p>
+Nora is built so server content is never accessible to developers.
+All data remains isolated to the server that generated it.
+</p>
+</div>
+
+<div class="card">
+<h3>Transparent Systems</h3>
+<p>
+Every feature in Nora is designed so administrators understand exactly
+what data exists and how it is used.
+</p>
+</div>
+
+<div class="card">
+<h3>Moderator First Design</h3>
+<p>
+Moderation tools prioritize reliability and clarity so staff can act
+quickly and confidently when managing communities.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Example Commands</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="cmd">/ban</div>
+<p>Remove disruptive members from your server securely.</p>
+</div>
+
+<div class="card">
+<div class="cmd">/mute</div>
+<p>Apply temporary restrictions with clear time limits.</p>
+</div>
+
+<div class="card">
+<div class="cmd">/ask</div>
+<p>Ask Nora AI questions directly inside Discord.</p>
+</div>
+
+<div class="card">
+<div class="cmd">/privacy</div>
+<p>View or delete stored data instantly.</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Latest Nora Updates</h2>
+
+<div class="update-list">
+
+<div class="update-card">
+
+<div class="update-meta">2026 Update</div>
+
+<h3>Nora Studio Manager</h3>
+
+<p>
+Development has begun on Nora Studio Manager, a new dashboard
+that will allow server owners to manage all Nora features
+through a modern interface.
+</p>
+
+<p>
+The dashboard will include server configuration tools,
+privacy controls, and command management.
+</p>
+
+</div>
+
+<div class="update-card">
+
+<div class="update-meta">2026 Update</div>
+
+<h3>Moderation Series N</h3>
+
+<p>
+Series N introduces a new set of moderation commands designed
+with stronger error handling and predictable behavior.
+</p>
+
+</div>
+
+<div class="update-card">
+
+<div class="update-meta">2026 Update</div>
+
+<h3>Server Specific Leveling</h3>
+
+<p>
+The leveling system now tracks progress independently per server,
+allowing communities to maintain their own rankings.
+</p>
+
+</div>
+
+<div class="update-card">
+
+<div class="update-meta">2026 Update</div>
+
+<h3>Improved Reliability</h3>
+
+<p>
+Internal improvements allow Nora to operate continuously
+without disabling commands due to rate limits.
+</p>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
 <footer>
-  © 2026 Nora | Privacy-First AI & Moderation for Discord
+
+© 2026 Nora — Privacy-First AI & Moderation for Discord
+
 </footer>
 
 </body>
