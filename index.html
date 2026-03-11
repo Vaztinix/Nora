@@ -411,29 +411,59 @@ allowing communities to maintain their own rankings.
 
 </div>
 
-<div class="update-card">
-
-<div class="update-meta">2026 Update</div>
-
-<h3>Improved Reliability</h3>
-
-<p>
-Internal improvements allow Nora to operate continuously
-without disabling commands due to rate limits.
-</p>
-
+<div id="discord-overlay" class="hidden">
+  <div class="overlay-content">
+    <img id="discord-avatar" src="" alt="Avatar">
+    <span id="discord-username"></span>
+    <button id="logout-btn">Logout</button>
+  </div>
 </div>
 
-</div>
+<button id="login-btn" style="position:fixed;bottom:20px;right:20px;padding:12px 20px;border-radius:999px;font-weight:700;background:var(--primary);color:#000;cursor:pointer;z-index:999;">Login with Discord</button>
 
-</section>
+<script>
+// Elements
+const overlay = document.getElementById('discord-overlay');
+const avatarEl = document.getElementById('discord-avatar');
+const usernameEl = document.getElementById('discord-username');
+const loginBtn = document.getElementById('login-btn');
+const logoutBtn = document.getElementById('logout-btn');
 
-</main>
+// Discord OAuth URL
+const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&response_type=token&scope=identify";
+
+// Login button
+loginBtn.onclick = () => { window.location.href = discordLoginURL; };
+
+// Logout button
+logoutBtn.onclick = () => {
+  sessionStorage.removeItem('discord_token');
+  overlay.classList.add('hidden');
+  loginBtn.style.display = 'block';
+};
+
+// Check token on page load
+window.onload = () => {
+  const token = sessionStorage.getItem('discord_token');
+  if(token){
+    fetch('https://discord.com/api/users/@me', {headers:{Authorization:`Bearer ${token}`}})
+      .then(res => res.json())
+      .then(data => {
+        overlay.classList.remove('hidden');
+        loginBtn.style.display = 'none';
+        avatarEl.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`;
+        usernameEl.textContent = `${data.username}#${data.discriminator}`;
+      })
+      .catch(err => {
+        console.error("Failed to fetch Discord user:", err);
+        sessionStorage.removeItem('discord_token');
+      });
+  }
+};
+</script>
 
 <footer>
-
 © 2026 Nora | Privacy-First AI & Moderation for Discord
-
 </footer>
 
 </body>
