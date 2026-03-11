@@ -585,6 +585,7 @@ allowing communities to maintain their own rankings.
 </style>
 
 <script>
+<script>
 // Elements
 const overlay = document.getElementById('discord-overlay');
 const avatarEl = document.getElementById('discord-avatar');
@@ -597,15 +598,16 @@ const collapseBtn = document.getElementById('collapse-btn');
 // OAuth2 URL
 const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&response_type=token&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&scope=identify+email";
 
-// Login
+// Login button
 loginBtn.onclick = () => { window.location.href = discordLoginURL; };
 
-// Logout
+// Logout button
 logoutBtn.onclick = () => {
   sessionStorage.removeItem('discord_user');
   sessionStorage.removeItem('discord_token');
   overlay.style.display = 'none';
   loginBtn.style.display = 'flex';
+  overlay.classList.remove('collapsed'); // reset collapsed state
 };
 
 // Collapse toggle
@@ -613,14 +615,16 @@ collapseBtn.onclick = () => {
   overlay.classList.toggle('collapsed');
 };
 
-// Fetch user
+// Fetch Discord user safely
 async function fetchDiscordUser(token) {
   try {
     const res = await fetch('https://discord.com/api/users/@me', {
       headers: { Authorization: `Bearer ${token}` }
     });
-    const data = await res.json();
 
+    if (!res.ok) throw new Error(`Discord API error: ${res.status}`);
+
+    const data = await res.json();
     const user = {
       id: data.id,
       username: data.username,
@@ -630,29 +634,49 @@ async function fetchDiscordUser(token) {
     };
     sessionStorage.setItem('discord_user', JSON.stringify(user));
     return user;
-  } catch(err){
-    console.error(err);
+  } catch(err) {
+    console.error('Failed to fetch Discord user:', err);
     return null;
   }
 }
 
-// Initialize overlay
-window.addEventListener('DOMContentLoaded', async () => {
+// Show overlay with user info
+function showOverlay(user) {
+  overlay.style.display = 'block';
+  loginBtn.style.display = 'none';
+  overlay.classList.remove('collapsed'); // start expanded
+  avatarEl.src = user.avatar;
+  usernameEl.textContent = `${user.username}#${user.discriminator}`;
+  emailEl.textContent = user.email || "No email available";
+}
+
+// Initialize overlay safely
+async function initDiscordOverlay() {
+  // Reset overlay state first
+  overlay.style.display = 'none';
+  loginBtn.style.display = 'flex';
+  overlay.classList.remove('collapsed');
+
   const token = sessionStorage.getItem('discord_token');
   let user = JSON.parse(sessionStorage.getItem('discord_user'));
 
-  if(token && !user){
+  if (token && !user) {
     user = await fetchDiscordUser(token);
   }
 
-  if(user){
-    overlay.style.display = 'block';
-    loginBtn.style.display = 'none';
-    avatarEl.src = user.avatar;
-    usernameEl.textContent = `${user.username}#${user.discriminator}`;
-    emailEl.textContent = user.email || "No email available";
+  if (user) {
+    showOverlay(user);
+  } else {
+    // Clear invalid session if fetch fails
+    sessionStorage.removeItem('discord_user');
+    sessionStorage.removeItem('discord_token');
+    overlay.style.display = 'none';
+    loginBtn.style.display = 'flex';
   }
-});
+}
+
+// Run on page load
+window.addEventListener('DOMContentLoaded', initDiscordOverlay);
 </script>
 <footer>
 © 2026 Nora | Privacy-First AI & Moderation for Discord
