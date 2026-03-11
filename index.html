@@ -411,17 +411,19 @@ allowing communities to maintain their own rankings.
 
 </div>
 
-<div id="discord-overlay" class="hidden">
+<div id="discord-overlay">
   <div class="overlay-content">
     <div class="user-preview">
       <img id="discord-avatar" class="avatar" src="" alt="Avatar">
       <div class="user-info">
         <span id="discord-username" class="username">Username#0000</span>
         <span id="discord-email" class="user-email">email@example.com</span>
-        <span id="discord-presence" class="user-presence offline">Offline</span>
       </div>
     </div>
     <button id="logout-btn" class="btn btn-ghost">Logout</button>
+    <button id="collapse-btn" class="collapse-btn">
+      <span class="arrow">⯈⯇</span>
+    </button>
   </div>
 </div>
 
@@ -431,36 +433,54 @@ allowing communities to maintain their own rankings.
 </button>
 
 <style>
-/* Floating overlay card */
-#discord-overlay {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  background: var(--card);
-  color: var(--text);
-  padding: 22px 28px;
-  border-radius: 18px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-  z-index: 9999;
-  width: 280px;
-  display: none;
-  transition: all 0.3s ease;
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
 }
 
+/* Overlay container */
+#discord-overlay {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  background: var(--glass-bg);
+  border-radius: 20px;
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px var(--glass-shadow);
+  z-index: 9999;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+/* Expanded overlay content */
+.overlay-content {
+  padding: 22px 28px 40px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* User preview flex */
 .user-preview {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 14px;
 }
 
+/* Avatar styling */
 .avatar {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  border: 3px solid var(--primary);
+  border: 2px solid var(--glass-border);
+  transition: transform 0.3s ease;
 }
 
+/* User info */
 .user-info {
   display: flex;
   flex-direction: column;
@@ -468,36 +488,55 @@ allowing communities to maintain their own rankings.
 
 .username {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--accent);
-  margin-bottom: 2px;
 }
 
 .user-email {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-bottom: 2px;
-  word-break: break-word;
+  font-size: 0.9rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.user-presence {
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-/* Presence colors */
-.user-presence.online { color: #43b581; }
-.user-presence.idle { color: #faa61a; }
-.user-presence.dnd { color: #f04747; }
-.user-presence.offline { color: var(--muted); }
-
-.buttons .btn {
-  width: 100%;
-  padding: 10px 0;
+/* Logout button */
+#logout-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
   font-weight: 700;
-  margin-top: 6px;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 0;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+#logout-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
+/* Collapse button */
+.collapse-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+.collapse-btn .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Login button */
 .login-btn {
   position: fixed;
   bottom: 20px;
@@ -509,7 +548,7 @@ allowing communities to maintain their own rankings.
   gap: 10px;
   font-weight: 700;
   cursor: pointer;
-  z-index: 999;
+  z-index: 998;
 }
 
 .discord-icon {
@@ -517,11 +556,26 @@ allowing communities to maintain their own rankings.
   height: 20px;
 }
 
+/* Collapsed state */
+#discord-overlay.collapsed {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 10px;
+}
+#discord-overlay.collapsed .overlay-content {
+  display: none;
+}
+#discord-overlay.collapsed .collapse-btn .arrow {
+  transform: rotate(90deg);
+}
+
+/* Responsive */
 @media(max-width:600px){
-  #discord-overlay { width: 90%; bottom: 90px; right: 5%; padding: 18px; }
+  #discord-overlay { width: 90%; bottom: 80px; right: 5%; padding: 18px; }
   .avatar { width: 55px; height: 55px; }
   .username { font-size: 1rem; }
-  .user-email, .user-presence { font-size: 0.75rem; }
+  .user-email { font-size: 0.8rem; }
 }
 </style>
 
@@ -531,17 +585,17 @@ const overlay = document.getElementById('discord-overlay');
 const avatarEl = document.getElementById('discord-avatar');
 const usernameEl = document.getElementById('discord-username');
 const emailEl = document.getElementById('discord-email');
-const presenceEl = document.getElementById('discord-presence');
 const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
+const collapseBtn = document.getElementById('collapse-btn');
 
-// Discord OAuth2 implicit grant URL
+// OAuth2 URL
 const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&response_type=token&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&scope=identify+email";
 
-// Login button
+// Login
 loginBtn.onclick = () => { window.location.href = discordLoginURL; };
 
-// Logout button
+// Logout
 logoutBtn.onclick = () => {
   sessionStorage.removeItem('discord_user');
   sessionStorage.removeItem('discord_token');
@@ -549,7 +603,12 @@ logoutBtn.onclick = () => {
   loginBtn.style.display = 'flex';
 };
 
-// Fetch Discord user data
+// Collapse toggle
+collapseBtn.onclick = () => {
+  overlay.classList.toggle('collapsed');
+};
+
+// Fetch user
 async function fetchDiscordUser(token) {
   try {
     const res = await fetch('https://discord.com/api/users/@me', {
@@ -562,18 +621,17 @@ async function fetchDiscordUser(token) {
       username: data.username,
       discriminator: data.discriminator,
       avatar: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`,
-      email: data.email,
-      presence: "offline" // presence is mocked
+      email: data.email
     };
     sessionStorage.setItem('discord_user', JSON.stringify(user));
     return user;
-  } catch(err) {
-    console.error("Failed to fetch Discord user:", err);
+  } catch(err){
+    console.error(err);
     return null;
   }
 }
 
-// Initialize overlay immediately on page load
+// Initialize overlay
 window.addEventListener('DOMContentLoaded', async () => {
   const token = sessionStorage.getItem('discord_token');
   let user = JSON.parse(sessionStorage.getItem('discord_user'));
@@ -588,12 +646,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     avatarEl.src = user.avatar;
     usernameEl.textContent = `${user.username}#${user.discriminator}`;
     emailEl.textContent = user.email || "No email available";
-    presenceEl.textContent = user.presence.charAt(0).toUpperCase() + user.presence.slice(1);
-    presenceEl.className = `user-presence ${user.presence}`;
   }
 });
 </script>
-
 <footer>
 © 2026 Nora | Privacy-First AI & Moderation for Discord
 </footer>
