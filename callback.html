@@ -4,30 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nora Discord Callback</title>
-<style>
-  body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #1e1e1e; color: white; font-family: sans-serif; }
-  h2 { text-align: center; }
-</style>
-</head>
-<body>
-  <div id="loading">
-    <h2>Processing Discord login...</h2>
-  </div>
-
 <script>
+  // Immediately process the token before rendering anything
   const hash = window.location.hash.substring(1);
   const params = new URLSearchParams(hash);
   const token = params.get('access_token');
 
   if (token) {
     sessionStorage.setItem('discord_token', token);
-    window.location.href = 'index.html#loggedin';
+
+    // Redirect to homepage without hash
+    window.location.replace('index.html'); 
+    // use replace() to avoid back button going to callback.html
   } else {
-    document.getElementById('loading').innerHTML = "<h2>Discord login failed. Redirecting...</h2>";
-    setTimeout(() => {
-      window.location.href = 'index.html';
-    }, 2000);
+    // If something went wrong, redirect after brief message
+    document.write('<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#1e1e1e;color:white;font-family:sans-serif;"><h2>Discord login failed. Redirecting...</h2></div>');
+    setTimeout(() => window.location.replace('index.html'), 2000);
   }
 </script>
-</body>
+</head>
+<body></body>
 </html>
