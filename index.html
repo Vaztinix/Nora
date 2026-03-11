@@ -413,13 +413,98 @@ allowing communities to maintain their own rankings.
 
 <div id="discord-overlay" class="hidden">
   <div class="overlay-content">
-    <img id="discord-avatar" src="" alt="Avatar">
-    <span id="discord-username"></span>
-    <button id="logout-btn">Logout</button>
+    <div class="user-info">
+      <img id="discord-avatar" src="" alt="Avatar" class="avatar">
+      <span id="discord-username" class="username"></span>
+    </div>
+    <div class="buttons">
+      <button id="logout-btn" class="btn btn-ghost">Logout</button>
+    </div>
   </div>
 </div>
 
-<button id="login-btn" style="position:fixed;bottom:20px;right:20px;padding:12px 20px;border-radius:999px;font-weight:700;background:var(--primary);color:#000;cursor:pointer;z-index:999;">Login with Discord</button>
+<!-- Login Button -->
+<button id="login-btn" class="btn btn-primary login-btn">
+  <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord Logo" class="discord-icon">
+  Login with Discord
+</button>
+
+<style>
+/* Overlay styling */
+#discord-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.overlay-content {
+  background: var(--bg-soft);
+  padding: 30px 40px;
+  border-radius: 16px;
+  text-align: center;
+  min-width: 280px;
+  max-width: 350px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  word-break: break-word;
+}
+
+.buttons .btn {
+  width: 100%;
+  padding: 12px 0;
+  font-weight: 700;
+}
+
+/* Login button styling */
+.login-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.discord-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive */
+@media(max-width:600px){
+  .overlay-content { padding: 20px 25px; min-width: 90%; }
+  .avatar { width: 80px; height: 80px; }
+  .username { font-size: 1rem; }
+}
+</style>
 
 <script>
 // Elements
@@ -429,20 +514,19 @@ const usernameEl = document.getElementById('discord-username');
 const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 
-// Discord OAuth URL
 const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&response_type=token&scope=identify";
 
-// Login button
+// Login
 loginBtn.onclick = () => { window.location.href = discordLoginURL; };
 
-// Logout button
+// Logout
 logoutBtn.onclick = () => {
   sessionStorage.removeItem('discord_token');
   overlay.classList.add('hidden');
-  loginBtn.style.display = 'block';
+  loginBtn.style.display = 'flex';
 };
 
-// Check token on page load
+// Check token
 window.onload = () => {
   const token = sessionStorage.getItem('discord_token');
   if(token){
