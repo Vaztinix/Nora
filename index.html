@@ -559,63 +559,28 @@ allowing communities to maintain their own rankings.
   height: 20px;
 }
 
-/* Collapsed state with visible buttons */
+/* Collapsed state — only arrows visible */
 #discord-overlay.collapsed {
-  width: 120px; /* increased to fit buttons */
+  width: 70px;
   height: 70px;
-  border-radius: 20px;
+  border-radius: 50%;
   padding: 10px;
 }
 #discord-overlay.collapsed .overlay-content {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 6px;
-}
-#discord-overlay.collapsed .avatar {
-  width: 40px;
-  height: 40px;
-}
-#discord-overlay.collapsed .user-info {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
-#discord-overlay.collapsed .username {
-  font-size: 0.8rem;
-}
-#discord-overlay.collapsed .user-email {
-  display: none; /* optional: hide email in collapsed */
-}
+#discord-overlay.collapsed .user-preview,
+#discord-overlay.collapsed .user-info,
+#discord-overlay.collapsed .username,
+#discord-overlay.collapsed .user-email,
+#discord-overlay.collapsed .avatar,
 #discord-overlay.collapsed #logout-btn {
-  font-size: 0.7rem;
-  padding: 4px 6px;
-  border-radius: 8px;
-}
-#discord-overlay.collapsed .collapse-btn {
-  font-size: 0.9rem;
-  width: 20px;
-  height: 20px;
+  display: none; /* hide everything except arrows */
 }
 #discord-overlay.collapsed .collapse-btn .arrow {
   transform: rotate(90deg);
-  animation: arrow-sway 1.2s ease-in-out infinite alternate;
-}
-
-/* Arrow animation */
-@keyframes arrow-sway {
-  0%   { transform: rotate(90deg) translateX(0); }
-  50%  { transform: rotate(90deg) translateX(2px); }
-  100% { transform: rotate(90deg) translateX(0); }
-}
-
-/* Responsive */
-@media(max-width:600px){
-  #discord-overlay { width: 90%; bottom: 80px; right: 5%; padding: 18px; }
-  .avatar { width: 55px; height: 55px; }
-  .username { font-size: 1rem; }
-  .user-email { font-size: 0.8rem; }
 }
 </style>
 
