@@ -500,7 +500,7 @@ allowing communities to maintain their own rankings.
   text-overflow: ellipsis;
 }
 
-/* Logout button smaller */
+/* Logout button */
 #logout-btn {
   background: rgba(255, 255, 255, 0.15);
   color: white;
@@ -517,7 +517,7 @@ allowing communities to maintain their own rankings.
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* Collapse button smaller and always visible */
+/* Collapse button */
 .collapse-btn {
   position: absolute;
   bottom: 8px;
@@ -559,21 +559,55 @@ allowing communities to maintain their own rankings.
   height: 20px;
 }
 
-/* Collapsed state */
+/* Collapsed state with visible buttons */
 #discord-overlay.collapsed {
-  width: 70px;
+  width: 120px; /* increased to fit buttons */
   height: 70px;
-  border-radius: 50%;
+  border-radius: 20px;
   padding: 10px;
 }
 #discord-overlay.collapsed .overlay-content {
-  display: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+#discord-overlay.collapsed .avatar {
+  width: 40px;
+  height: 40px;
+}
+#discord-overlay.collapsed .user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#discord-overlay.collapsed .username {
+  font-size: 0.8rem;
+}
+#discord-overlay.collapsed .user-email {
+  display: none; /* optional: hide email in collapsed */
+}
+#discord-overlay.collapsed #logout-btn {
+  font-size: 0.7rem;
+  padding: 4px 6px;
+  border-radius: 8px;
 }
 #discord-overlay.collapsed .collapse-btn {
-  display: flex;
+  font-size: 0.9rem;
+  width: 20px;
+  height: 20px;
 }
 #discord-overlay.collapsed .collapse-btn .arrow {
   transform: rotate(90deg);
+  animation: arrow-sway 1.2s ease-in-out infinite alternate;
+}
+
+/* Arrow animation */
+@keyframes arrow-sway {
+  0%   { transform: rotate(90deg) translateX(0); }
+  50%  { transform: rotate(90deg) translateX(2px); }
+  100% { transform: rotate(90deg) translateX(0); }
 }
 
 /* Responsive */
