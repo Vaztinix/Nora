@@ -454,6 +454,7 @@ allowing communities to maintain their own rankings.
   z-index: 9999;
   overflow: hidden;
   transition: all 0.4s ease;
+  display: none; /* start hidden until user is loaded */
 }
 
 /* Expanded overlay content */
@@ -585,7 +586,6 @@ allowing communities to maintain their own rankings.
 </style>
 
 <script>
-<script>
 // Elements
 const overlay = document.getElementById('discord-overlay');
 const avatarEl = document.getElementById('discord-avatar');
@@ -599,21 +599,23 @@ const collapseBtn = document.getElementById('collapse-btn');
 const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&response_type=token&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&scope=identify+email";
 
 // Login button
-loginBtn.onclick = () => { window.location.href = discordLoginURL; };
+loginBtn.addEventListener('click', () => {
+  window.location.href = discordLoginURL;
+});
 
 // Logout button
-logoutBtn.onclick = () => {
+logoutBtn.addEventListener('click', () => {
   sessionStorage.removeItem('discord_user');
   sessionStorage.removeItem('discord_token');
   overlay.style.display = 'none';
   loginBtn.style.display = 'flex';
-  overlay.classList.remove('collapsed'); // reset collapsed state
-};
+  overlay.classList.remove('collapsed');
+});
 
 // Collapse toggle
-collapseBtn.onclick = () => {
+collapseBtn.addEventListener('click', () => {
   overlay.classList.toggle('collapsed');
-};
+});
 
 // Fetch Discord user safely
 async function fetchDiscordUser(token) {
