@@ -541,9 +541,14 @@ const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=13759437
 // Login
 loginBtn.onclick = () => { window.location.href = discordLoginURL; };
 
-// Logout clears session and reloads page
+// Logout (always works)
 logoutBtn.onclick = () => {
+  // Remove any stored user/token info
   sessionStorage.removeItem('discord_user');
+  sessionStorage.removeItem('discord_token');
+  overlay.style.display = 'none';
+  loginBtn.style.display = 'flex';
+  // Reload page to reset state
   location.reload();
 };
 
@@ -564,6 +569,7 @@ async function fetchDiscordUser(token) {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
+
     // Mock presence (frontend-only)
     const presence = data.presence_status || "offline";
 
@@ -587,11 +593,16 @@ async function fetchDiscordUser(token) {
 window.onload = async () => {
   let user = JSON.parse(sessionStorage.getItem('discord_user'));
   const token = getTokenFromHash();
-  if(token && !user){
+
+  // If a token is present in URL, fetch user
+  if(token){
+    sessionStorage.setItem('discord_token', token);
     user = await fetchDiscordUser(token);
-    // Clear the URL hash for cleanliness
+    // Clean the URL hash
     history.replaceState(null, '', window.location.pathname);
   }
+
+  // Show overlay if user exists
   if(user){
     overlay.style.display = 'block';
     loginBtn.style.display = 'none';
@@ -599,7 +610,6 @@ window.onload = async () => {
     usernameEl.textContent = `${user.username}#${user.discriminator}`;
     emailEl.textContent = user.email || "No email available";
 
-    // Set presence with color
     presenceEl.textContent = user.presence.charAt(0).toUpperCase() + user.presence.slice(1);
     presenceEl.className = `user-presence ${user.presence}`;
   }
