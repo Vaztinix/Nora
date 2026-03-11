@@ -372,29 +372,36 @@ Updated versions will be published on the Nora website.
 </footer>
 
 <script>
+const switcher = document.getElementById('switch')
+const tosBtn = document.getElementById('btnTos')
+const privBtn = document.getElementById('btnPrivacy')
+const tos = document.getElementById('tosContent')
+const privacy = document.getElementById('privacyContent')
 
-const switcher=document.getElementById('switch')
-const tosBtn=document.getElementById('btnTos')
-const privBtn=document.getElementById('btnPrivacy')
-const tos=document.getElementById('tosContent')
-const privacy=document.getElementById('privacyContent')
-
-tosBtn.onclick=()=>{
-switcher.dataset.active="tos"
-tosBtn.classList.add('active')
-privBtn.classList.remove('active')
-tos.classList.remove('hidden')
-privacy.classList.add('hidden')
+function showTOS(){
+    switcher.dataset.active = "tos"
+    tosBtn.classList.add('active')
+    privBtn.classList.remove('active')
+    tos.classList.remove('hidden')
+    privacy.classList.add('hidden')
 }
 
-privBtn.onclick=()=>{
-switcher.dataset.active="privacy"
-privBtn.classList.add('active')
-tosBtn.classList.remove('active')
-privacy.classList.remove('hidden')
-tos.classList.add('hidden')
+function showPrivacy(){
+    switcher.dataset.active = "privacy"
+    privBtn.classList.add('active')
+    tosBtn.classList.remove('active')
+    privacy.classList.remove('hidden')
+    tos.classList.add('hidden')
 }
 
+tosBtn.onclick = showTOS
+privBtn.onclick = showPrivacy
+
+// Detect hash in URL on load
+const hash = window.location.hash.toLowerCase()
+if(hash === "#privacy" || window.location.pathname.endsWith("/privacy")){
+    showPrivacy()
+}
 </script>
 
 </body>
