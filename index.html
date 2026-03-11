@@ -417,9 +417,7 @@ allowing communities to maintain their own rankings.
       <img id="discord-avatar" src="" alt="Avatar" class="avatar">
       <span id="discord-username" class="username"></span>
     </div>
-    <div class="buttons">
-      <button id="logout-btn" class="btn btn-ghost">Logout</button>
-    </div>
+    <button id="logout-btn" class="btn btn-ghost">Logout</button>
   </div>
 </div>
 
@@ -430,79 +428,66 @@ allowing communities to maintain their own rankings.
 </button>
 
 <style>
-/* Overlay styling */
+/* Floating overlay (optional) */
 #discord-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.overlay-content {
+  bottom: 80px;
+  right: 20px;
   background: var(--bg-soft);
-  padding: 30px 40px;
+  padding: 20px 25px;
   border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
   text-align: center;
-  min-width: 280px;
-  max-width: 350px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  z-index: 9999;
+  width: 200px;
+  display: none; /* hidden by default */
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  border: 3px solid var(--primary);
+  border: 2px solid var(--primary);
 }
 
 .username {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--primary);
   word-break: break-word;
 }
 
-.buttons .btn {
-  width: 100%;
-  padding: 12px 0;
-  font-weight: 700;
-}
-
-/* Login button styling */
+/* Login Button */
 .login-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: 12px 22px;
+  padding: 12px 20px;
   border-radius: 999px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-weight: 700;
   cursor: pointer;
+  z-index: 999;
 }
 
 .discord-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
-/* Responsive */
 @media(max-width:600px){
-  .overlay-content { padding: 20px 25px; min-width: 90%; }
-  .avatar { width: 80px; height: 80px; }
-  .username { font-size: 1rem; }
+  #discord-overlay { width: 80%; bottom: 90px; right: 10%; padding: 15px; }
+  .avatar { width: 50px; height: 50px; }
 }
 </style>
 
@@ -522,18 +507,17 @@ loginBtn.onclick = () => { window.location.href = discordLoginURL; };
 // Logout
 logoutBtn.onclick = () => {
   sessionStorage.removeItem('discord_token');
-  overlay.classList.add('hidden');
-  loginBtn.style.display = 'flex';
+  location.reload(); // automatically reset page
 };
 
-// Check token
+// Check token on load
 window.onload = () => {
   const token = sessionStorage.getItem('discord_token');
   if(token){
     fetch('https://discord.com/api/users/@me', {headers:{Authorization:`Bearer ${token}`}})
       .then(res => res.json())
       .then(data => {
-        overlay.classList.remove('hidden');
+        overlay.style.display = 'block';
         loginBtn.style.display = 'none';
         avatarEl.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`;
         usernameEl.textContent = `${data.username}#${data.discriminator}`;
