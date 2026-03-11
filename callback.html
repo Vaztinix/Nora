@@ -4,24 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nora Discord Callback</title>
+<style>
+  body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #1e1e1e; color: white; font-family: sans-serif; }
+  h2 { text-align: center; }
+</style>
 </head>
 <body>
+  <div id="loading">
+    <h2>Processing Discord login...</h2>
+  </div>
+
 <script>
-  // 1️⃣ Check if the URL has the access_token from Discord
-  const hash = window.location.hash.substring(1); // remove '#'
+  const hash = window.location.hash.substring(1);
   const params = new URLSearchParams(hash);
   const token = params.get('access_token');
 
   if (token) {
-    // 2️⃣ Store token temporarily in sessionStorage
     sessionStorage.setItem('discord_token', token);
-
-    // 3️⃣ Redirect back to the main page
-    // We'll pass a hash so index.html can pick it up if needed
     window.location.href = 'index.html#loggedin';
   } else {
-    // No token? Go back to index
-    window.location.href = 'index.html';
+    document.getElementById('loading').innerHTML = "<h2>Discord login failed. Redirecting...</h2>";
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 2000);
   }
 </script>
 </body>
