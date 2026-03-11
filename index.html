@@ -418,7 +418,7 @@ allowing communities to maintain their own rankings.
       <div class="user-info">
         <span id="discord-username" class="username">Username#0000</span>
         <span id="discord-email" class="user-email">email@example.com</span>
-        <span id="discord-presence" class="user-presence">Offline</span>
+        <span id="discord-presence" class="user-presence offline">Offline</span>
       </div>
     </div>
     <button id="logout-btn" class="btn btn-ghost">Logout</button>
@@ -536,20 +536,18 @@ const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 
 // Discord OAuth2 implicit grant (token) URL
-const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&response_type=token&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&scope=identify+email+presences.read";
+const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&response_type=token&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&scope=identify+email";
 
 // Login
 loginBtn.onclick = () => { window.location.href = discordLoginURL; };
 
-// Logout (always works)
+// Logout
 logoutBtn.onclick = () => {
-  // Remove any stored user/token info
   sessionStorage.removeItem('discord_user');
   sessionStorage.removeItem('discord_token');
   overlay.style.display = 'none';
   loginBtn.style.display = 'flex';
-  // Reload page to reset state
-  location.reload();
+  window.location.hash = '';
 };
 
 // Parse token from URL hash
@@ -570,16 +568,13 @@ async function fetchDiscordUser(token) {
     });
     const data = await res.json();
 
-    // Mock presence (frontend-only)
-    const presence = data.presence_status || "offline";
-
     const user = {
       id: data.id,
       username: data.username,
       discriminator: data.discriminator,
       avatar: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`,
       email: data.email,
-      presence: presence
+      presence: "offline" // presence mocked
     };
     sessionStorage.setItem('discord_user', JSON.stringify(user));
     return user;
@@ -594,22 +589,18 @@ window.onload = async () => {
   let user = JSON.parse(sessionStorage.getItem('discord_user'));
   const token = getTokenFromHash();
 
-  // If a token is present in URL, fetch user
   if(token){
     sessionStorage.setItem('discord_token', token);
     user = await fetchDiscordUser(token);
-    // Clean the URL hash
-    history.replaceState(null, '', window.location.pathname);
+    history.replaceState(null, '', window.location.pathname); // remove token from URL
   }
 
-  // Show overlay if user exists
   if(user){
     overlay.style.display = 'block';
     loginBtn.style.display = 'none';
     avatarEl.src = user.avatar;
     usernameEl.textContent = `${user.username}#${user.discriminator}`;
     emailEl.textContent = user.email || "No email available";
-
     presenceEl.textContent = user.presence.charAt(0).toUpperCase() + user.presence.slice(1);
     presenceEl.className = `user-presence ${user.presence}`;
   }
