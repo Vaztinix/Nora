@@ -45,7 +45,7 @@ Creator of Nora
 ## 🔗 Links
 
 Top.gg
-[https://](https://top.gg/user/593420060990005248)
+https://top.gg/user/593420060990005248
 
 GitHub  
 https://github.com/Vaztinix
