@@ -44,7 +44,7 @@ Creator of Nora
 
 ## 🔗 Links
 
-Top.gg
+Top.gg  
 https://top.gg/user/593420060990005248
 
 GitHub  
