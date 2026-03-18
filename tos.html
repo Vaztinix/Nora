@@ -249,9 +249,21 @@ Improper permission configuration may result in unexpected behavior.
 
 <h3>6. AI Assistance Features</h3>
 <p>
-Some Nora features may include AI-generated responses or automated moderation suggestions.
-These systems are designed to assist moderators but should not be relied upon as the
-sole authority for moderation decisions.
+Some Nora features include AI-generated responses or automated moderation suggestions.
+These systems are designed to assist moderators and improve usability, but they are not
+guaranteed to be accurate, complete, or appropriate in all situations.
+</p>
+
+<p>
+AI features may process user-provided input to generate responses. This processing may
+involve temporary handling of message content for context. Users should avoid submitting
+sensitive, personal, or confidential information when interacting with AI systems.
+</p>
+
+<p>
+AI outputs should be reviewed by server administrators before being relied upon for
+moderation or decision-making. Nora does not assume responsibility for actions taken
+based on AI-generated content.
 </p>
 
 <h3>7. Feature Availability</h3>
@@ -278,14 +290,32 @@ Access to the service may be suspended or restricted if the system is abused
 or used in violation of these Terms.
 </p>
 
-<h3>11. Limitation of Liability</h3>
+<h3>11. Payments and Subscriptions</h3>
+<p>
+All payments for Nora premium features are handled exclusively through Discord's
+official subscription system.
+</p>
+
+<p>
+Subscriptions are managed within Discord under the server or user subscription
+settings interface. Nora does not directly process, store, or have access to
+payment information such as credit cards or billing details.
+</p>
+
+<p>
+Billing, refunds, and subscription management are governed by Discord’s own
+policies and systems. Users should refer to Discord’s subscription settings
+for any payment-related actions.
+</p>
+
+<h3>12. Limitation of Liability</h3>
 <p>
 To the maximum extent permitted by law, Nora and its developer are not liable
 for damages resulting from service interruptions, configuration errors,
 or moderation outcomes performed through the system.
 </p>
   
-<p><strong>Last Updated:</strong> March 10, 2026</p>
+<p><strong>Last Updated:</strong> March 17, 2026</p>
 
 </div>
 
@@ -319,49 +349,77 @@ This processing occurs in memory and is not permanently stored unless a
 specific feature requires it.
 </p>
 
-<h3>5. Leveling System Data</h3>
+<h3>5. AI Data Handling</h3>
+<p>
+When AI features are used, message content may be processed to generate responses.
+This processing is limited to what is necessary to produce the requested output.
+</p>
+
+<p>
+Nora does not use server data to train AI models. Any AI-related processing is
+performed for real-time functionality only and is not used to build or improve
+external datasets.
+</p>
+
+<p>
+Users should avoid submitting sensitive personal information when using AI features,
+as with any online AI system.
+</p>
+
+<h3>6. Leveling System Data</h3>
 <p>
 When the leveling system is enabled, Nora may record user activity indicators
 such as message events or interaction counts to calculate progression.
 </p>
 
-<h3>6. Join Event Processing</h3>
+<h3>7. Join Event Processing</h3>
 <p>
 When a server enables the welcome system, Nora listens for member join events
 to generate welcome messages.
 </p>
 
-<h3>7. Data Isolation</h3>
+<h3>8. Data Isolation</h3>
 <p>
 Each server's data is isolated. Data generated in one server
 is never shared with or visible to other servers.
 </p>
 
-<h3>8. Data Sharing</h3>
+<h3>9. Data Sharing</h3>
 <p>
 Nora does not sell, rent, or distribute server data to third parties.
 Data collected is used solely for operating the service.
 </p>
 
-<h3>9. Data Retention</h3>
+<h3>10. Data Retention</h3>
 <p>
 Data is retained only as long as necessary for the feature that generated it.
 Removing Nora from a server deletes configuration data associated with that server.
 </p>
 
-<h3>10. Security Practices</h3>
+<h3>11. Security Practices</h3>
 <p>
 Reasonable security practices are implemented to protect configuration data
 from unauthorized access.
 </p>
 
-<h3>11. Policy Updates</h3>
+<h3>12. Payment Information</h3>
+<p>
+Nora does not collect, store, or process payment information directly.
+All payments and subscriptions are handled through Discord’s official systems.
+</p>
+
+<p>
+As a result, Nora has no access to billing details such as payment methods,
+transaction data, or financial information.
+</p>
+
+<h3>13. Policy Updates</h3>
 <p>
 This policy may be updated periodically as the system evolves.
 Updated versions will be published on the Nora website.
 </p>
 
-<p><strong>Last Updated:</strong> March 10, 2026</p>
+<p><strong>Last Updated:</strong> March 17, 2026</p>
 
 </div>
 
@@ -397,7 +455,6 @@ function showPrivacy(){
 tosBtn.onclick = showTOS
 privBtn.onclick = showPrivacy
 
-// Detect hash in URL on load
 const hash = window.location.hash.toLowerCase()
 if(hash === "#privacy" || window.location.pathname.endsWith("/privacy")){
     showPrivacy()
