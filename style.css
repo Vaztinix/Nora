@@ -12,9 +12,13 @@
   --menu-width: 220px;
   --menu-bg: rgba(0,0,0,0.85);
   --transition-speed: 0.3s;
+
+  --radius: 16px;
 }
 
 /* ===== Global ===== */
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -25,203 +29,188 @@ body {
   transition: background 0.5s, color 0.5s;
 }
 
-
+/* ===== Header ===== */
 header {
-  background: #222;
-  color: #fff;
-  padding: 10px 20px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.navbar {
+.brand {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.brand img {
+  width: 38px;
+  border-radius: 8px;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
   gap: 15px;
+  list-style: none;
 }
 
-.nav-links li a {
-  color: #fff;
+.nav-links a {
+  color: var(--text-color);
   text-decoration: none;
+  opacity: 0.85;
+  transition: 0.2s;
 }
 
-.nav-links li a.active {
-  border-bottom: 2px solid #fff;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-}
-
-
-.hero {
-  padding: 50px;
-  text-align: center;
-}
-
-
-footer {
-  background: #222;
-  color: #fff;
-  text-align: center;
-  padding: 15px;
-  margin-top: 20px;
-}
-
-footer a {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--primary-color);
-  text-decoration: none;
-  margin: 0 .5rem;
+  opacity: 1;
 }
 
-
-.sidebar,
-nav.menu {
-  position: fixed;
-  top: 0;
-  left: -var(--menu-width);
-  width: var(--menu-width);
-  height: 100%;
-  background: var(--menu-bg);
-  display: flex;
-  flex-direction: column;
-  padding-top: 4rem;
-  gap: 1rem;
-  transition: left var(--transition-speed) ease;
-  z-index: 1000;
-}
-
-.sidebar a,
-nav.menu a {
-  color: var(--primary-color);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  transition: background 0.3s, color 0.3s;
-  border-radius: 4px;
-}
-
-.sidebar a:hover,
-nav.menu a:hover,
-.sidebar a.active,
-nav.menu a.active {
-  background: var(--primary-color);
-  color: #222 !important;
-}
-
-nav.menu.open,
-body.sidebar-open .sidebar {
-  left: 0;
-}
-
-
+/* ===== Container Layout ===== */
 .container {
   margin-left: 270px;
-  padding: 50px 40px;
+  padding: 60px 40px;
   width: calc(100% - 300px);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.container-content {
-  max-width: 900px;
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: 15px;
-  backdrop-filter: blur(6px);
-  transition: background 0.3s;
+/* ===== Hero ===== */
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-.container h1 { font-size: 2.5rem; margin-bottom: 20px; color: #e6f7ff; }
-.container h2 { margin-top: 30px; color: var(--primary-color); }
-.container h3 { margin-top: 20px; color: #bdefff; }
-.container p { margin-bottom: 15px; }
-.container ul { margin-left: 25px; margin-bottom: 15px; }
-.container li { margin-bottom: 10px; }
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(174,239,255,0.15);
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: .75rem;
+  margin-bottom: 16px;
+}
 
-.container footer {
+.hero h1 {
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: auto;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ===== Switch ===== */
+.switch-wrap {
+  margin: 40px 0;
+}
+
+.switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--card-bg);
+  border-radius: 999px;
+  padding: 6px;
+  width: 360px;
+}
+
+.switch button {
+  background: none;
+  border: none;
+  padding: 12px 0;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.switch button.active {
+  color: #000;
+}
+
+.indicator {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  width: 50%;
+  background: var(--primary-color);
+  border-radius: 999px;
+  transition: transform 0.35s ease;
+}
+
+.switch[data-active="privacy"] .indicator {
+  transform: translateX(100%);
+}
+
+/* ===== Legal Card ===== */
+.legal-card {
+  max-width: 900px;
+  width: 100%;
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: var(--radius);
+  backdrop-filter: blur(6px);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Headings */
+.legal-card h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+}
+
+.legal-card h3 {
+  color: #e6f7ff;
+  margin-top: 28px;
+}
+
+/* Text */
+.legal-card p {
+  margin-bottom: 14px;
+}
+
+/* Hidden toggle */
+.hidden {
+  display: none;
+}
+
+/* ===== Footer ===== */
+footer {
   text-align: center;
   padding: 20px;
-  font-size: 0.9rem;
-  opacity: 0.85;
+  margin-top: 60px;
   background: rgba(0,0,0,0.25);
-  border-top: 1px solid rgba(255,255,255,0.2);
-  margin-top: 50px;
+  border-top: 1px solid rgba(255,255,255,0.15);
   border-radius: 10px;
 }
 
-
-body.light {
-  --text-color: #333;
-  --sidebar-bg: rgba(255, 255, 255, 0.8);
-  --bg-gradient: linear-gradient(to bottom right, #dbe9ff, #f2e4ff);
-}
-
-body.light a,
-body.light .toggle-btn {
-  color: #222;
-}
-
-body.light .sidebar a:hover {
-  background: #4facfe;
-  color: #fff !important;
-}
-
-
-body.dark {
-  background: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-body.dark .container-content {
-  background: var(--dark-card);
-}
-
-body.dark .sidebar {
-  background: rgba(15, 25, 40, 0.9);
-}
-
-
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: #333;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    padding: 10px;
-  }
-  .nav-links.show { display: flex; }
-  .menu-toggle { display: block; }
-
-  
-  .sidebar,
-  nav.menu {
-    position: fixed;
-    left: -var(--menu-width);
-    transition: left 0.3s;
-    z-index: 1000;
-  }
-  body.sidebar-open .sidebar,
-  nav.menu.open { left: 0; }
 
   .container {
     margin-left: 0;
     width: 100%;
-    padding: 20px;
+    padding: 30px 20px;
   }
+
+  .switch {
+    width: 100%;
+  }
+
 }
