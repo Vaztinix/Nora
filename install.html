@@ -5,96 +5,163 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Install Nora</title>
 
+<link rel="icon" type="image/png" href="nora.png">
+
 <style>
-body {
-  margin: 0;
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: white;
-  font-family: sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+:root{
+--bg:#0b0f1a;
+--bg-soft:#12182b;
+--card:rgba(255,255,255,0.06);
+--card-hover:rgba(255,255,255,0.12);
+--border:rgba(255,255,255,0.08);
+--primary:#aeefff;
+--accent:#7aa2ff;
+--text:#ffffff;
+--muted:rgba(255,255,255,0.7);
+--radius:18px;
 }
 
-/* Glass card */
-.card {
-  width: 360px;
-  padding: 28px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(18px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-  text-align: center;
+body{
+margin:0;
+font-family:"Inter","Segoe UI",system-ui,sans-serif;
+background:
+radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
+radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
+var(--bg);
+color:var(--text);
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+}
+
+/* Container */
+.container{
+width:100%;
+max-width:420px;
+padding:1.5rem;
+}
+
+/* Card */
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:var(--radius);
+padding:32px;
+text-align:center;
+transition:.25s;
 }
 
 /* Title */
-h1 {
-  margin-bottom: 10px;
+h1{
+margin:0 0 10px;
+font-size:1.6rem;
 }
 
 /* Description */
-p {
-  font-size: 0.9rem;
-  opacity: 0.85;
+p{
+color:var(--muted);
+font-size:0.95rem;
+margin-bottom:20px;
 }
 
 /* Features */
-.features {
-  text-align: left;
-  margin: 18px 0;
-  font-size: 0.85rem;
-  opacity: 0.9;
+.features{
+text-align:left;
+font-size:0.9rem;
+color:var(--muted);
+line-height:1.6;
+margin-bottom:24px;
 }
 
-/* Button */
-.install-btn {
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  color: white;
-  background: linear-gradient(135deg, #5865F2, #404EED);
-  transition: 0.3s;
+/* Buttons */
+.btn{
+padding:14px 26px;
+border-radius:999px;
+font-weight:800;
+border:none;
+cursor:pointer;
+transition:.25s;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+width:100%;
 }
 
-.install-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(88,101,242,0.6);
+.btn-primary{
+background:var(--primary);
+color:#000;
+box-shadow:0 10px 30px rgba(174,239,255,.25);
+}
+
+.btn-primary:hover{
+transform:translateY(-3px);
+}
+
+/* Trust text */
+.trust{
+margin-top:16px;
+font-size:0.75rem;
+color:var(--muted);
+line-height:1.4;
+}
+
+/* Small header */
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:999px;
+background:rgba(174,239,255,0.12);
+color:var(--primary);
+font-weight:700;
+font-size:.7rem;
+letter-spacing:.6px;
+margin-bottom:16px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>Install Nora</h1>
-  <p>Privacy-first moderation & utility for your Discord server.</p>
+<div class="container">
+  <div class="card">
 
-  <div class="features">
-    ✔ Smart moderation tools<br>
-    ✔ Privacy-focused systems<br>
-    ✔ Clean dashboard control<br>
-    ✔ Fast + reliable responses
+    <div class="badge">NORA INSTALL</div>
+
+    <h1>Add Nora to your server</h1>
+
+    <p>
+      Set up modern moderation and AI tools with a system designed for privacy,
+      transparency, and full server control.
+    </p>
+
+    <div class="features">
+      • Smart moderation commands<br>
+      • Privacy-first data handling<br>
+      • Server-controlled systems<br>
+      • Fast and reliable responses
+    </div>
+
+    <button class="btn btn-primary" onclick="installBot()">
+      Continue to Discord
+    </button>
+
+    <div class="trust">
+      Nora only requests permissions required for moderation and core features.
+      You can review and adjust access during installation.
+    </div>
+
   </div>
-
-  <button class="install-btn" onclick="installBot()">
-    Continue to Discord →
-  </button>
 </div>
 
 <script>
 function installBot() {
-  const clientId = "1375943730951098549";
-
   const url =
     "https://discord.com/oauth2/authorize" +
-    "?client_id=" + clientId +
+    "?client_id=1375943730951098549" +
     "&scope=bot%20applications.commands" +
-    "&permissions=274877991936";
+    "&permissions=1099511627775";
 
   window.location.href = url;
 }
