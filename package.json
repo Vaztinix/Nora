@@ -1,11 +1,13 @@
 {
   "name": "nora-web",
   "version": "1.0.0",
+  "description": "Nora web interface and install flow",
   "type": "module",
+  "private": true,
   "engines": {
-    "node": "20.x"
+    "node": ">=20 <21"
   },
-  "dependencies": {
-    "node-fetch": "^3.3.2"
+  "scripts": {
+    "start": "node index.js"
   }
 }
