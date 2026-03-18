@@ -35,14 +35,13 @@ justify-content:center;
 min-height:100vh;
 }
 
-/* Container */
 .container{
 width:100%;
 max-width:420px;
 padding:1.5rem;
 }
 
-/* Card */
+
 .card{
 background:var(--card);
 border:1px solid var(--border);
@@ -52,20 +51,19 @@ text-align:center;
 transition:.25s;
 }
 
-/* Title */
+/*Title*/
 h1{
 margin:0 0 10px;
 font-size:1.6rem;
 }
 
-/* Description */
+/*Description*/
 p{
 color:var(--muted);
 font-size:0.95rem;
 margin-bottom:20px;
 }
 
-/* Features */
 .features{
 text-align:left;
 font-size:0.9rem;
@@ -74,7 +72,7 @@ line-height:1.6;
 margin-bottom:24px;
 }
 
-/* Buttons */
+
 .btn{
 padding:14px 26px;
 border-radius:999px;
@@ -99,7 +97,6 @@ box-shadow:0 10px 30px rgba(174,239,255,.25);
 transform:translateY(-3px);
 }
 
-/* Trust text */
 .trust{
 margin-top:16px;
 font-size:0.75rem;
@@ -107,7 +104,7 @@ color:var(--muted);
 line-height:1.4;
 }
 
-/* Small header */
+
 .badge{
 display:inline-block;
 padding:6px 14px;
@@ -157,11 +154,11 @@ margin-bottom:16px;
 
 <script>
 function installBot() {
-  const url =
-    "https://discord.com/oauth2/authorize" +
-    "?client_id=1375943730951098549" +
-    "&scope=bot%20applications.commands" +
-    "&permissions=2425212967";
+  const url = 
+    "https://discord.com/oauth2/authorize" + 
+    "?client_id=1375943730951098549" + 
+    "&scope=bot%20applications.commands" + 
+    "&permissions=470020182";
 
   window.location.href = url;
 }
