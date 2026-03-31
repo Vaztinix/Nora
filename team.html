@@ -63,10 +63,7 @@
     }
 
     .nav-links {
-      display: flex;
-      gap: 18px;
-      font-weight: 600;
-      color: var(--muted);
+      display: flex; gap: 18px; font-weight: 600; color: var(--muted);
     }
 
     .nav-links a:hover { color: var(--text); }
@@ -77,7 +74,7 @@
       padding: 4rem 1.5rem;
     }
 
-    .page-hero { text-align: center; }
+    .page-hero { text-align: center; margin-bottom: 3rem; }
 
     .badge {
       display: inline-block;
@@ -90,13 +87,10 @@
       margin-bottom: 18px;
     }
 
-    .page-hero h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 14px; }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 24px;
-      margin-top: 3rem;
     }
 
     .card {
@@ -120,7 +114,7 @@
       object-fit: cover;
       margin-bottom: 14px;
       border: 2px solid var(--border);
-      background: #151a2e;
+      background: #161b2c; /* Loading color */
     }
 
     .role {
@@ -144,6 +138,7 @@
       padding: 32px 1.5rem;
       text-align: center;
       color: var(--muted);
+      margin-top: 4rem;
     }
 
     @media (max-width: 800px) { .nav-links { display: none; } }
@@ -176,7 +171,7 @@
 
   <div class="grid">
     <div class="card">
-      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1214048435632603137" alt="vaztinix" />
+      <img class="avatar" data-user-id="1214048435632603137" src="ReVaztinix.jpeg" alt="vaztinix" />
       <div class="role">Founder & Developer</div>
       <h3>vaztinix</h3>
       <p class="bio">
@@ -189,7 +184,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/941084096673755188" alt="solorads" />
+      <img class="avatar" data-user-id="941084096673755188" src="solorads_pfp.png" alt="solorads" />
       <div class="role">Partner & Sponsor</div>
       <h3>solorads</h3>
       <p class="bio">
@@ -201,7 +196,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1375943730951098549" alt="Nora" />
+      <img class="avatar" data-user-id="1375943730951098549" src="nora.png" alt="Nora" />
       <div class="role">Privacy-First Discord Bot</div>
       <h3>Nora</h3>
       <p class="bio">
@@ -212,11 +207,11 @@
     </div>
 
     <div class="card">
-      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1223693570662334604" alt="Staff Manager" />
+      <img class="avatar" data-user-id="1223693570662334604" src="silasvr8.png" alt="Staff Manager" />
       <div class="role">Staff Manager</div>
       <h3>silasvr8</h3>
       <p class="bio">
-        Helps manage Nora and its community, testing features to repair them early to keep Nora running smoothly.
+        Helps manage Nora and its community, testing features to repair them early.
         <a href="https://www.youtube.com/@SilasVR8" target="_blank">YouTube</a>
         <a href="https://guns.lol/silasvr8" target="_blank">guns.lol</a>
         <a href="https://discord.com/users/1223693570662334604" target="_blank">Discord</a>
@@ -224,7 +219,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1366229304257544213" alt="Co-Owner" />
+      <img class="avatar" data-user-id="1366229304257544213" src="waffles.png" alt="Co-Owner" />
       <div class="role">Co-Owner and Community Rage Baiter</div>
       <h3>sillywillywood</h3>
       <p class="bio">
@@ -235,7 +230,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1366229304257544213" alt="Admin" />
+      <img class="avatar" data-user-id="1366229304257544213" src="beecet.png" alt="Admin" />
       <div class="role">Administrator</div>
       <h3>discounted_chaos</h3>
       <p class="bio">
@@ -245,7 +240,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/734113955986931734" alt="sanedish" />
+      <img class="avatar" data-user-id="734113955986931734" src="sanedish.png" alt="sanedish" />
       <div class="role">the gayest lesbian</div>
       <h3>sanedish</h3>
       <p class="bio">
@@ -255,7 +250,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1387499169870254230" alt="BIG TOE" />
+      <img class="avatar" data-user-id="1387499169870254230" src="boris.png" alt="BIG TOE" />
       <div class="role">BIG TOE</div>
       <h3>boris10106</h3>
       <p class="bio">
@@ -269,6 +264,24 @@
 <footer>
   © 2026 Nora | Privacy-First AI & Moderation for Discord
 </footer>
+
+<script>
+  // Fast, reliable fetch using a public lookup proxy
+  document.querySelectorAll('.avatar').forEach(img => {
+    const userId = img.getAttribute('data-user-id');
+    if (!userId) return;
+
+    fetch(`https://discordlookup.mesalytic.moe/v1/user/${userId}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.avatar && data.avatar.link) {
+          // Replace the local file with the live Discord link
+          img.src = data.avatar.link;
+        }
+      })
+      .catch(err => console.log("Failed to fetch live pfp for " + userId));
+  });
+</script>
 
 </body>
 </html>
