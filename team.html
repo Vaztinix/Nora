@@ -5,23 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nora — Staff</title>
 
-  <!-- Primary Meta -->
   <meta name="title" content="Nora — Team">
   <meta name="description" content="Meet the team behind Nora, a privacy-first Discord moderation and AI bot.">
   
-  <!-- Open Graph (Discord, Facebook, etc.) -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vaztinx.github.io/Nora/team.html">
   <meta property="og:title" content="Nora — Team">
   <meta property="og:description" content="Meet the team building a privacy-first Discord bot focused on safety and user control.">
   <meta property="og:image" content="https://vaztinx.github.io/Nora/nora.png">
-  
-  <!-- Twitter Embed (also used by Discord fallback sometimes) -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://vaztinx.github.io/Nora/team.html">
-  <meta name="twitter:title" content="Nora — Team">
-  <meta name="twitter:description" content="Meet the team behind Nora, a privacy-first Discord bot.">
-  <meta name="twitter:image" content="https://vaztinx.github.io/Nora/nora.png">
+
   <style>
     :root {
       --bg: #0b0f1a;
@@ -48,7 +40,7 @@
       min-height: 100vh;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a { color: inherit; text-decoration: none; transition: 0.2s; }
 
     header {
       position: sticky;
@@ -73,7 +65,6 @@
       align-items: center;
       gap: 12px;
       font-weight: 700;
-      letter-spacing: 0.4px;
     }
 
     .brand img {
@@ -97,11 +88,7 @@
       padding: 4rem 1.5rem;
     }
 
-    section { margin-bottom: 6rem; }
-
-    .page-hero {
-      text-align: center;
-    }
+    .page-hero { text-align: center; margin-bottom: 4rem; }
 
     .badge {
       display: inline-block;
@@ -111,26 +98,15 @@
       color: var(--primary);
       font-weight: 700;
       font-size: 0.75rem;
-      letter-spacing: 0.6px;
       margin-bottom: 18px;
     }
 
-    .page-hero h1 {
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      margin-bottom: 14px;
-    }
-
-    .page-hero p {
-      max-width: 720px;
-      margin: 0 auto;
-      color: var(--muted);
-    }
+    .page-hero h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 14px; }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 24px;
-      margin-top: 3rem;
     }
 
     .card {
@@ -154,39 +130,39 @@
       object-fit: cover;
       margin-bottom: 14px;
       border: 2px solid var(--border);
+      background: #161b2c;
     }
 
     .role {
       color: var(--primary);
       font-weight: 700;
       font-size: 0.85rem;
-      letter-spacing: 0.4px;
       margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .bio {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
+    .bio { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
 
-    .bio a {
+    .links { margin-top: 15px; display: flex; flex-direction: column; gap: 5px; }
+
+    .links a {
       color: #aeefff;
       font-weight: 600;
-      text-decoration: none;
-      display: block;
-      margin: 4px 0;
+      font-size: 0.9rem;
     }
 
-    .bio a:hover { text-decoration: underline; }
+    .links a:hover { text-decoration: underline; }
 
     footer {
       border-top: 1px solid var(--border);
       padding: 32px 1.5rem;
       text-align: center;
       color: var(--muted);
+      margin-top: 4rem;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 600px) {
       .nav-links { display: none; }
     }
   </style>
@@ -213,108 +189,101 @@
 
   <section class="page-hero">
     <div class="badge">Nora's Team</div>
-    <h1>Our Team</h1>
-    <p>
-      Nora is built to ensure communities have a safer and better experience on Discord
-      while keeping their data secure and fully under their control.
-    </p>
+    <h1>Meet the Team</h1>
+    <p>The humans (and bots) keeping Nora running smoothly and securely.</p>
   </section>
 
-  <section>
-    <div class="grid">
-      <div class="card">
-        <img class="avatar" src="ReVaztinix.jpeg" alt="Founder" />
-        <div class="role">Founder & Developer</div>
-        <h3>vaztinix</h3>
-        <p class="bio">
-          Oh Hey, have you prayed today.... nvm... just letting ya know I hit on girls often heh.
-          <a href="https://github.com/Vaztinix" target="_blank">GitHub</a>
-          <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
-          <a href="https://www.roblox.com/users/3089063186/profile" target="_blank">Roblox Profile</a>
-          <a href="https://discord.com/users/1214048435632603137" target="_blank">Discord</a>
-        </p>
+  <div class="grid">
+    <div class="card">
+      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1214048435632603137" alt="vaztinix" />
+      <div class="role">Founder & Developer</div>
+      <h3>vaztinix</h3>
+      <p class="bio">Oh Hey, have you prayed today.... nvm... just letting ya know I hit on girls often heh.</p>
+      <div class="links">
+        <a href="https://github.com/Vaztinix" target="_blank">GitHub</a>
+        <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
+        <a href="https://www.roblox.com/users/3089063186/profile" target="_blank">Roblox Profile</a>
+        <a href="https://discord.com/users/1214048435632603137" target="_blank">Discord</a>
       </div>
-
-      <div class="card">
-        <img class="avatar" src="solorads_pfp.png" alt="Partner" />
-        <div class="role">Partner & Sponsor</div>
-        <h3>solorads</h3>
-        <p class="bio">
-          Helps build ideas for Nora and its community.
-          <a href="https://www.roblox.com/communities/32778698/SMRP-United-States-Military#!/about" target="_blank">Roblox Community</a>
-          <a href="https://www.roblox.com/users/2987228682/profile" target="_blank">Roblox Profile</a>
-          <a href="https://discord.com/users/941084096673755188" target="_blank">Discord</a>
-        </p>
-      </div>
-
-      <div class="card">
-        <img class="avatar" src="nora.png" alt="Nora" />
-        <div class="role">Privacy-First Discord Bot</div>
-        <h3>Nora</h3>
-        <p class="bio">
-          Ensures Nora never compromises user trust or server data.
-          <a href="https://vaztinix.github.io/Nora" target="_blank">Custom Site</a>
-          <a href="https://discord.com/users/1375943730951098549" target="-blank">Discord</a>
-        </p>
-      </div>
-
-      <div class="card">
-        <img class="avatar" src="silasvr8.png" alt="Staff Manager" />
-        <div class="role">Staff Manager</div>
-        <h3>silasvr8</h3>
-        <p class="bio">
-          Helps manage Nora and its community, testing features to repair them early to keep Nora running smoothly.
-          <a href="https://www.youtube.com/@SilasVR8" target="_blank">YouTube</a>
-          <a href="https://guns.lol/silasvr8" target="_blank">guns.lol</a>
-          <a href="https://discord.com/users/1223693570662334604" target="_blank">Discord</a>
-        </p>
-      </div>
-
-       <div class="card">
-        <img class="avatar" src="waffles.png" alt="Co-Owner" />
-        <div class="role">Co-Owner and Community Rage Baiter</div>
-        <h3>sillywillywood</h3>
-        <p class="bio">
-          D1 Hater
-          <a href="https://1angel1.straw.page/" target="_blank">1angel1</a>
-          <a href="https://discord.com/users/1366229304257544213" target="_blank">Discord</a>
-        </p>
-      </div>
-
-      <div class="card">
-        <img class="avatar" src="beecet.png" alt="Admin" />
-        <div class="role">Administrator</div>
-        <h3>discounted_chaos</h3>
-        <p class="bio">
-          Helps manage Nora and its community, and is a actively g**ned to member.
-          <a href="https://discord.com/users/1366229304257544213" target="_blank">Discord</a>
-        </p>
-      </div>
-
-       <div class="card">
-        <img class="avatar" src="sanedish.png" alt="the gayest lesbian" />
-        <div class="role">the gayest lesbian</div>
-        <h3>sanedish</h3>
-        <p class="bio">
-          The one who suffers from acute silliness and "gay lesbian"
-          <a href="https://discord.com/users/734113955986931734" target="_blank">Discord</a>
-        </p>
-      </div>
-
-      <div class="card">
-        <img class="avatar" src="boris.png" alt="My big toe not allow to be here" />
-        <div class="role">BIG TOE</div>
-        <h3>boris10106</h3>
-        <p class="bio">
-          The cameras are on my big toe now.
-          <a href="https://discord.com/users/1387499169870254230" target="_blank">Discord</a>
-        </p>
-      </div>
-
-
     </div>
-  </section>
 
+    <div class="card">
+      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/941084096673755188" alt="solorads" />
+      <div class="role">Partner & Sponsor</div>
+      <h3>solorads</h3>
+      <p class="bio">Helps build ideas for Nora and its community.</p>
+      <div class="links">
+        <a href="https://www.roblox.com/communities/32778698/SMRP-United-States-Military" target="_blank">Roblox Community</a>
+        <a href="https://www.roblox.com/users/2987228682/profile" target="_blank">Roblox Profile</a>
+        <a href="https://discord.com/users/941084096673755188" target="_blank">Discord</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1375943730951098549" alt="Nora" />
+      <div class="role">Privacy-First Bot</div>
+      <h3>Nora</h3>
+      <p class="bio">Ensures Nora never compromises user trust or server data.</p>
+      <div class="links">
+        <a href="https://vaztinix.github.io/Nora" target="_blank">Custom Site</a>
+        <a href="https://discord.com/users/1375943730951098549" target="_blank">Discord</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1223693570662334604" alt="silasvr8" />
+      <div class="role">Staff Manager</div>
+      <h3>silasvr8</h3>
+      <p class="bio">Testing features to repair them early and keep Nora running smoothly.</p>
+      <div class="links">
+        <a href="https://www.youtube.com/@SilasVR8" target="_blank">YouTube</a>
+        <a href="https://guns.lol/silasvr8" target="_blank">guns.lol</a>
+        <a href="https://discord.com/users/1223693570662334604" target="_blank">Discord</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1366229304257544213" alt="sillywillywood" />
+      <div class="role">Co-Owner & Baiter</div>
+      <h3>sillywillywood</h3>
+      <p class="bio">D1 Hater</p>
+      <div class="links">
+        <a href="https://1angel1.straw.page/" target="_blank">1angel1</a>
+        <a href="https://discord.com/users/1366229304257544213" target="_blank">Discord</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1366229304257544213" alt="discounted_chaos" />
+      <div class="role">Administrator</div>
+      <h3>discounted_chaos</h3>
+      <p class="bio">Helps manage Nora and its community members.</p>
+      <div class="links">
+        <a href="https://discord.com/users/1366229304257544213" target="_blank">Discord</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/734113955986931734" alt="sanedish" />
+      <div class="role">The gayest lesbian</div>
+      <h3>sanedish</h3>
+      <p class="bio">The one who suffers from acute silliness and "gay lesbian".</p>
+      <div class="links">
+        <a href="https://discord.com/users/734113955986931734" target="_blank">Discord</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="avatar" src="https://img.discordapp.net/ext/guides/user-avatar/1387499169870254230" alt="boris10106" />
+      <div class="role">BIG TOE</div>
+      <h3>boris10106</h3>
+      <p class="bio">The cameras are on my big toe now.</p>
+      <div class="links">
+        <a href="https://discord.com/users/1387499169870254230" target="_blank">Discord</a>
+      </div>
+    </div>
+
+  </div>
 </main>
 
 <footer>
