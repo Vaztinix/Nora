@@ -126,7 +126,6 @@
       font-weight: 700;
       font-size: 0.85rem;
       margin-bottom: 8px;
-      text-transform: uppercase;
     }
 
     .bio { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
@@ -229,7 +228,7 @@
 
     <div class="card">
       <img class="avatar" data-user="1366229304257544213" src="waffles.png" alt="sillywillywood" />
-      <div class="role">Co-Owner & Rage Baiter</div>
+      <div class="role">Co-Owner and Community Rage Baiter</div>
       <h3>sillywillywood</h3>
       <p class="bio">
         D1 Hater
@@ -286,10 +285,8 @@
         if (res.success && res.data.discord_user.avatar) {
           const user = res.data.discord_user;
           const isAnimated = user.avatar.startsWith('a_');
-          // Cache-buster (?v=) forces the browser to fetch the NEWEST avatar
           const liveUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${isAnimated ? 'gif' : 'png'}?size=256&v=${Date.now()}`;
           
-          // Pre-load to prevent flickering
           const temp = new Image();
           temp.src = liveUrl;
           temp.onload = () => { img.src = liveUrl; };
