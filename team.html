@@ -272,21 +272,28 @@
 </footer>
 
 <script>
-  document.querySelectorAll('.avatar').forEach(img => {
-    const userId = img.getAttribute('data-user');
-    if (!userId) return;
+  // Forces browser to bypass cache by adding a random timestamp to the image URL
+  function refreshAvatars() {
+    document.querySelectorAll('.avatar').forEach(img => {
+      const userId = img.getAttribute('data-user');
+      if (!userId) return;
 
-    fetch(`https://api.lanyard.rest/v1/users/${userId}`)
-      .then(response => response.json())
-      .then(res => {
-        if (res.success && res.data.discord_user.avatar) {
-          const user = res.data.discord_user;
-          const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
-          img.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
-        }
-      })
-      .catch(err => console.error("Error updating avatar:", err));
-  });
+      fetch(`https://api.lanyard.rest/v1/users/${userId}`)
+        .then(response => response.json())
+        .then(res => {
+          if (res.success && res.data.discord_user.avatar) {
+            const user = res.data.discord_user;
+            const ext = user.avatar.startsWith('a_') ? 'gif' : 'png';
+            const cacheBuster = new Date().getTime(); // Forces refresh
+            img.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256&v=${cacheBuster}`;
+          }
+        })
+        .catch(err => console.error("Update failed:", err));
+    });
+  }
+
+  // Run on load
+  refreshAvatars();
 </script>
 
 </body>
