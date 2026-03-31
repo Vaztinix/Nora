@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nora — Staff</title>
-
   <style>
     :root {
       --bg: #0b0f1a;
@@ -29,7 +28,7 @@
       min-height: 100vh;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a { color: inherit; text-decoration: none; transition: 0.2s; }
 
     header {
       position: sticky;
@@ -63,7 +62,10 @@
     }
 
     .nav-links {
-      display: flex; gap: 18px; font-weight: 600; color: var(--muted);
+      display: flex;
+      gap: 18px;
+      font-weight: 600;
+      color: var(--muted);
     }
 
     .nav-links a:hover { color: var(--text); }
@@ -74,7 +76,7 @@
       padding: 4rem 1.5rem;
     }
 
-    .page-hero { text-align: center; margin-bottom: 3rem; }
+    .page-hero { text-align: center; margin-bottom: 4rem; }
 
     .badge {
       display: inline-block;
@@ -86,6 +88,8 @@
       font-size: 0.75rem;
       margin-bottom: 18px;
     }
+
+    .page-hero h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 14px; }
 
     .grid {
       display: grid;
@@ -114,7 +118,7 @@
       object-fit: cover;
       margin-bottom: 14px;
       border: 2px solid var(--border);
-      background: #161b2c; /* Loading color */
+      background: #161b2c;
     }
 
     .role {
@@ -122,9 +126,10 @@
       font-weight: 700;
       font-size: 0.85rem;
       margin-bottom: 8px;
+      text-transform: uppercase;
     }
 
-    .bio { color: var(--muted); font-size: 0.95rem; }
+    .bio { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
 
     .bio a {
       color: #aeefff;
@@ -132,6 +137,8 @@
       display: block;
       margin: 4px 0;
     }
+
+    .bio a:hover { text-decoration: underline; }
 
     footer {
       border-top: 1px solid var(--border);
@@ -141,7 +148,9 @@
       margin-top: 4rem;
     }
 
-    @media (max-width: 800px) { .nav-links { display: none; } }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -171,7 +180,7 @@
 
   <div class="grid">
     <div class="card">
-      <img class="avatar" data-user-id="1214048435632603137" src="ReVaztinix.jpeg" alt="vaztinix" />
+      <img class="avatar" data-user="1214048435632603137" src="ReVaztinix.jpeg" alt="vaztinix" />
       <div class="role">Founder & Developer</div>
       <h3>vaztinix</h3>
       <p class="bio">
@@ -184,7 +193,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" data-user-id="941084096673755188" src="solorads_pfp.png" alt="solorads" />
+      <img class="avatar" data-user="941084096673755188" src="solorads_pfp.png" alt="solorads" />
       <div class="role">Partner & Sponsor</div>
       <h3>solorads</h3>
       <p class="bio">
@@ -196,22 +205,22 @@
     </div>
 
     <div class="card">
-      <img class="avatar" data-user-id="1375943730951098549" src="nora.png" alt="Nora" />
+      <img class="avatar" data-user="1375943730951098549" src="nora.png" alt="Nora" />
       <div class="role">Privacy-First Discord Bot</div>
       <h3>Nora</h3>
       <p class="bio">
         Ensures Nora never compromises user trust or server data.
         <a href="https://vaztinix.github.io/Nora" target="_blank">Custom Site</a>
-        <a href="https://discord.com/users/1375943730951098549" target="-blank">Discord</a>
+        <a href="https://discord.com/users/1375943730951098549" target="_blank">Discord</a>
       </p>
     </div>
 
     <div class="card">
-      <img class="avatar" data-user-id="1223693570662334604" src="silasvr8.png" alt="Staff Manager" />
+      <img class="avatar" data-user="1223693570662334604" src="silasvr8.png" alt="silasvr8" />
       <div class="role">Staff Manager</div>
       <h3>silasvr8</h3>
       <p class="bio">
-        Helps manage Nora and its community, testing features to repair them early.
+        Helps manage Nora and its community, testing features to repair them early to keep Nora running smoothly.
         <a href="https://www.youtube.com/@SilasVR8" target="_blank">YouTube</a>
         <a href="https://guns.lol/silasvr8" target="_blank">guns.lol</a>
         <a href="https://discord.com/users/1223693570662334604" target="_blank">Discord</a>
@@ -219,8 +228,8 @@
     </div>
 
     <div class="card">
-      <img class="avatar" data-user-id="1366229304257544213" src="waffles.png" alt="Co-Owner" />
-      <div class="role">Co-Owner and Community Rage Baiter</div>
+      <img class="avatar" data-user="1366229304257544213" src="waffles.png" alt="sillywillywood" />
+      <div class="role">Co-Owner & Rage Baiter</div>
       <h3>sillywillywood</h3>
       <p class="bio">
         D1 Hater
@@ -230,7 +239,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" data-user-id="1366229304257544213" src="beecet.png" alt="Admin" />
+      <img class="avatar" data-user="1366229304257544213" src="beecet.png" alt="discounted_chaos" />
       <div class="role">Administrator</div>
       <h3>discounted_chaos</h3>
       <p class="bio">
@@ -240,7 +249,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" data-user-id="734113955986931734" src="sanedish.png" alt="sanedish" />
+      <img class="avatar" data-user="734113955986931734" src="sanedish.png" alt="sanedish" />
       <div class="role">the gayest lesbian</div>
       <h3>sanedish</h3>
       <p class="bio">
@@ -250,7 +259,7 @@
     </div>
 
     <div class="card">
-      <img class="avatar" data-user-id="1387499169870254230" src="boris.png" alt="BIG TOE" />
+      <img class="avatar" data-user="1387499169870254230" src="boris.png" alt="boris10106" />
       <div class="role">BIG TOE</div>
       <h3>boris10106</h3>
       <p class="bio">
@@ -262,24 +271,31 @@
 </main>
 
 <footer>
-  © 2026 Nora | Privacy-First AI & Moderation for Discord
+  © 2026 Nora | Privacy-First AI & Moderation
 </footer>
 
 <script>
-  // Fast, reliable fetch using a public lookup proxy
+  // Automatic Lanyard Avatar Updates
   document.querySelectorAll('.avatar').forEach(img => {
-    const userId = img.getAttribute('data-user-id');
+    const userId = img.getAttribute('data-user');
     if (!userId) return;
 
-    fetch(`https://discordlookup.mesalytic.moe/v1/user/${userId}`)
+    fetch(`https://api.lanyard.rest/v1/users/${userId}`)
       .then(response => response.json())
-      .then(data => {
-        if (data.avatar && data.avatar.link) {
-          // Replace the local file with the live Discord link
-          img.src = data.avatar.link;
+      .then(res => {
+        if (res.success && res.data.discord_user.avatar) {
+          const user = res.data.discord_user;
+          const isAnimated = user.avatar.startsWith('a_');
+          // Cache-buster (?v=) forces the browser to fetch the NEWEST avatar
+          const liveUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${isAnimated ? 'gif' : 'png'}?size=256&v=${Date.now()}`;
+          
+          // Pre-load to prevent flickering
+          const temp = new Image();
+          temp.src = liveUrl;
+          temp.onload = () => { img.src = liveUrl; };
         }
       })
-      .catch(err => console.log("Failed to fetch live pfp for " + userId));
+      .catch(err => console.error("Update failed for " + userId));
   });
 </script>
 
