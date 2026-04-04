@@ -1,265 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nora | Privacy-First Discord Bot</title>
-    <meta name="description" content="Nora is a privacy-first Discord moderation and AI assistant bot built for transparency, safety, and full server control.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nora | Privacy-First Discord Bot</title>
 
-    <meta property="og:title" content="Nora — Privacy-First Discord Bot">
-    <meta property="og:description" content="Modern AI moderation for Discord with privacy and transparency.">
-    <meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
-    <meta property="og:type" content="website">
+<meta name="description" content="Nora is a privacy-first Discord moderation and AI assistant bot built for transparency, safety, and full server control.">
+<meta property="og:title" content="Nora — Privacy-First Discord Bot">
+<meta property="og:description" content="Modern AI moderation for Discord with privacy and transparency.">
+<meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
+<meta property="og:type" content="website">
 
-    <link rel="icon" type="image/png" href="nora.png">
+<link rel="icon" type="image/png" href="nora.png">
 
-    <style>
-        :root {
-            --bg: #0b0f1a;
-            --bg-soft: #12182b;
-            --card: rgba(255, 255, 255, 0.06);
-            --card-hover: rgba(255, 255, 255, 0.12);
-            --border: rgba(255, 255, 255, 0.08);
-            --primary: #aeefff;
-            --accent: #7aa2ff;
-            --text: #ffffff;
-            --muted: rgba(255, 255, 255, 0.7);
-            --radius: 18px;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: rgba(0, 0, 0, 0.4);
-        }
+<style>
+:root {
+    --bg: #0b0f1a;
+    --bg-soft: #12182b;
+    --card: rgba(255, 255, 255, 0.06);
+    --card-hover: rgba(255, 255, 255, 0.12);
+    --border: rgba(255, 255, 255, 0.08);
+    --primary: #aeefff;
+    --accent: #7aa2ff;
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.7);
+    --radius: 18px;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
 
-        * { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
-        body {
-            margin: 0;
-            font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-            background: radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
-                        radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
-                        var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    background: radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
+                radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
+                var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
 
-        a { color: inherit; text-decoration: none; }
+a { color: inherit; text-decoration: none; }
 
-        /* Header & Nav */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            background: rgba(10, 14, 30, 0.75);
-            border-bottom: 1px solid var(--border);
-        }
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    background: rgba(10, 14, 30, 0.75);
+    border-bottom: 1px solid var(--border);
+}
 
-        .nav {
-            max-width: 1200px;
-            margin: auto;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+.nav {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-        }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+.brand img { width: 40px; height: 40px; border-radius: 10px; }
 
-        .brand img { width: 40px; height: 40px; border-radius: 10px; }
+.nav-links { display: flex; gap: 18px; font-weight: 600; color: var(--muted); }
+.nav-links a:hover { color: var(--text); }
 
-        .nav-links { display: flex; gap: 18px; font-weight: 600; color: var(--muted); }
-        .nav-links a:hover { color: var(--text); }
+.container { max-width: 1200px; margin: auto; padding: 4rem 1.5rem; }
+section { margin-bottom: 6rem; }
 
-        /* Layout */
-        .container { max-width: 1200px; margin: auto; padding: 4rem 1.5rem; }
-        section { margin-bottom: 6rem; }
+.hero { text-align: center; padding-top: 2rem; }
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(174, 239, 255, 0.12);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: .75rem;
+    margin-bottom: 18px;
+}
 
-        /* Hero */
-        .hero { text-align: center; padding-top: 2rem; }
-        .badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 999px;
-            background: rgba(174, 239, 255, 0.12);
-            color: var(--primary);
-            font-weight: 700;
-            font-size: .75rem;
-            letter-spacing: .6px;
-            margin-bottom: 18px;
-        }
+.hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.1; margin: 0 0 18px; }
+.hero p { max-width: 760px; margin: 0 auto 32px; color: var(--muted); font-size: 1.05rem; }
 
-        .hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.1; margin: 0 0 18px; }
-        .hero-description { max-width: 760px; margin: 0 auto 32px; color: var(--muted); font-size: 1.05rem; }
+.cta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.btn {
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    transition: .25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        /* Cards & Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 26px;
-            transition: .25s;
-        }
-        .card:hover { background: var(--card-hover); transform: translateY(-6px); }
-        .card p { color: var(--muted); font-size: 0.95rem; }
+.btn-primary { background: var(--primary); color: #000; }
+.btn-primary:hover { transform: translateY(-4px); }
+.btn-ghost { background: transparent; border: 2px solid var(--border); }
+.btn-ghost:hover { border-color: var(--primary); }
 
-        .cmd {
-            font-family: monospace;
-            background: rgba(0, 0, 0, .35);
-            padding: 8px 12px;
-            border-radius: 10px;
-            display: inline-block;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px;
+    transition: .25s;
+}
+.card:hover { background: var(--card-hover); transform: translateY(-6px); }
+.card p { color: var(--muted); }
 
-        /* Updates */
-        .update-list { display: flex; flex-direction: column; gap: 28px; }
-        .update-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 34px;
-            transition: .25s;
-        }
-        .update-meta { font-size: .8rem; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
+.cmd {
+    font-family: monospace;
+    background: rgba(0,0,0,.35);
+    padding: 6px 10px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
 
-        /* Buttons */
-        .cta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-        .btn {
-            padding: 14px 26px;
-            border-radius: 999px;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            transition: .25s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .btn-primary { background: var(--primary); color: #000; box-shadow: 0 10px 30px rgba(174,239,255,.25); }
-        .btn-primary:hover { transform: translateY(-4px); }
-        .btn-ghost { background: transparent; border: 2px solid var(--border); }
-        .btn-ghost:hover { border-color: var(--primary); }
+/* COMPACT DISCORD OVERLAY */
+#discord-overlay {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 260px; /* Smaller width */
+    background: var(--glass-bg);
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    z-index: 9999;
+    display: none;
+}
 
-        /* Discord Overlay */
-        #discord-overlay {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 320px;
-            background: var(--glass-bg);
-            border-radius: 20px;
-            backdrop-filter: blur(15px) saturate(180%);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 30px var(--glass-shadow);
-            z-index: 9999;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            display: none;
-        }
+.overlay-content { padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+.user-preview { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--glass-border); }
+.username { font-weight: 700; font-size: 0.95rem; color: var(--accent); }
+.user-email { font-size: 0.75rem; color: white; opacity: 0.8; }
 
-        .overlay-content { padding: 22px 28px 40px 28px; display: flex; flex-direction: column; gap: 12px; }
-        .user-preview { display: flex; align-items: center; gap: 14px; }
-        .avatar { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--glass-border); }
-        .username { font-weight: 700; color: var(--primary); }
-        .user-email { font-size: 0.85rem; color: var(--muted); }
+#logout-btn { padding: 6px; font-size: 0.75rem; width: 100%; border-radius: 8px; }
 
-        .login-btn { position: fixed; bottom: 20px; right: 20px; z-index: 998; }
-        .discord-icon { width: 20px; height: 20px; }
+.collapse-btn {
+    position: absolute; bottom: 5px; left: 5px; background: transparent;
+    border: none; cursor: pointer; color: white; font-size: 0.8rem;
+}
 
-        .collapse-btn {
-            position: absolute; bottom: 8px; left: 8px; background: transparent;
-            border: none; cursor: pointer; color: white; font-size: 1.2rem;
-        }
+#discord-overlay.collapsed { width: 55px; height: 55px; border-radius: 50%; overflow: hidden; }
+#discord-overlay.collapsed .overlay-content { display: none; }
 
-        #discord-overlay.collapsed { width: 60px; height: 60px; border-radius: 50%; }
-        #discord-overlay.collapsed .overlay-content { display: none; }
+.login-btn { position: fixed; bottom: 20px; right: 20px; z-index: 998; }
 
-        footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: center; color: var(--muted); }
+footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: center; color: var(--muted); }
 
-        @media(max-width:800px){ .nav-links { display: none; } }
-    </style>
+@media(max-width:800px){ .nav-links { display: none; } }
+</style>
 </head>
 
 <body>
 
 <header>
-    <div class="nav">
-        <div class="brand">
-            <img src="nora.png" alt="Nora">
-            <span>Nora</span>
-        </div>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="team.html">Team</a>
-            <a href="ai-helper.html">Kite AI</a>
-            <a href="AI.html">Nora AI</a>
-            <a href="tos.html">Legal</a>
-        </nav>
+<div class="nav">
+    <div class="brand">
+        <img src="nora.png" alt="Nora">
+        <span>Nora</span>
     </div>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="team.html">Team</a>
+        <a href="ai-helper.html">Kite AI</a>
+        <a href="AI.html">Nora AI</a>
+        <a href="tos.html">Legal</a>
+    </nav>
+</div>
 </header>
 
 <main class="container">
-    <section class="hero">
-        <div class="badge">PRIVACY-FIRST DISCORD BOT</div>
-        <h1>Moderation & AI Built for Trust</h1>
-        
-        <div class="hero-description">
-            <p>Nora is a leading privacy-focused application, recognized for strict data minimization. 
-            Server data belongs to the server that created it—no hidden logging, no developer backdoors.</p>
-        </div>
+<section class="hero">
+    <div class="badge">PRIVACY-FIRST DISCORD BOT</div>
+    <h1>Moderation & AI Built for Trust</h1>
+    <p>
+        Nora is a modern Discord moderation and AI assistant bot designed around
+        one simple rule: server data belongs to the server that created it.
+        No hidden logging. No developer access to private content.
+    </p>
+    <div class="cta">
+        <a class="btn btn-primary" href="https://vaztinix.github.io/Nora/install" target="_blank">Install</a>
+        <a class="btn btn-ghost" href="https://top.gg/bot/1375943730951098549/vote" target="_blank">Vote on Top.gg</a>
+    </div>
+</section>
 
-        <div class="cta">
-            <a class="btn btn-primary" href="https://vaztinix.github.io/Nora/install" target="_blank">Install</a>
-            <a class="btn btn-ghost" href="https://top.gg/bot/1375943730951098549/vote" target="_blank">Vote on Top.gg</a>
+<section>
+    <h2>Our Standards</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Privacy by Default</h3>
+            <p>Nora is built so server content is never accessible to developers. Data remains isolated.</p>
         </div>
-    </section>
+        <div class="card">
+            <h3>Transparent Systems</h3>
+            <p>Every feature is designed so administrators understand exactly what data exists and how it is used.</p>
+        </div>
+        <div class="card">
+            <h3>Prioritized Moderation</h3>
+            <p>Tools prioritize reliability and clarity so staff can act quickly and confidently.</p>
+        </div>
+    </div>
+</section>
 
-    <section>
-        <h2>Our Standards</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Privacy by Default</h3>
-                <p>Nora is built so server content is never accessible to developers. All data remains isolated.</p>
-            </div>
-            <div class="card">
-                <h3>Transparent Systems</h3>
-                <p>Admins understand exactly what data exists and how it is used. No surprises.</p>
-            </div>
-            <div class="card">
-                <h3>Reliable Tools</h3>
-                <p>Moderation tools are built for speed and clarity, letting staff act with confidence.</p>
-            </div>
-        </div>
-    </section>
+<section>
+    <h2>Example Commands</h2>
+    <div class="grid">
+        <div class="card"><div class="cmd">/ban</div><p>Permanantly remove disruptive members from your server.</p></div>
+        <div class="card"><div class="cmd">/mute</div><p>Apply temporary restrictions with clear time limits.</p></div>
+        <div class="card"><div class="cmd">/ask</div><p>Ask Nora AI questions directly inside Discord.</p></div>
+        <div class="card"><div class="cmd">/my card</div><p>View or delete stored data instantly.</p></div>
+        <div class="card"><div class="cmd">/create invite</div><p>Create an invite for your server quickly and efficently.</p></div>
+        <div class="card"><div class="cmd">/leaderboard</div><p>View public leveling statistics and ranking.</p></div>
+        <div class="card"><div class="cmd">/rank</div><p>View server rank and current xp.</p></div>
+        <div class="card"><div class="cmd">/role add</div><p>Quickly add a role to a user.</p></div>
+    </div>
+</section>
 
-    <section>
-        <h2>Example Commands</h2>
-        <div class="grid">
-            <div class="card"><div class="cmd">/ban</div><p>Permanently remove disruptive members.</p></div>
-            <div class="card"><div class="cmd">/mute</div><p>Apply temporary restrictions with ease.</p></div>
-            <div class="card"><div class="cmd">/ask</div><p>Interact with Nora AI directly.</p></div>
-            <div class="card"><div class="cmd">/my card</div><p>View or delete your stored data.</p></div>
+<section>
+    <h2>Latest Nora Updates</h2>
+    <div class="grid" style="grid-template-columns: 1fr;">
+        <div class="card">
+            <div class="update-meta" style="color: var(--primary); font-weight: bold; margin-bottom: 10px;">2026 Update (Releases May 24th)</div>
+            <h3>Nora Studio Manager</h3>
+            <p>Development has begun on a new dashboard for server owners to manage all Nora features through a modern interface.</p>
         </div>
-    </section>
-
-    <section>
-        <h2>Latest Updates</h2>
-        <div class="update-list">
-            <div class="update-card">
-                <div class="update-meta">May 24th, 2026</div>
-                <h3>Nora Studio Manager</h3>
-                <p>A new modern dashboard for server owners to manage privacy and configuration.</p>
-            </div>
+        <div class="card">
+            <div class="update-meta" style="color: var(--primary); font-weight: bold; margin-bottom: 10px;">2026 Update</div>
+            <h3>Moderation Series N</h3>
+            <p>Stronger error handling and predictable behavior for all core moderation commands.</p>
         </div>
-    </section>
+    </div>
+</section>
 </main>
 
 <div id="discord-overlay">
@@ -267,83 +249,78 @@
         <div class="user-preview">
             <img id="discord-avatar" class="avatar" src="" alt="Avatar">
             <div class="user-info">
-                <div id="discord-username" class="username">User</div>
+                <div id="discord-username" class="username">Username</div>
                 <div id="discord-email" class="user-email">email@example.com</div>
             </div>
         </div>
-        <button id="logout-btn" class="btn btn-ghost" style="width:100%; margin-top:10px;">Logout</button>
+        <button id="logout-btn" class="btn btn-ghost">Logout</button>
+        <button id="collapse-btn" class="collapse-btn">⇌</button>
     </div>
-    <button id="collapse-btn" class="collapse-btn">⇌</button>
 </div>
 
 <button id="login-btn" class="btn btn-primary login-btn">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" class="discord-icon">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" style="width:18px;">
     Login
 </button>
 
-<footer>
-    © 2026 Nora | Privacy-First AI & Moderation for Discord
-</footer>
+<footer>© 2026 Nora | Privacy-First AI & Moderation</footer>
 
 <script>
-    const overlay = document.getElementById('discord-overlay');
-    const avatarEl = document.getElementById('discord-avatar');
-    const usernameEl = document.getElementById('discord-username');
-    const emailEl = document.getElementById('discord-email');
-    const loginBtn = document.getElementById('login-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const collapseBtn = document.getElementById('collapse-btn');
+const overlay = document.getElementById('discord-overlay');
+const avatarEl = document.getElementById('discord-avatar');
+const usernameEl = document.getElementById('discord-username');
+const emailEl = document.getElementById('discord-email');
+const loginBtn = document.getElementById('login-btn');
+const logoutBtn = document.getElementById('logout-btn');
+const collapseBtn = document.getElementById('collapse-btn');
 
-    const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&response_type=token&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&scope=identify+email";
+const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&response_type=token&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&scope=identify+email";
 
-    loginBtn.addEventListener('click', () => { window.location.href = discordLoginURL; });
+loginBtn.addEventListener('click', () => { window.location.href = discordLoginURL; });
 
-    logoutBtn.addEventListener('click', () => {
-        sessionStorage.clear();
-        overlay.style.display = 'none';
-        loginBtn.style.display = 'flex';
-    });
+logoutBtn.addEventListener('click', () => {
+    sessionStorage.clear();
+    overlay.style.display = 'none';
+    loginBtn.style.display = 'flex';
+});
 
-    collapseBtn.addEventListener('click', () => {
-        overlay.classList.toggle('collapsed');
-    });
+collapseBtn.addEventListener('click', () => { overlay.classList.toggle('collapsed'); });
 
-    async function fetchDiscordUser(token) {
-        try {
-            const res = await fetch('https://discord.com/api/users/@me', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            if (!res.ok) throw new Error('API Error');
-            const data = await res.json();
-            const user = {
-                username: data.username,
-                avatar: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`,
-                email: data.email
-            };
-            sessionStorage.setItem('discord_user', JSON.stringify(user));
-            return user;
-        } catch(err) {
-            return null;
-        }
+async function fetchDiscordUser(token) {
+    try {
+        const res = await fetch('https://discord.com/api/users/@me', {
+            headers: { Authorization: `Bearer ${token}` } // Fixed backticks here
+        });
+        if (!res.ok) throw new Error('Auth failed');
+        const data = await res.json();
+        const user = {
+            username: `${data.username}`,
+            avatar: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`,
+            email: data.email
+        };
+        sessionStorage.setItem('discord_user', JSON.stringify(user));
+        return user;
+    } catch(err) {
+        return null;
     }
+}
 
-    function showOverlay(user) {
+async function init() {
+    const token = sessionStorage.getItem('discord_token');
+    let user = JSON.parse(sessionStorage.getItem('discord_user'));
+
+    if (token && !user) user = await fetchDiscordUser(token);
+    
+    if (user) {
         overlay.style.display = 'block';
         loginBtn.style.display = 'none';
         avatarEl.src = user.avatar;
         usernameEl.textContent = user.username;
-        emailEl.textContent = user.email || "No email available";
+        emailEl.textContent = user.email || "Private Email";
     }
+}
 
-    async function init() {
-        const token = sessionStorage.getItem('discord_token');
-        let user = JSON.parse(sessionStorage.getItem('discord_user'));
-
-        if (token && !user) user = await fetchDiscordUser(token);
-        if (user) showOverlay(user);
-    }
-
-    window.addEventListener('DOMContentLoaded', init);
+window.addEventListener('DOMContentLoaded', init);
 </script>
 
 </body>
