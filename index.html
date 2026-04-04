@@ -25,8 +25,8 @@
     --text: #ffffff;
     --muted: rgba(255, 255, 255, 0.7);
     --radius: 18px;
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-bg: rgba(15, 20, 35, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.15);
 }
 
 * { box-sizing: border-box; }
@@ -39,9 +39,8 @@ body {
                 var(--bg);
     color: var(--text);
     min-height: 100vh;
+    overflow-x: hidden;
 }
-
-a { color: inherit; text-decoration: none; }
 
 header {
     position: sticky;
@@ -100,8 +99,8 @@ section { margin-bottom: 6rem; }
 
 .btn-primary { background: var(--primary); color: #000; }
 .btn-primary:hover { transform: translateY(-4px); }
-.btn-ghost { background: transparent; border: 2px solid var(--border); }
-.btn-ghost:hover { border-color: var(--primary); }
+.btn-ghost { background: transparent; border: 2px solid var(--border); color: white; }
+.btn-ghost:hover { border-color: var(--primary); background: rgba(255,255,255,0.05); }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
 .card {
@@ -124,37 +123,118 @@ section { margin-bottom: 6rem; }
     color: var(--primary);
 }
 
-/* COMPACT DISCORD OVERLAY */
+/* --- REFINED DISCORD WIDGET --- */
 #discord-overlay {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 260px; /* Smaller width */
+    bottom: 25px;
+    right: 25px;
+    width: 280px;
     background: var(--glass-bg);
-    border-radius: 16px;
-    backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     z-index: 9999;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
     display: none;
 }
 
-.overlay-content { padding: 15px; display: flex; flex-direction: column; gap: 10px; }
-.user-preview { display: flex; align-items: center; gap: 10px; }
-.avatar { width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--glass-border); }
-.username { font-weight: 700; font-size: 0.95rem; color: var(--accent); }
-.user-email { font-size: 0.75rem; color: white; opacity: 0.8; }
-
-#logout-btn { padding: 6px; font-size: 0.75rem; width: 100%; border-radius: 8px; }
-
-.collapse-btn {
-    position: absolute; bottom: 5px; left: 5px; background: transparent;
-    border: none; cursor: pointer; color: white; font-size: 0.8rem;
+.overlay-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-#discord-overlay.collapsed { width: 55px; height: 55px; border-radius: 50%; overflow: hidden; }
-#discord-overlay.collapsed .overlay-content { display: none; }
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-.login-btn { position: fixed; bottom: 20px; right: 20px; z-index: 998; }
+.avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    background: var(--bg-soft);
+    object-fit: cover;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.display-name {
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.username-tag {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.widget-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Control Buttons */
+.toggle-btn {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    z-index: 10000;
+}
+.toggle-btn:hover { background: var(--primary); color: #000; }
+
+/* Collapsed State */
+#discord-overlay.collapsed {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#discord-overlay.collapsed .overlay-content {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#discord-overlay.collapsed .avatar-mini {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: block;
+    border: 2px solid var(--primary);
+}
+
+.avatar-mini { display: none; }
+
+.login-btn { position: fixed; bottom: 25px; right: 25px; z-index: 998; }
 
 footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: center; color: var(--muted); }
 
@@ -187,7 +267,6 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
     <p>
         Nora is a modern Discord moderation and AI assistant bot designed around
         one simple rule: server data belongs to the server that created it.
-        No hidden logging. No developer access to private content.
     </p>
     <div class="cta">
         <a class="btn btn-primary" href="https://vaztinix.github.io/Nora/install" target="_blank">Install</a>
@@ -196,66 +275,36 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
 </section>
 
 <section>
-    <h2>Our Standards</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Privacy by Default</h3>
-            <p>Nora is built so server content is never accessible to developers. Data remains isolated.</p>
-        </div>
-        <div class="card">
-            <h3>Transparent Systems</h3>
-            <p>Every feature is designed so administrators understand exactly what data exists and how it is used.</p>
-        </div>
-        <div class="card">
-            <h3>Prioritized Moderation</h3>
-            <p>Tools prioritize reliability and clarity so staff can act quickly and confidently.</p>
-        </div>
-    </div>
-</section>
-
-<section>
     <h2>Example Commands</h2>
     <div class="grid">
-        <div class="card"><div class="cmd">/ban</div><p>Permanantly remove disruptive members from your server.</p></div>
+        <div class="card"><div class="cmd">/ban</div><p>Permanantly remove disruptive members.</p></div>
         <div class="card"><div class="cmd">/mute</div><p>Apply temporary restrictions with clear time limits.</p></div>
         <div class="card"><div class="cmd">/ask</div><p>Ask Nora AI questions directly inside Discord.</p></div>
         <div class="card"><div class="cmd">/my card</div><p>View or delete stored data instantly.</p></div>
-        <div class="card"><div class="cmd">/create invite</div><p>Create an invite for your server quickly and efficently.</p></div>
+        <div class="card"><div class="cmd">/create invite</div><p>Create an invite for your server efficiently.</p></div>
         <div class="card"><div class="cmd">/leaderboard</div><p>View public leveling statistics and ranking.</p></div>
         <div class="card"><div class="cmd">/rank</div><p>View server rank and current xp.</p></div>
         <div class="card"><div class="cmd">/role add</div><p>Quickly add a role to a user.</p></div>
     </div>
 </section>
-
-<section>
-    <h2>Latest Nora Updates</h2>
-    <div class="grid" style="grid-template-columns: 1fr;">
-        <div class="card">
-            <div class="update-meta" style="color: var(--primary); font-weight: bold; margin-bottom: 10px;">2026 Update (Releases May 24th)</div>
-            <h3>Nora Studio Manager</h3>
-            <p>Development has begun on a new dashboard for server owners to manage all Nora features through a modern interface.</p>
-        </div>
-        <div class="card">
-            <div class="update-meta" style="color: var(--primary); font-weight: bold; margin-bottom: 10px;">2026 Update</div>
-            <h3>Moderation Series N</h3>
-            <p>Stronger error handling and predictable behavior for all core moderation commands.</p>
-        </div>
-    </div>
-</section>
 </main>
 
 <div id="discord-overlay">
+    <img id="avatar-mini" class="avatar-mini" src="" alt="User">
+    
     <div class="overlay-content">
-        <div class="user-preview">
+        <div class="user-card">
             <img id="discord-avatar" class="avatar" src="" alt="Avatar">
-            <div class="user-info">
-                <div id="discord-username" class="username">Username</div>
-                <div id="discord-email" class="user-email">email@example.com</div>
+            <div class="user-details">
+                <span id="discord-displayname" class="display-name">Display Name</span>
+                <span id="discord-username" class="username-tag">@username</span>
             </div>
         </div>
-        <button id="logout-btn" class="btn btn-ghost">Logout</button>
-        <button id="collapse-btn" class="collapse-btn">⇌</button>
+        <div class="widget-actions">
+            <button id="logout-btn" class="btn btn-ghost" style="width:100%; justify-content:center; padding: 8px;">Logout</button>
+        </div>
     </div>
+    <button id="toggle-btn" class="toggle-btn" title="Toggle Widget">⇌</button>
 </div>
 
 <button id="login-btn" class="btn btn-primary login-btn">
@@ -268,11 +317,12 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
 <script>
 const overlay = document.getElementById('discord-overlay');
 const avatarEl = document.getElementById('discord-avatar');
+const avatarMini = document.getElementById('avatar-mini');
+const displayNameEl = document.getElementById('discord-displayname');
 const usernameEl = document.getElementById('discord-username');
-const emailEl = document.getElementById('discord-email');
 const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
-const collapseBtn = document.getElementById('collapse-btn');
+const toggleBtn = document.getElementById('toggle-btn');
 
 const discordLoginURL = "https://discord.com/oauth2/authorize?client_id=1375943730951098549&response_type=token&redirect_uri=https%3A%2F%2Fvaztinix.github.io%2FNora%2Fcallback&scope=identify+email";
 
@@ -284,19 +334,31 @@ logoutBtn.addEventListener('click', () => {
     loginBtn.style.display = 'flex';
 });
 
-collapseBtn.addEventListener('click', () => { overlay.classList.toggle('collapsed'); });
+// Toggle between expanded and collapsed
+toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    overlay.classList.toggle('collapsed');
+});
+
+// Expand if clicking the mini-avatar while collapsed
+overlay.addEventListener('click', () => {
+    if(overlay.classList.contains('collapsed')) {
+        overlay.classList.remove('collapsed');
+    }
+});
 
 async function fetchDiscordUser(token) {
     try {
         const res = await fetch('https://discord.com/api/users/@me', {
-            headers: { Authorization: `Bearer ${token}` } // Fixed backticks here
+            headers: { Authorization: `Bearer ${token}` }
         });
         if (!res.ok) throw new Error('Auth failed');
         const data = await res.json();
+        
         const user = {
-            username: `${data.username}`,
-            avatar: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`,
-            email: data.email
+            displayName: data.global_name || data.username,
+            username: data.username,
+            avatar: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`
         };
         sessionStorage.setItem('discord_user', JSON.stringify(user));
         return user;
@@ -315,8 +377,9 @@ async function init() {
         overlay.style.display = 'block';
         loginBtn.style.display = 'none';
         avatarEl.src = user.avatar;
-        usernameEl.textContent = user.username;
-        emailEl.textContent = user.email || "Private Email";
+        avatarMini.src = user.avatar;
+        displayNameEl.textContent = user.displayName;
+        usernameEl.textContent = `@${user.username}`;
     }
 }
 
