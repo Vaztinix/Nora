@@ -136,6 +136,14 @@ section { margin-bottom: 6rem; }
     color: var(--primary);
 }
 
+.update-list {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+.update-list li { margin-bottom: 8px; }
+
 /* --- DISCORD WIDGET --- */
 #discord-overlay {
     position: fixed;
@@ -300,6 +308,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
     <section>
         <h2>Example Commands</h2>
         <div class="grid">
+            <div class="card"><div class="cmd">/configure</div><p>Full control over features, logging, and AI selection.</p></div>
             <div class="card"><div class="cmd">/ban</div><p>Permanantly remove disruptive members from your server.</p></div>
             <div class="card"><div class="cmd">/mute</div><p>Apply temporary restrictions with clear time limits.</p></div>
             <div class="card"><div class="cmd">/ask</div><p>Ask Nora AI questions directly inside Discord.</p></div>
@@ -314,6 +323,19 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
     <section>
         <h2>Latest Nora Updates</h2>
         <div class="grid" style="grid-template-columns: 1fr; gap: 28px;">
+            <div class="card" style="border-left: 4px solid var(--primary);">
+                <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">LATEST UPDATE — BETA 4.1</div>
+                <h3>The Foundation Rebuild</h3>
+                <p>A major overhaul focusing on stability, AI flexibility, and total server control.</p>
+                <ul class="update-list">
+                    <li><strong>AI Flexibility:</strong> Dual support for ChatGPT and Gemini (Beta), plus the new lightweight <strong>Aura AI</strong> for simple tasks.</li>
+                    <li><strong>Full Control:</strong> New <code>/configure</code> system for toggling features, logging, and verification.</li>
+                    <li><strong>New Utilities:</strong> Improved Purge tools, Giveaways, and a new Counting system.</li>
+                    <li><strong>Voice XP:</strong> Leveling logic refined to include voice activity (multiple users required).</li>
+                    <li><strong>Stability:</strong> Full system rebuild to support future expansions like Nora Studio.</li>
+                </ul>
+            </div>
+
             <div class="card">
                 <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">2026 Update (Releases May 24th)</div>
                 <h3>Nora Studio Manager</h3>
