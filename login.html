@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Nora Studio Manager</title>
 
+<meta name="description" content="Log in to manage your Nora bot settings and servers.">
+<link rel="icon" type="image/png" href="nora.png">
+
+<style>
+:root {
+    --bg: #0b0f1a;
+    --bg-soft: #12182b;
+    --card: rgba(255, 255, 255, 0.06);
+    --card-hover: rgba(255, 255, 255, 0.12);
+    --border: rgba(255, 255, 255, 0.08);
+    --primary: #aeefff;
+    --accent: #7aa2ff;
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.7);
+    --radius: 18px;
+    --glass-bg: rgba(15, 20, 35, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.15);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    background: radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
+                radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
+                var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    background: rgba(10, 14, 30, 0.75);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand { display: flex; align-items: center; gap: 12px;
