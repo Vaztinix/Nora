@@ -9,17 +9,20 @@
   const hash = window.location.hash.substring(1);
   const params = new URLSearchParams(hash);
   const token = params.get('access_token');
+  const tokenType = params.get('token_type');
 
   if (token) {
-    sessionStorage.setItem('discord_token', token);
+    // Save to localStorage for site-wide, persistent login
+    localStorage.setItem('discord_token', token);
+    if (tokenType) localStorage.setItem('token_type', tokenType);
 
-    // Redirect to homepage without hash
-    window.location.replace('index.html'); 
-    // use replace() to avoid back button going to callback.html
+    // Redirect to the dashboard using replace() to prevent back-button loops
+    window.location.replace('login.html'); 
   } else {
-    // If something went wrong, redirect after brief message
-    document.write('<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#1e1e1e;color:white;font-family:sans-serif;"><h2>Discord login failed. Redirecting...</h2></div>');
-    setTimeout(() => window.location.replace('index.html'), 2000);
+    // If something went wrong, redirect after a brief message
+    document.write('<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0b0f1a;color:white;font-family:sans-serif;"><h2>Discord login failed. Redirecting...</h2></div>');
+    // Redirect back to the login page so they can try again
+    setTimeout(() => window.location.replace('login.html'), 2000);
   }
 </script>
 </head>
