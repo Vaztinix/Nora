@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login | Nora Studio Manager</title>
+<title>Manager | Nora Studio</title>
 
 <meta name="description" content="Log in to manage your Nora bot settings and servers.">
 <link rel="icon" type="image/png" href="nora.png">
@@ -20,9 +20,8 @@
     --text: #ffffff;
     --muted: rgba(255, 255, 255, 0.7);
     --radius: 18px;
-    --glass-bg: rgba(15, 20, 35, 0.9);
-    --glass-border: rgba(255, 255, 255, 0.15);
     --warning: #ffaa00;
+    --danger: #ff5555;
 }
 
 * { box-sizing: border-box; }
@@ -49,149 +48,70 @@ header {
     border-bottom: 1px solid var(--border);
 }
 
-.nav {
-    max-width: 1200px;
-    margin: auto;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
+.nav { max-width: 1200px; margin: auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; color: white; text-decoration: none;}
 .brand img { width: 40px; height: 40px; border-radius: 10px; }
-
 .container { max-width: 1200px; margin: auto; padding: 4rem 1.5rem; width: 100%; flex: 1; }
 
-/* Login State Styles */
-#login-view {
-    text-align: center;
-    padding-top: 10vh;
-}
+#login-view { text-align: center; padding-top: 10vh; }
 #login-view h1 { font-size: 2.5rem; margin-bottom: 10px; }
 #login-view p { color: var(--muted); margin-bottom: 30px; }
 
-.btn {
-    padding: 14px 26px;
-    border-radius: 999px;
-    font-weight: 800;
-    border: none;
-    cursor: pointer;
-    transition: .25s;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-}
-.btn-primary { background: var(--primary); color: #000; box-shadow: 0 10px 30px rgba(174,239,255,.25); text-decoration: none; }
+.btn { padding: 12px 24px; border-radius: 999px; font-weight: 700; border: none; cursor: pointer; transition: .25s; display: inline-flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+.btn-primary { background: var(--primary); color: #000; box-shadow: 0 10px 30px rgba(174,239,255,.25); }
 .btn-primary:hover { transform: translateY(-4px); }
-.btn-ghost { background: transparent; border: 2px solid var(--border); color: white; text-decoration: none; }
+.btn-ghost { background: transparent; border: 2px solid var(--border); color: white; }
 .btn-ghost:hover { border-color: var(--primary); }
+.btn-danger { background: rgba(255,85,85,0.1); border: 1px solid var(--danger); color: var(--danger); }
+.btn-danger:hover { background: var(--danger); color: #000; }
 
-/* Dashboard State Styles */
-#dashboard-view {
-    display: none; 
-    grid-template-columns: 250px 1fr;
-    gap: 2rem;
-}
-
-.sidebar {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    height: fit-content;
-}
-
-.profile-card {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-}
+#dashboard-view { display: none; grid-template-columns: 250px 1fr; gap: 2rem; }
+.sidebar { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; height: fit-content; }
+.profile-card { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
 .profile-card img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary); }
 .profile-info { display: flex; flex-direction: column; overflow: hidden;}
 .profile-info strong { white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
 .profile-info span { font-size: 0.8rem; color: var(--muted); }
 
-.tab-btn {
-    width: 100%;
-    background: transparent;
-    color: var(--muted);
-    border: none;
-    text-align: left;
-    padding: 12px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    transition: 0.2s;
-}
+.tab-btn { width: 100%; background: transparent; color: var(--muted); border: none; text-align: left; padding: 12px 15px; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 600; margin-bottom: 8px; transition: 0.2s; }
 .tab-btn:hover { background: var(--card-hover); color: white; }
 .tab-btn.active { background: var(--primary); color: #000; }
-
 .tab-content { display: none; }
 .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Server Grid */
 .server-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
-.server-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    text-align: center;
-    transition: 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
+.server-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 15px; }
 .server-card:hover { background: var(--card-hover); transform: translateY(-5px); border-color: var(--primary); }
 .server-icon { width: 70px; height: 70px; border-radius: 20px; object-fit: cover; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; color: var(--muted);}
 
-/* Settings UI */
+/* Settings UI Inputs */
 .setting-group { margin-bottom: 25px; background: var(--card); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
-.setting-group label { display: block; font-weight: bold; margin-bottom: 8px; }
-.setting-group p { font-size: 0.85rem; color: var(--muted); margin-top: 0; margin-bottom: 15px; }
-select, input[type="text"] { width: 100%; padding: 12px; border-radius: 10px; background: var(--bg-soft); border: 1px solid var(--border); color: white; font-family: inherit; }
-select:focus, input:focus { outline: none; border-color: var(--primary); }
+.setting-group > label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 1.1rem;}
+.setting-group > p { font-size: 0.85rem; color: var(--muted); margin-top: 0; margin-bottom: 15px; }
+select, input[type="text"], input[type="number"], textarea { width: 100%; padding: 12px; border-radius: 10px; background: var(--bg-soft); border: 1px solid var(--border); color: white; font-family: inherit; }
+select:focus, input:focus, textarea:focus { outline: none; border-color: var(--primary); }
 
-/* In-Progress Warning UI */
-.badge-wip {
-    display: inline-block;
-    padding: 4px 8px;
-    background: rgba(255, 170, 0, 0.15);
-    color: var(--warning);
-    border: 1px solid rgba(255, 170, 0, 0.3);
-    border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-.info-banner {
-    background: rgba(255, 170, 0, 0.1);
-    border: 1px solid var(--warning);
-    color: var(--warning);
-    padding: 15px;
-    border-radius: var(--radius);
-    margin-bottom: 25px;
-}
-.switch-row {
-    background: rgba(0,0,0,0.2);
-    padding: 12px 15px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: normal !important;
-    margin-bottom: 8px;
-}
+/* --- INNER CONFIGURATION STYLES --- */
+.config-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.config-header .server-icon { width: 60px; height: 60px; font-size: 1.2rem; }
+
+/* Config Nav Pills */
+.config-nav { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 25px; border-bottom: 1px solid var(--border); }
+.config-nav::-webkit-scrollbar { height: 6px; }
+.config-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+.config-nav button { white-space: nowrap; padding: 8px 16px; border-radius: 20px; background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid transparent; cursor: pointer; transition: 0.2s; font-weight: 600;}
+.config-nav button.active { background: rgba(174,239,255,0.1); color: var(--primary); border-color: var(--primary); }
+.config-nav button:hover:not(.active) { background: rgba(255,255,255,0.1); color: white;}
+
+.config-section { display: none; animation: fadeIn 0.2s ease; }
+.config-section.active { display: block; }
+
+/* Switch Rows */
+.switch-row { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.switch-info strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+.switch-info span { font-size: 0.8rem; color: var(--muted); }
 
 /* Custom Toggle Switch */
 .switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0;}
@@ -201,31 +121,24 @@ select:focus, input:focus { outline: none; border-color: var(--primary); }
 input:checked + .slider { background-color: var(--primary); border-color: var(--primary); }
 input:checked + .slider:before { transform: translateX(20px); background-color: #000; }
 
-/* --- DYNAMIC SETTINGS STYLES --- */
-body.theme-midnight {
-    --bg: #000000;
-    --bg-soft: #050505;
-    --card: rgba(20, 20, 20, 0.8);
-    --border: #222222;
-    background: #000000;
-}
-body.compact-mode .server-card { flex-direction: row; padding: 12px; text-align: left; gap: 12px; }
-body.compact-mode .server-icon { width: 40px; height: 40px; border-radius: 10px; font-size: 1rem; }
-body.compact-mode .server-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-
-/* --- SERVER CONFIGURATION STYLES --- */
-.config-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-.config-header .server-icon { width: 60px; height: 60px; font-size: 1.2rem; }
-.command-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;}
+/* Command Grid */
+.command-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
 .command-card { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; gap: 15px; transition: 0.2s;}
 .command-card:hover { border-color: rgba(255,255,255,0.2); background: rgba(0,0,0,0.4);}
 .command-info h4 { margin: 0 0 5px 0; color: var(--primary); font-family: monospace; font-size: 1rem;}
 .command-info p { margin: 0; font-size: 0.8rem; color: var(--muted); line-height: 1.3;}
 
-@media(max-width: 768px) {
-    #dashboard-view { grid-template-columns: 1fr; }
-}
+/* Grid Layout for compact settings */
+.settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;}
+.input-block label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 6px; }
 
+/* Themes */
+body.theme-midnight { --bg: #000000; --bg-soft: #050505; --card: rgba(20, 20, 20, 0.8); --border: #222222; background: #000000; }
+body.compact-mode .server-card { flex-direction: row; padding: 12px; text-align: left; gap: 12px; }
+body.compact-mode .server-icon { width: 40px; height: 40px; border-radius: 10px; font-size: 1rem; }
+body.compact-mode .server-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+@media(max-width: 850px) { #dashboard-view { grid-template-columns: 1fr; } .settings-grid { grid-template-columns: 1fr; } }
 footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: center; color: var(--muted); margin-top: auto; }
 </style>
 </head>
@@ -247,9 +160,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" style="width: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(174,239,255,0.4));">
         <h1>Nora Studio Manager</h1>
         <p>Log in with Discord to configure your servers and manage your preferences.</p>
-        <button id="discord-login-btn" class="btn btn-primary">
-            Log in with Discord
-        </button>
+        <button id="discord-login-btn" class="btn btn-primary">Log in with Discord</button>
     </div>
 
     <div id="dashboard-view">
@@ -262,9 +173,8 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
                 </div>
             </div>
             
-            <button class="tab-btn active" onclick="switchTab('servers')">My Servers</button>
-            <button class="tab-btn" onclick="switchTab('user-settings')">User Settings</button>
-            <button class="tab-btn" onclick="switchTab('display-settings')">Display Settings</button>
+            <button class="tab-btn active" onclick="switchTab('servers')">Server Manager</button>
+            <button class="tab-btn" onclick="switchTab('user-settings')">My Preferences</button>
             
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">
                 <button id="logout-btn" class="btn btn-ghost" style="width: 100%; justify-content: center;">Logout</button>
@@ -284,90 +194,255 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
                     
                     <div class="config-header">
                         <div id="config-server-icon"></div>
-                        <div>
+                        <div style="flex: 1;">
                             <h2 id="config-server-name" style="margin: 0; margin-bottom: 4px;">Server Name</h2>
-                            <span style="color: var(--muted); font-size: 0.9rem;">Command Management & Feature Configuration</span>
+                            <span style="color: var(--muted); font-size: 0.9rem;">Guild Configuration</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="saveServerSettings()">Save Data</button>
+                    </div>
+
+                    <div class="config-nav">
+                        <button class="active" onclick="switchConfigSection('sect-safety')">Safety & Raid</button>
+                        <button onclick="switchConfigSection('sect-automod')">AutoMod</button>
+                        <button onclick="switchConfigSection('sect-logs')">Logging</button>
+                        <button onclick="switchConfigSection('sect-levels')">Leveling</button>
+                        <button onclick="switchConfigSection('sect-modules')">Modules & Games</button>
+                        <button onclick="switchConfigSection('sect-ai')">Nora AI</button>
+                        <button onclick="switchConfigSection('sect-commands')">Commands</button>
+                    </div>
+                    
+                    <div id="sect-safety" class="config-section active">
+                        <div class="setting-group">
+                            <label>Anti-Raid Core</label>
+                            <p>Manage incoming member flow and automated defenses.</p>
+                            
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Enable Anti-Raid</strong><span>Core defense mechanisms against bot floods.</span></div>
+                                <label class="switch"><input type="checkbox" id="c-antiraid"><span class="slider"></span></label>
+                            </div>
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Server Lockdown</strong><span style="color: var(--danger);">Pauses all invites and new joins instantly.</span></div>
+                                <label class="switch"><input type="checkbox" id="c-lockdown"><span class="slider"></span></label>
+                            </div>
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Require Profile Picture</strong><span>Kick accounts joining with default Discord avatars.</span></div>
+                                <label class="switch"><input type="checkbox" id="c-pfp"><span class="slider"></span></label>
+                            </div>
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Nickname Filter</strong><span>Prevent bot naming conventions upon entry.</span></div>
+                                <label class="switch"><input type="checkbox" id="c-nick"><span class="slider"></span></label>
+                            </div>
+
+                            <div class="settings-grid" style="margin-top: 20px;">
+                                <div class="input-block">
+                                    <label>Sensitivity Threshold</label>
+                                    <select id="c-raid-thresh">
+                                        <option value="3">Strict (3 users/sec)</option>
+                                        <option value="5" selected>Normal (5 users/sec)</option>
+                                        <option value="10">Relaxed (10 users/sec)</option>
+                                    </select>
+                                </div>
+                                <div class="input-block">
+                                    <label>Minimum Account Age</label>
+                                    <select id="c-raid-age">
+                                        <option value="0">Disabled</option>
+                                        <option value="1">1 Day Old</option>
+                                        <option value="7">7 Days Old</option>
+                                        <option value="30">30 Days Old</option>
+                                    </select>
+                                </div>
+                                <div class="input-block" style="grid-column: 1/-1;">
+                                    <label>Action Taken on Raid Detection</label>
+                                    <select id="c-raid-action">
+                                        <option value="notify">Notify Staff Only</option>
+                                        <option value="lockdown">Trigger Server Lockdown</option>
+                                        <option value="kick_new">Kick New Users</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <label>Warning System Automation</label>
+                            <p>Automate punishments for repeat offenders.</p>
+                            <div class="settings-grid">
+                                <div class="input-block">
+                                    <label>Max Warnings Allowed</label>
+                                    <select id="c-warn-thresh">
+                                        <option value="3">3 Warnings</option>
+                                        <option value="5">5 Warnings</option>
+                                        <option value="10">10 Warnings</option>
+                                    </select>
+                                </div>
+                                <div class="input-block">
+                                    <label>Action Taken</label>
+                                    <select id="c-warn-action">
+                                        <option value="timeout">Timeout</option>
+                                        <option value="kick">Kick</option>
+                                        <option value="ban">Ban</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="setting-group" style="background: transparent; border: none; padding: 0;">
-                        <label style="font-size: 1.2rem;">Command Modules</label>
-                        <p>Enable or disable specific commands for this server. Disabled commands will not appear in the Discord slash menu.</p>
-                        
-                        <div id="command-grid-container" class="command-grid"></div>
+
+                    <div id="sect-automod" class="config-section">
+                        <div class="setting-group">
+                            <label>Chat Safety Filters</label>
+                            <p>Syncs directly with Discord's native AutoMod engine.</p>
+                            
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Bad Language Filter</strong><span>Blocks slurs and heavy profanity.</span></div>
+                                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                            </div>
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Scam Link Filter</strong><span>Blocks known phishing and crypto scam URLs.</span></div>
+                                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                            </div>
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Hardcore Media Filter</strong><span>Blocks explicit images in chat.</span></div>
+                                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                            </div>
+                            
+                            <div class="settings-grid" style="margin-top: 15px;">
+                                <div class="input-block">
+                                    <label>Mass Mention Limit</label>
+                                    <select>
+                                        <option value="0">Off</option>
+                                        <option value="5">Max 5 Mentions</option>
+                                        <option value="10">Max 10 Mentions</option>
+                                    </select>
+                                </div>
+                                <div class="input-block">
+                                    <label>Immune Roles (Comma separated IDs)</label>
+                                    <input type="text" placeholder="e.g. 123456789, 987654321">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <label>Anti-Spam Engine</label>
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Enable Spam Detection</strong><span>Stops repetitive typing and copy-paste floods.</span></div>
+                                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                            </div>
+                            <div class="settings-grid" style="margin-top: 15px;">
+                                <div class="input-block"><label>Sensitivity</label><select><option>Strict (3 msgs)</option><option selected>Normal (5 msgs)</option></select></div>
+                                <div class="input-block"><label>Time Window</label><select><option>3 Seconds</option><option selected>5 Seconds</option></select></div>
+                                <div class="input-block" style="grid-column: 1/-1;"><label>Timeout Duration</label><select><option>1 Minute</option><option>5 Minutes</option></select></div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div style="margin-top: 30px; display: flex; gap: 15px;">
-                        <button class="btn btn-primary" onclick="saveServerSettings()">Save Changes</button>
-                        <button class="btn btn-ghost" onclick="closeServerConfig()">Cancel</button>
+
+                    <div id="sect-logs" class="config-section">
+                        <div class="setting-group">
+                            <label>Server Auditing</label>
+                            <p>Track server activity and send reports to a specific channel.</p>
+                            
+                            <div class="input-block" style="margin-bottom: 20px;">
+                                <label>Master Log Channel ID</label>
+                                <input type="text" placeholder="e.g. 112233445566778899">
+                            </div>
+
+                            <div class="settings-grid">
+                                <label class="switch-row" style="margin:0; padding:10px;"><span style="font-size:0.9rem;">Member Joins</span><div class="switch"><input type="checkbox"><span class="slider"></span></div></label>
+                                <label class="switch-row" style="margin:0; padding:10px;"><span style="font-size:0.9rem;">Member Leaves</span><div class="switch"><input type="checkbox"><span class="slider"></span></div></label>
+                                <label class="switch-row" style="margin:0; padding:10px;"><span style="font-size:0.9rem;">Message Edits</span><div class="switch"><input type="checkbox"><span class="slider"></span></div></label>
+                                <label class="switch-row" style="margin:0; padding:10px;"><span style="font-size:0.9rem;">Message Deletes</span><div class="switch"><input type="checkbox"><span class="slider"></span></div></label>
+                                <label class="switch-row" style="margin:0; padding:10px;"><span style="font-size:0.9rem;">Channel Changes</span><div class="switch"><input type="checkbox"><span class="slider"></span></div></label>
+                                <label class="switch-row" style="margin:0; padding:10px;"><span style="font-size:0.9rem;">Voice Activity</span><div class="switch"><input type="checkbox"><span class="slider"></span></div></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sect-levels" class="config-section">
+                        <div class="setting-group">
+                            <label>XP & Leveling System</label>
+                            <p>Reward active users with ranks and roles.</p>
+                            
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Enable Leveling globally</strong></div>
+                                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                            </div>
+                            <div class="switch-row">
+                                <div class="switch-info"><strong>Level Up Notifications</strong></div>
+                                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                            </div>
+
+                            <div class="input-block" style="margin-top: 15px;">
+                                <label>Alert Channel ID (Leave blank for current channel)</label>
+                                <input type="text" placeholder="Channel ID">
+                            </div>
+
+                            <div class="input-block" style="margin-top: 15px;">
+                                <label>Role Rewards (Format: Level:RoleID, one per line)</label>
+                                <textarea rows="4" placeholder="5:123456789&#10;10:987654321"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sect-modules" class="config-section">
+                        <div class="settings-grid">
+                            <div class="setting-group" style="margin:0;">
+                                <label>Join Verification</label>
+                                <p>Require CAPTCHA before users can see the server.</p>
+                                <div class="input-block" style="margin-bottom:10px;"><label>Verified Role ID</label><input type="text"></div>
+                                <button class="btn btn-ghost" style="width: 100%; justify-content: center; font-size: 0.8rem;">Spawn Panel in Channel</button>
+                            </div>
+                            
+                            <div class="setting-group" style="margin:0;">
+                                <label>Support Tickets</label>
+                                <p>Private ticket management system.</p>
+                                <div class="input-block" style="margin-bottom:10px;"><label>Ticket Category ID</label><input type="text"></div>
+                                <button class="btn btn-ghost" style="width: 100%; justify-content: center; font-size: 0.8rem;">Spawn Panel in Channel</button>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <label>Self Roles</label>
+                            <p>Create an interactive panel where users click buttons to get roles.</p>
+                            <div class="settings-grid">
+                                <div class="input-block"><label>Panel Title</label><input type="text" placeholder="Choose your roles!"></div>
+                                <div class="input-block"><label>Role IDs (Comma separated)</label><input type="text" placeholder="ID1, ID2, ID3"></div>
+                            </div>
+                            <button class="btn btn-ghost" style="margin-top: 10px;">Build & Spawn Panel</button>
+                        </div>
+                    </div>
+
+                    <div id="sect-ai" class="config-section">
+                        <div class="setting-group">
+                            <label>Nora Bot Persona Engine</label>
+                            <p>Select the LLM driving Nora's behavior in this server for /ask commands.</p>
+                            <select>
+                                <option value="LOCAL">Built-in Logic (Free / Aura)</option>
+                                <option value="BUILT_IN" selected>Gemini (Google) - Advanced</option>
+                                <option value="OPENAI">ChatGPT (OpenAI)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="setting-group" style="border-color: var(--danger);">
+                            <label style="color: var(--danger);">Danger Zone</label>
+                            <p>These actions affect core bot functionality. Owner only.</p>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-danger">Force Reboot</button>
+                                <button class="btn btn-danger">Sync Database</button>
+                                <button class="btn btn-danger">Backup JSON</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sect-commands" class="config-section">
+                        <div class="setting-group" style="background: transparent; border: none; padding: 0;">
+                            <label style="font-size: 1.2rem;">Command Modules</label>
+                            <p>Enable or disable specific commands for this server. Disabled commands will not appear in the Discord slash menu.</p>
+                            <div id="command-grid-container" class="command-grid"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div id="user-settings" class="tab-content">
-                <h2>User Settings</h2>
-
-                <div class="info-banner">
-                    <strong style="display: flex; align-items: center; gap: 8px;">
-                        ⚠️ Features in Development
-                    </strong>
-                    <p style="margin: 5px 0 0; font-size: 0.85rem;">Some settings below are currently being built. You can toggle them, but they may not affect your Nora bot experience until the backend API goes live.</p>
-                </div>
-
-                <div class="setting-group">
-                    <label>Preferred AI Model</label>
-                    <p>Select which AI Nora uses when you run /ask commands.</p>
-                    <select id="setting-ai">
-                        <option value="gemini">Gemini (Beta) - Recommended</option>
-                        <option value="chatgpt">ChatGPT 4o</option>
-                        <option value="aura">Aura AI (Lightweight)</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <label style="margin: 0;">Dashboard Language</label>
-                        <span class="badge-wip">IN PROGRESS</span>
-                    </div>
-                    <p>Change the language of the Nora Studio Manager interface.</p>
-                    <select id="setting-lang">
-                        <option value="en">English (US)</option>
-                        <option value="es">Español (Spanish)</option>
-                        <option value="fr">Français (French)</option>
-                        <option value="de">Deutsch (German)</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <label>Notification Preferences</label>
-                    <p>Choose how Nora communicates important bot updates and moderation alerts to you.</p>
-                    <div style="display: flex; flex-direction: column; margin-top: 15px;">
-                        <label class="switch-row">
-                            <span>Discord DM Alerts</span>
-                            <div class="switch"><input type="checkbox" id="setting-notif-dm"><span class="slider"></span></div>
-                        </label>
-                        <label class="switch-row">
-                            <span>
-                                Email Notifications 
-                                <span class="badge-wip" style="margin-left: 8px;">IN PROGRESS</span>
-                            </span>
-                            <div class="switch"><input type="checkbox" id="setting-notif-email"><span class="slider"></span></div>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="setting-group">
-                    <label>Data Privacy</label>
-                    <p>Manage how your user data is stored across Nora-enabled servers.</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn btn-ghost" style="font-size: 0.85rem;">Request Data Export</button>
-                        <button class="btn btn-ghost" style="font-size: 0.85rem; border-color: #ff5555; color: #ff5555;">Clear My Data</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="display-settings" class="tab-content">
-                <h2>Display Settings</h2>
+                <h2>My Preferences</h2>
                 <div class="setting-group">
                     <label>Dashboard Theme</label>
                     <p>Customize the look of Nora Studio Manager.</p>
@@ -384,42 +459,45 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
                         <option value="on">On</option>
                     </select>
                 </div>
+                <div class="setting-group">
+                    <label>Data Privacy</label>
+                    <p>Manage how your user data is stored across Nora-enabled servers.</p>
+                    <button class="btn btn-ghost" style="font-size: 0.85rem; border-color: var(--danger); color: var(--danger);">Clear My Global Data</button>
+                </div>
             </div>
         </section>
     </div>
 </main>
 
-<footer>
-© 2026 Nora | Privacy-First AI & Moderation for Discord
-</footer>
+<footer>© 2026 Nora | Privacy-First AI & Moderation for Discord</footer>
 
 <script>
+// Authentication Configuration
 const CLIENT_ID = "1375943730951098549";
 const REDIRECT_URI = encodeURIComponent("https://vaztinix.github.io/Nora/callback");
 const discordLoginURL = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URI}&scope=identify%20email%20guilds`;
 
 const noraCommands = [
-    { name: "/announce", desc: "Create a beautiful embedded announcement in a specific channel." },
+    { name: "/announce", desc: "Create an embedded announcement." },
     { name: "/ask", desc: "Ask the Nora AI a question privately." },
-    { name: "/ban", desc: "Ban a user from the server with detailed logging." },
+    { name: "/ban", desc: "Ban a user with detailed logging." },
     { name: "/clear-warns", desc: "Wipe all warnings for a specific user." },
-    { name: "/configure", desc: "Simple settings menu for managing Nora." },
+    { name: "/configure", desc: "Settings menu for managing Nora." },
     { name: "/delete-warns", desc: "Delete a specific warning by its ID." },
     { name: "/edit-warns", desc: "Edit the reason for a specific warning." },
-    { name: "/guess", desc: "Play a number guessing game. Can you beat the odds?" },
-    { name: "/help", desc: "See all the ways Nora can help your server." },
-    { name: "/info", desc: "View Nora's current status and performance." },
-    { name: "/invite", desc: "Generate a customizable invite for this channel." },
-    { name: "/kick", desc: "Kick a user from the server with detailed logging." },
-    { name: "/leaderboard", desc: "View the most active users in the server." },
-    { name: "/mute", desc: "Time out a user with robust error handling." },
-    { name: "/mycard", desc: "View your complete profile and server data in one card." },
-    { name: "/nora-admin", desc: "Nora Systems Control Unit (Owner Only)" },
-    { name: "/purge", desc: "Massively delete messages in this channel with advanced filtering." },
-    { name: "/rank", desc: "Check your or another user's rank with a beautiful card." },
-    { name: "/role", desc: "Manage a user's roles with extensive hierarchy checks." },
-    { name: "/setlevel", desc: "Force-update a user's current level and progress." },
-    { name: "/unmute", desc: "Remove a user's timeout with secure hierarchy checks." },
+    { name: "/guess", desc: "Play a number guessing game." },
+    { name: "/help", desc: "See all the ways Nora can help." },
+    { name: "/info", desc: "View Nora's current status." },
+    { name: "/invite", desc: "Generate a customizable invite." },
+    { name: "/kick", desc: "Kick a user with detailed logging." },
+    { name: "/leaderboard", desc: "View the most active users." },
+    { name: "/mute", desc: "Time out a user securely." },
+    { name: "/mycard", desc: "View your complete profile." },
+    { name: "/purge", desc: "Massively delete messages." },
+    { name: "/rank", desc: "Check your rank with a card." },
+    { name: "/role", desc: "Manage a user's roles." },
+    { name: "/setlevel", desc: "Force-update a user's level." },
+    { name: "/unmute", desc: "Remove a user's timeout." },
     { name: "/vote", desc: "Support Nora by voting on Top.gg." },
     { name: "/warn", desc: "Add a warning to a user." },
     { name: "/warnings", desc: "View warnings for a user." }
@@ -435,10 +513,6 @@ const serverConfigView = document.getElementById('server-config-view');
 const commandGridContainer = document.getElementById('command-grid-container');
 
 // Settings Elements
-const aiSelect = document.getElementById('setting-ai');
-const langSelect = document.getElementById('setting-lang');
-const notifDm = document.getElementById('setting-notif-dm');
-const notifEmail = document.getElementById('setting-notif-email');
 const themeSelect = document.getElementById('setting-theme');
 const compactSelect = document.getElementById('setting-compact');
 
@@ -450,14 +524,23 @@ logoutBtn.addEventListener('click', () => {
     location.reload(); 
 });
 
+// Main Sidebar Tabs
 window.switchTab = function(tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.sidebar .tab-btn').forEach(btn => btn.classList.remove('active'));
     
     document.getElementById(tabId).classList.add('active');
     event.currentTarget.classList.add('active');
-
     if(tabId === 'servers') closeServerConfig();
+}
+
+// Inner Config Nav Pills
+window.switchConfigSection = function(sectionId) {
+    document.querySelectorAll('.config-section').forEach(sect => sect.classList.remove('active'));
+    document.querySelectorAll('.config-nav button').forEach(btn => btn.classList.remove('active'));
+    
+    document.getElementById(sectionId).classList.add('active');
+    event.currentTarget.classList.add('active');
 }
 
 function renderCommandList() {
@@ -466,14 +549,8 @@ function renderCommandList() {
         const card = document.createElement('div');
         card.className = 'command-card';
         card.innerHTML = `
-            <div class="command-info">
-                <h4>${cmd.name}</h4>
-                <p>${cmd.desc}</p>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="cmd-toggle-${index}" checked>
-                <span class="slider"></span>
-            </label>
+            <div class="command-info"><h4>${cmd.name}</h4><p>${cmd.desc}</p></div>
+            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
         `;
         commandGridContainer.appendChild(card);
     });
@@ -482,10 +559,11 @@ function renderCommandList() {
 function openServerConfig(guildName, iconHtml, guildId) {
     serverListView.style.display = 'none';
     serverConfigView.style.display = 'block';
-    
     document.getElementById('config-server-name').textContent = guildName;
     document.getElementById('config-server-icon').innerHTML = iconHtml;
-
+    
+    // Reset to first tab
+    document.querySelectorAll('.config-nav button')[0].click();
     renderCommandList();
 }
 
@@ -500,62 +578,36 @@ function saveServerSettings() {
     btn.textContent = "Saved!";
     btn.style.background = "#55ff55";
     btn.style.color = "#000";
-    
     setTimeout(() => {
         btn.textContent = originalText;
         btn.style.background = "var(--primary)";
+        btn.style.color = "#000";
     }, 2000);
 }
 
 function applyVisualSettings() {
-    if (localStorage.getItem('nora_theme') === 'midnight') {
-        document.body.classList.add('theme-midnight');
-    } else {
-        document.body.classList.remove('theme-midnight');
-    }
-
-    if (localStorage.getItem('nora_compact') === 'on') {
-        document.body.classList.add('compact-mode');
-    } else {
-        document.body.classList.remove('compact-mode');
-    }
+    if (localStorage.getItem('nora_theme') === 'midnight') document.body.classList.add('theme-midnight');
+    else document.body.classList.remove('theme-midnight');
+    
+    if (localStorage.getItem('nora_compact') === 'on') document.body.classList.add('compact-mode');
+    else document.body.classList.remove('compact-mode');
 }
 
 function loadSettings() {
-    // Load visual settings
     themeSelect.value = localStorage.getItem('nora_theme') || 'dark';
     compactSelect.value = localStorage.getItem('nora_compact') || 'off';
     applyVisualSettings();
-
-    // Load functional settings
-    aiSelect.value = localStorage.getItem('nora_ai') || 'gemini';
-    langSelect.value = localStorage.getItem('nora_lang') || 'en';
-    
-    // Checkboxes need boolean handling
-    notifDm.checked = localStorage.getItem('nora_notif_dm') !== 'false'; // Defaults to true
-    notifEmail.checked = localStorage.getItem('nora_notif_email') === 'true'; // Defaults to false
 }
-
-// Add Event Listeners for all settings
-aiSelect.addEventListener('change', (e) => localStorage.setItem('nora_ai', e.target.value));
-langSelect.addEventListener('change', (e) => localStorage.setItem('nora_lang', e.target.value));
-notifDm.addEventListener('change', (e) => localStorage.setItem('nora_notif_dm', e.target.checked));
-notifEmail.addEventListener('change', (e) => localStorage.setItem('nora_notif_email', e.target.checked));
 
 themeSelect.addEventListener('change', (e) => { localStorage.setItem('nora_theme', e.target.value); applyVisualSettings(); });
 compactSelect.addEventListener('change', (e) => { localStorage.setItem('nora_compact', e.target.value); applyVisualSettings(); });
 
 async function init() {
     const token = localStorage.getItem('discord_token');
-    if (!token) {
-        loginView.style.display = 'block';
-        return;
-    }
+    if (!token) { loginView.style.display = 'block'; return; }
 
     try {
-        const userRes = await fetch('https://discord.com/api/users/@me', {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+        const userRes = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` } });
         if (!userRes.ok) throw new Error("Invalid Token");
         const userData = await userRes.json();
 
@@ -579,9 +631,7 @@ async function fetchGuilds(token) {
     serverList.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Loading servers...</p>';
 
     try {
-        const res = await fetch('https://discord.com/api/users/@me/guilds', {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+        const res = await fetch('https://discord.com/api/users/@me/guilds', { headers: { Authorization: `Bearer ${token}` } });
         const guilds = await res.json();
         
         serverList.innerHTML = ''; 
@@ -595,37 +645,19 @@ async function fetchGuilds(token) {
         adminGuilds.forEach(guild => {
             const card = document.createElement('div');
             card.className = 'server-card';
-            
-            let iconHTML = '';
-            if (guild.icon) {
-                iconHTML = `<img class="server-icon" src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png" alt="${guild.name}">`;
-            } else {
-                const initials = guild.name.split(' ').map(w => w[0]).join('').substring(0, 2);
-                iconHTML = `<div class="server-icon">${initials}</div>`;
-            }
-
-            card.innerHTML = `
-                ${iconHTML}
-                <strong style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${guild.name}</strong>
-            `;
+            let iconHTML = guild.icon ? `<img class="server-icon" src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png">` : `<div class="server-icon">${guild.name.substring(0, 2)}</div>`;
+            card.innerHTML = `${iconHTML}<strong style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${guild.name}</strong>`;
             
             const configBtn = document.createElement('button');
             configBtn.className = 'btn btn-ghost';
-            configBtn.style.padding = '8px 16px';
-            configBtn.style.fontSize = '0.8rem';
-            configBtn.style.width = '100%';
-            configBtn.style.justifyContent = 'center';
+            configBtn.style.padding = '8px 16px'; configBtn.style.fontSize = '0.8rem'; configBtn.style.width = '100%'; configBtn.style.justifyContent = 'center';
             configBtn.textContent = 'Configure';
-            
             configBtn.onclick = () => openServerConfig(guild.name, iconHTML, guild.id);
             
             card.appendChild(configBtn);
             serverList.appendChild(card);
         });
-
-    } catch (err) {
-        serverList.innerHTML = '<p style="grid-column: 1/-1; color: #ff5555;">Failed to load servers.</p>';
-    }
+    } catch (err) { serverList.innerHTML = '<p style="grid-column: 1/-1; color: #ff5555;">Failed to load servers.</p>'; }
 }
 
 window.addEventListener('DOMContentLoaded', init);
