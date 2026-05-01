@@ -472,10 +472,14 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
 <footer>© 2026 Nora | Privacy-First AI & Moderation for Discord</footer>
 
 <script>
-// Authentication Configuration
+// Authentication & API Configuration
 const CLIENT_ID = "1375943730951098549";
 const REDIRECT_URI = encodeURIComponent("https://vaztinix.github.io/Nora/callback");
 const discordLoginURL = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URI}&scope=identify%20email%20guilds`;
+
+// UPDATE THIS to your live Antigravity URL
+const API_BASE_URL = "https://your-antigravity-app-url.com"; 
+let activeGuildId = null;
 
 const noraCommands = [
     { name: "/announce", desc: "Create an embedded announcement." },
@@ -556,15 +560,46 @@ function renderCommandList() {
     });
 }
 
-function openServerConfig(guildName, iconHtml, guildId) {
+async function openServerConfig(guildName, iconHtml, guildId) {
     serverListView.style.display = 'none';
     serverConfigView.style.display = 'block';
-    document.getElementById('config-server-name').textContent = guildName;
+    
+    activeGuildId = guildId;
+    const nameEl = document.getElementById('config-server-name');
+    nameEl.textContent = guildName + " (Fetching Settings...)";
     document.getElementById('config-server-icon').innerHTML = iconHtml;
     
     // Reset to first tab
     document.querySelectorAll('.config-nav button')[0].click();
     renderCommandList();
+
+    const token = localStorage.getItem('discord_token');
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/guilds/${guildId}/settings`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.ok) {
+            const settingsData = await response.json();
+            
+            // Map the returned database settings to the frontend inputs safely
+            if(document.getElementById('c-antiraid')) document.getElementById('c-antiraid').checked = settingsData.antiRaidEnabled || false;
+            if(document.getElementById('c-lockdown')) document.getElementById('c-lockdown').checked = settingsData.lockdownMode || false;
+            if(document.getElementById('c-pfp')) document.getElementById('c-pfp').checked = settingsData.requirePFP || false;
+            if(document.getElementById('c-nick')) document.getElementById('c-nick').checked = settingsData.nicknameRaidFilter || false;
+            if(document.getElementById('c-raid-thresh')) document.getElementById('c-raid-thresh').value = settingsData.antiRaidThreshold || "5";
+            if(document.getElementById('c-raid-action')) document.getElementById('c-raid-action').value = settingsData.antiRaidAction || "notify";
+            if(document.getElementById('c-warn-thresh')) document.getElementById('c-warn-thresh').value = settingsData.warningThreshold || "3";
+            if(document.getElementById('c-warn-action')) document.getElementById('c-warn-action').value = settingsData.warningAction || "timeout";
+
+            nameEl.textContent = guildName; // Remove loading text
+        } else {
+            nameEl.textContent = guildName + " (Unauthorized or Default Settings)";
+        }
+    } catch (error) {
+        console.error("API Connection Error:", error);
+        nameEl.textContent = guildName + " (Database Offline)";
+    }
 }
 
 function closeServerConfig() {
@@ -572,12 +607,50 @@ function closeServerConfig() {
     serverListView.style.display = 'block';
 }
 
-function saveServerSettings() {
+async function saveServerSettings() {
     const btn = event.currentTarget;
     const originalText = btn.textContent;
-    btn.textContent = "Saved!";
-    btn.style.background = "#55ff55";
-    btn.style.color = "#000";
+    btn.textContent = "Transmitting...";
+    
+    const token = localStorage.getItem('discord_token');
+
+    // Compile the current state of the dashboard inputs into a JSON payload
+    const payload = {
+        antiRaidEnabled: document.getElementById('c-antiraid') ? document.getElementById('c-antiraid').checked : false,
+        lockdownMode: document.getElementById('c-lockdown') ? document.getElementById('c-lockdown').checked : false,
+        requirePFP: document.getElementById('c-pfp') ? document.getElementById('c-pfp').checked : false,
+        nicknameRaidFilter: document.getElementById('c-nick') ? document.getElementById('c-nick').checked : false,
+        antiRaidThreshold: document.getElementById('c-raid-thresh') ? parseInt(document.getElementById('c-raid-thresh').value) : 5,
+        antiRaidAction: document.getElementById('c-raid-action') ? document.getElementById('c-raid-action').value : "notify",
+        warningThreshold: document.getElementById('c-warn-thresh') ? parseInt(document.getElementById('c-warn-thresh').value) : 3,
+        warningAction: document.getElementById('c-warn-action') ? document.getElementById('c-warn-action').value : "timeout"
+    };
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/guilds/${activeGuildId}/settings`, {
+            method: 'PUT',
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            btn.textContent = "Data Secured";
+            btn.style.background = "#55ff55";
+            btn.style.color = "#000";
+        } else {
+            btn.textContent = "Auth Rejected";
+            btn.style.background = "var(--danger)";
+            btn.style.color = "#fff";
+        }
+    } catch (error) {
+        btn.textContent = "Network Error";
+        btn.style.background = "var(--danger)";
+        btn.style.color = "#fff";
+    }
+
     setTimeout(() => {
         btn.textContent = originalText;
         btn.style.background = "var(--primary)";
