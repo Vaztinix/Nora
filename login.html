@@ -22,6 +22,7 @@
     --radius: 18px;
     --glass-bg: rgba(15, 20, 35, 0.9);
     --glass-border: rgba(255, 255, 255, 0.15);
+    --warning: #ffaa00;
 }
 
 * { box-sizing: border-box; }
@@ -160,34 +161,37 @@ header {
 select, input[type="text"] { width: 100%; padding: 12px; border-radius: 10px; background: var(--bg-soft); border: 1px solid var(--border); color: white; font-family: inherit; }
 select:focus, input:focus { outline: none; border-color: var(--primary); }
 
-/* --- DYNAMIC SETTINGS STYLES --- */
-body.theme-midnight {
-    --bg: #000000;
-    --bg-soft: #050505;
-    --card: rgba(20, 20, 20, 0.8);
-    --border: #222222;
-    background: #000000;
+/* In-Progress Warning UI */
+.badge-wip {
+    display: inline-block;
+    padding: 4px 8px;
+    background: rgba(255, 170, 0, 0.15);
+    color: var(--warning);
+    border: 1px solid rgba(255, 170, 0, 0.3);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
-
-body.compact-mode .server-card {
-    flex-direction: row;
-    padding: 12px;
-    text-align: left;
-    gap: 12px;
+.info-banner {
+    background: rgba(255, 170, 0, 0.1);
+    border: 1px solid var(--warning);
+    color: var(--warning);
+    padding: 15px;
+    border-radius: var(--radius);
+    margin-bottom: 25px;
 }
-body.compact-mode .server-icon {
-    width: 40px;
-    height: 40px;
+.switch-row {
+    background: rgba(0,0,0,0.2);
+    padding: 12px 15px;
     border-radius: 10px;
-    font-size: 1rem;
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: normal !important;
+    margin-bottom: 8px;
 }
-body.compact-mode .server-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-}
-
-/* --- SERVER CONFIGURATION STYLES --- */
-.config-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-.config-header .server-icon { width: 60px; height: 60px; font-size: 1.2rem; }
 
 /* Custom Toggle Switch */
 .switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0;}
@@ -197,7 +201,21 @@ body.compact-mode .server-grid {
 input:checked + .slider { background-color: var(--primary); border-color: var(--primary); }
 input:checked + .slider:before { transform: translateX(20px); background-color: #000; }
 
-/* Command Grid */
+/* --- DYNAMIC SETTINGS STYLES --- */
+body.theme-midnight {
+    --bg: #000000;
+    --bg-soft: #050505;
+    --card: rgba(20, 20, 20, 0.8);
+    --border: #222222;
+    background: #000000;
+}
+body.compact-mode .server-card { flex-direction: row; padding: 12px; text-align: left; gap: 12px; }
+body.compact-mode .server-icon { width: 40px; height: 40px; border-radius: 10px; font-size: 1rem; }
+body.compact-mode .server-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+/* --- SERVER CONFIGURATION STYLES --- */
+.config-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.config-header .server-icon { width: 60px; height: 60px; font-size: 1.2rem; }
 .command-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;}
 .command-card { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; gap: 15px; transition: 0.2s;}
 .command-card:hover { border-color: rgba(255,255,255,0.2); background: rgba(0,0,0,0.4);}
@@ -255,7 +273,6 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
 
         <section class="content">
             <div id="servers" class="tab-content active">
-                
                 <div id="server-list-view">
                     <h2>Select a Server</h2>
                     <p style="color: var(--muted); margin-top: -10px;">Showing servers where you have administrative access.</p>
@@ -277,8 +294,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
                         <label style="font-size: 1.2rem;">Command Modules</label>
                         <p>Enable or disable specific commands for this server. Disabled commands will not appear in the Discord slash menu.</p>
                         
-                        <div id="command-grid-container" class="command-grid">
-                            </div>
+                        <div id="command-grid-container" class="command-grid"></div>
                     </div>
                     
                     <div style="margin-top: 30px; display: flex; gap: 15px;">
@@ -286,11 +302,18 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
                         <button class="btn btn-ghost" onclick="closeServerConfig()">Cancel</button>
                     </div>
                 </div>
-
             </div>
 
             <div id="user-settings" class="tab-content">
                 <h2>User Settings</h2>
+
+                <div class="info-banner">
+                    <strong style="display: flex; align-items: center; gap: 8px;">
+                        ⚠️ Features in Development
+                    </strong>
+                    <p style="margin: 5px 0 0; font-size: 0.85rem;">Some settings below are currently being built. You can toggle them, but they may not affect your Nora bot experience until the backend API goes live.</p>
+                </div>
+
                 <div class="setting-group">
                     <label>Preferred AI Model</label>
                     <p>Select which AI Nora uses when you run /ask commands.</p>
@@ -300,11 +323,46 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
                         <option value="aura">Aura AI (Lightweight)</option>
                     </select>
                 </div>
+
+                <div class="setting-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <label style="margin: 0;">Dashboard Language</label>
+                        <span class="badge-wip">IN PROGRESS</span>
+                    </div>
+                    <p>Change the language of the Nora Studio Manager interface.</p>
+                    <select id="setting-lang">
+                        <option value="en">English (US)</option>
+                        <option value="es">Español (Spanish)</option>
+                        <option value="fr">Français (French)</option>
+                        <option value="de">Deutsch (German)</option>
+                    </select>
+                </div>
+
+                <div class="setting-group">
+                    <label>Notification Preferences</label>
+                    <p>Choose how Nora communicates important bot updates and moderation alerts to you.</p>
+                    <div style="display: flex; flex-direction: column; margin-top: 15px;">
+                        <label class="switch-row">
+                            <span>Discord DM Alerts</span>
+                            <div class="switch"><input type="checkbox" id="setting-notif-dm"><span class="slider"></span></div>
+                        </label>
+                        <label class="switch-row">
+                            <span>
+                                Email Notifications 
+                                <span class="badge-wip" style="margin-left: 8px;">IN PROGRESS</span>
+                            </span>
+                            <div class="switch"><input type="checkbox" id="setting-notif-email"><span class="slider"></span></div>
+                        </label>
+                    </div>
+                </div>
+
                 <div class="setting-group">
                     <label>Data Privacy</label>
                     <p>Manage how your user data is stored across Nora-enabled servers.</p>
-                    <button class="btn btn-ghost" style="font-size: 0.85rem;">Request Data Export</button>
-                    <button class="btn btn-ghost" style="font-size: 0.85rem; border-color: #ff5555; color: #ff5555;">Clear My Data</button>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-ghost" style="font-size: 0.85rem;">Request Data Export</button>
+                        <button class="btn btn-ghost" style="font-size: 0.85rem; border-color: #ff5555; color: #ff5555;">Clear My Data</button>
+                    </div>
                 </div>
             </div>
 
@@ -336,12 +394,10 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
 </footer>
 
 <script>
-// Authentication Configuration
 const CLIENT_ID = "1375943730951098549";
 const REDIRECT_URI = encodeURIComponent("https://vaztinix.github.io/Nora/callback");
 const discordLoginURL = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URI}&scope=identify%20email%20guilds`;
 
-// NORA COMMANDS LIST
 const noraCommands = [
     { name: "/announce", desc: "Create a beautiful embedded announcement in a specific channel." },
     { name: "/ask", desc: "Ask the Nora AI a question privately." },
@@ -369,7 +425,6 @@ const noraCommands = [
     { name: "/warnings", desc: "View warnings for a user." }
 ];
 
-// DOM Elements
 const loginView = document.getElementById('login-view');
 const dashboardView = document.getElementById('dashboard-view');
 const loginBtn = document.getElementById('discord-login-btn');
@@ -379,12 +434,14 @@ const serverListView = document.getElementById('server-list-view');
 const serverConfigView = document.getElementById('server-config-view');
 const commandGridContainer = document.getElementById('command-grid-container');
 
-// Storage Managers
+// Settings Elements
 const aiSelect = document.getElementById('setting-ai');
+const langSelect = document.getElementById('setting-lang');
+const notifDm = document.getElementById('setting-notif-dm');
+const notifEmail = document.getElementById('setting-notif-email');
 const themeSelect = document.getElementById('setting-theme');
 const compactSelect = document.getElementById('setting-compact');
 
-// Login & Logout Event Listeners
 loginBtn.addEventListener('click', () => { window.location.href = discordLoginURL; });
 
 logoutBtn.addEventListener('click', () => {
@@ -393,7 +450,6 @@ logoutBtn.addEventListener('click', () => {
     location.reload(); 
 });
 
-// Tab Switching Logic
 window.switchTab = function(tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -401,13 +457,9 @@ window.switchTab = function(tabId) {
     document.getElementById(tabId).classList.add('active');
     event.currentTarget.classList.add('active');
 
-    // If returning to servers tab, ensure list view is shown
     if(tabId === 'servers') closeServerConfig();
 }
 
-// --- SERVER CONFIGURATION LOGIC ---
-
-// Generate the HTML for the command toggles
 function renderCommandList() {
     commandGridContainer.innerHTML = '';
     noraCommands.forEach((cmd, index) => {
@@ -434,7 +486,6 @@ function openServerConfig(guildName, iconHtml, guildId) {
     document.getElementById('config-server-name').textContent = guildName;
     document.getElementById('config-server-icon').innerHTML = iconHtml;
 
-    // Render the fresh command list
     renderCommandList();
 }
 
@@ -444,7 +495,6 @@ function closeServerConfig() {
 }
 
 function saveServerSettings() {
-    // Placeholder function for your Antigravity API connection
     const btn = event.currentTarget;
     const originalText = btn.textContent;
     btn.textContent = "Saved!";
@@ -456,8 +506,6 @@ function saveServerSettings() {
         btn.style.background = "var(--primary)";
     }, 2000);
 }
-
-// --- APP INITIALIZATION ---
 
 function applyVisualSettings() {
     if (localStorage.getItem('nora_theme') === 'midnight') {
@@ -474,13 +522,26 @@ function applyVisualSettings() {
 }
 
 function loadSettings() {
-    aiSelect.value = localStorage.getItem('nora_ai') || 'gemini';
+    // Load visual settings
     themeSelect.value = localStorage.getItem('nora_theme') || 'dark';
     compactSelect.value = localStorage.getItem('nora_compact') || 'off';
     applyVisualSettings();
+
+    // Load functional settings
+    aiSelect.value = localStorage.getItem('nora_ai') || 'gemini';
+    langSelect.value = localStorage.getItem('nora_lang') || 'en';
+    
+    // Checkboxes need boolean handling
+    notifDm.checked = localStorage.getItem('nora_notif_dm') !== 'false'; // Defaults to true
+    notifEmail.checked = localStorage.getItem('nora_notif_email') === 'true'; // Defaults to false
 }
 
+// Add Event Listeners for all settings
 aiSelect.addEventListener('change', (e) => localStorage.setItem('nora_ai', e.target.value));
+langSelect.addEventListener('change', (e) => localStorage.setItem('nora_lang', e.target.value));
+notifDm.addEventListener('change', (e) => localStorage.setItem('nora_notif_dm', e.target.checked));
+notifEmail.addEventListener('change', (e) => localStorage.setItem('nora_notif_email', e.target.checked));
+
 themeSelect.addEventListener('change', (e) => { localStorage.setItem('nora_theme', e.target.value); applyVisualSettings(); });
 compactSelect.addEventListener('change', (e) => { localStorage.setItem('nora_compact', e.target.value); applyVisualSettings(); });
 
@@ -548,7 +609,6 @@ async function fetchGuilds(token) {
                 <strong style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${guild.name}</strong>
             `;
             
-            // Build the button dynamically to safely pass the guild data
             const configBtn = document.createElement('button');
             configBtn.className = 'btn btn-ghost';
             configBtn.style.padding = '8px 16px';
@@ -557,7 +617,6 @@ async function fetchGuilds(token) {
             configBtn.style.justifyContent = 'center';
             configBtn.textContent = 'Configure';
             
-            // Wire the click event to open the new configuration panel
             configBtn.onclick = () => openServerConfig(guild.name, iconHTML, guild.id);
             
             card.appendChild(configBtn);
