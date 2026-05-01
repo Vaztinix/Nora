@@ -89,7 +89,7 @@ header {
 
 /* Dashboard State Styles */
 #dashboard-view {
-    display: none; /* Hidden until logged in */
+    display: none; 
     grid-template-columns: 250px 1fr;
     gap: 2rem;
 }
@@ -161,17 +161,14 @@ select, input[type="text"] { width: 100%; padding: 12px; border-radius: 10px; ba
 select:focus, input:focus { outline: none; border-color: var(--primary); }
 
 /* --- DYNAMIC SETTINGS STYLES --- */
-
-/* Midnight OLED Theme */
 body.theme-midnight {
     --bg: #000000;
     --bg-soft: #050505;
     --card: rgba(20, 20, 20, 0.8);
     --border: #222222;
-    background: #000000; /* Overrides the blue gradient */
+    background: #000000;
 }
 
-/* Compact View Mode */
 body.compact-mode .server-card {
     flex-direction: row;
     padding: 12px;
@@ -187,6 +184,25 @@ body.compact-mode .server-icon {
 body.compact-mode .server-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
+
+/* --- SERVER CONFIGURATION STYLES --- */
+.config-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.config-header .server-icon { width: 60px; height: 60px; font-size: 1.2rem; }
+
+/* Custom Toggle Switch */
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0;}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--bg-soft); transition: .3s; border-radius: 24px; border: 1px solid var(--border); }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: var(--muted); transition: .3s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--primary); border-color: var(--primary); }
+input:checked + .slider:before { transform: translateX(20px); background-color: #000; }
+
+/* Command Grid */
+.command-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;}
+.command-card { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; gap: 15px; transition: 0.2s;}
+.command-card:hover { border-color: rgba(255,255,255,0.2); background: rgba(0,0,0,0.4);}
+.command-info h4 { margin: 0 0 5px 0; color: var(--primary); font-family: monospace; font-size: 1rem;}
+.command-info p { margin: 0; font-size: 0.8rem; color: var(--muted); line-height: 1.3;}
 
 @media(max-width: 768px) {
     #dashboard-view { grid-template-columns: 1fr; }
@@ -239,10 +255,38 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
 
         <section class="content">
             <div id="servers" class="tab-content active">
-                <h2>Select a Server</h2>
-                <p style="color: var(--muted); margin-top: -10px;">Showing servers where you have administrative access.</p>
-                <div id="server-list" class="server-grid">
+                
+                <div id="server-list-view">
+                    <h2>Select a Server</h2>
+                    <p style="color: var(--muted); margin-top: -10px;">Showing servers where you have administrative access.</p>
+                    <div id="server-list" class="server-grid"></div>
+                </div>
+
+                <div id="server-config-view" style="display: none;">
+                    <button class="btn btn-ghost" onclick="closeServerConfig()" style="margin-bottom: 20px; font-size: 0.8rem; padding: 8px 16px;">&larr; Back to Servers</button>
+                    
+                    <div class="config-header">
+                        <div id="config-server-icon"></div>
+                        <div>
+                            <h2 id="config-server-name" style="margin: 0; margin-bottom: 4px;">Server Name</h2>
+                            <span style="color: var(--muted); font-size: 0.9rem;">Command Management & Feature Configuration</span>
+                        </div>
                     </div>
+                    
+                    <div class="setting-group" style="background: transparent; border: none; padding: 0;">
+                        <label style="font-size: 1.2rem;">Command Modules</label>
+                        <p>Enable or disable specific commands for this server. Disabled commands will not appear in the Discord slash menu.</p>
+                        
+                        <div id="command-grid-container" class="command-grid">
+                            </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; display: flex; gap: 15px;">
+                        <button class="btn btn-primary" onclick="saveServerSettings()">Save Changes</button>
+                        <button class="btn btn-ghost" onclick="closeServerConfig()">Cancel</button>
+                    </div>
+                </div>
+
             </div>
 
             <div id="user-settings" class="tab-content">
@@ -297,11 +341,43 @@ const CLIENT_ID = "1375943730951098549";
 const REDIRECT_URI = encodeURIComponent("https://vaztinix.github.io/Nora/callback");
 const discordLoginURL = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URI}&scope=identify%20email%20guilds`;
 
+// NORA COMMANDS LIST
+const noraCommands = [
+    { name: "/announce", desc: "Create a beautiful embedded announcement in a specific channel." },
+    { name: "/ask", desc: "Ask the Nora AI a question privately." },
+    { name: "/ban", desc: "Ban a user from the server with detailed logging." },
+    { name: "/clear-warns", desc: "Wipe all warnings for a specific user." },
+    { name: "/configure", desc: "Simple settings menu for managing Nora." },
+    { name: "/delete-warns", desc: "Delete a specific warning by its ID." },
+    { name: "/edit-warns", desc: "Edit the reason for a specific warning." },
+    { name: "/guess", desc: "Play a number guessing game. Can you beat the odds?" },
+    { name: "/help", desc: "See all the ways Nora can help your server." },
+    { name: "/info", desc: "View Nora's current status and performance." },
+    { name: "/invite", desc: "Generate a customizable invite for this channel." },
+    { name: "/kick", desc: "Kick a user from the server with detailed logging." },
+    { name: "/leaderboard", desc: "View the most active users in the server." },
+    { name: "/mute", desc: "Time out a user with robust error handling." },
+    { name: "/mycard", desc: "View your complete profile and server data in one card." },
+    { name: "/nora-admin", desc: "Nora Systems Control Unit (Owner Only)" },
+    { name: "/purge", desc: "Massively delete messages in this channel with advanced filtering." },
+    { name: "/rank", desc: "Check your or another user's rank with a beautiful card." },
+    { name: "/role", desc: "Manage a user's roles with extensive hierarchy checks." },
+    { name: "/setlevel", desc: "Force-update a user's current level and progress." },
+    { name: "/unmute", desc: "Remove a user's timeout with secure hierarchy checks." },
+    { name: "/vote", desc: "Support Nora by voting on Top.gg." },
+    { name: "/warn", desc: "Add a warning to a user." },
+    { name: "/warnings", desc: "View warnings for a user." }
+];
+
 // DOM Elements
 const loginView = document.getElementById('login-view');
 const dashboardView = document.getElementById('dashboard-view');
 const loginBtn = document.getElementById('discord-login-btn');
 const logoutBtn = document.getElementById('logout-btn');
+
+const serverListView = document.getElementById('server-list-view');
+const serverConfigView = document.getElementById('server-config-view');
+const commandGridContainer = document.getElementById('command-grid-container');
 
 // Storage Managers
 const aiSelect = document.getElementById('setting-ai');
@@ -314,7 +390,7 @@ loginBtn.addEventListener('click', () => { window.location.href = discordLoginUR
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('discord_token');
     localStorage.removeItem('discord_user');
-    location.reload(); // Refresh to show login screen
+    location.reload(); 
 });
 
 // Tab Switching Logic
@@ -324,9 +400,65 @@ window.switchTab = function(tabId) {
     
     document.getElementById(tabId).classList.add('active');
     event.currentTarget.classList.add('active');
+
+    // If returning to servers tab, ensure list view is shown
+    if(tabId === 'servers') closeServerConfig();
 }
 
-// Visual Settings Application Logic
+// --- SERVER CONFIGURATION LOGIC ---
+
+// Generate the HTML for the command toggles
+function renderCommandList() {
+    commandGridContainer.innerHTML = '';
+    noraCommands.forEach((cmd, index) => {
+        const card = document.createElement('div');
+        card.className = 'command-card';
+        card.innerHTML = `
+            <div class="command-info">
+                <h4>${cmd.name}</h4>
+                <p>${cmd.desc}</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="cmd-toggle-${index}" checked>
+                <span class="slider"></span>
+            </label>
+        `;
+        commandGridContainer.appendChild(card);
+    });
+}
+
+function openServerConfig(guildName, iconHtml, guildId) {
+    serverListView.style.display = 'none';
+    serverConfigView.style.display = 'block';
+    
+    document.getElementById('config-server-name').textContent = guildName;
+    document.getElementById('config-server-icon').innerHTML = iconHtml;
+
+    // Render the fresh command list
+    renderCommandList();
+}
+
+function closeServerConfig() {
+    serverConfigView.style.display = 'none';
+    serverListView.style.display = 'block';
+}
+
+function saveServerSettings() {
+    // Placeholder function for your Antigravity API connection
+    const btn = event.currentTarget;
+    const originalText = btn.textContent;
+    btn.textContent = "Saved!";
+    btn.style.background = "#55ff55";
+    btn.style.color = "#000";
+    
+    setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = "var(--primary)";
+    }, 2000);
+}
+
+// --- APP INITIALIZATION ---
+
 function applyVisualSettings() {
     if (localStorage.getItem('nora_theme') === 'midnight') {
         document.body.classList.add('theme-midnight');
@@ -341,7 +473,6 @@ function applyVisualSettings() {
     }
 }
 
-// Load Settings from LocalStorage
 function loadSettings() {
     aiSelect.value = localStorage.getItem('nora_ai') || 'gemini';
     themeSelect.value = localStorage.getItem('nora_theme') || 'dark';
@@ -349,23 +480,12 @@ function loadSettings() {
     applyVisualSettings();
 }
 
-// Listen for Settings Changes
-aiSelect.addEventListener('change', (e) => {
-    localStorage.setItem('nora_ai', e.target.value);
-});
-themeSelect.addEventListener('change', (e) => {
-    localStorage.setItem('nora_theme', e.target.value);
-    applyVisualSettings();
-});
-compactSelect.addEventListener('change', (e) => {
-    localStorage.setItem('nora_compact', e.target.value);
-    applyVisualSettings();
-});
+aiSelect.addEventListener('change', (e) => localStorage.setItem('nora_ai', e.target.value));
+themeSelect.addEventListener('change', (e) => { localStorage.setItem('nora_theme', e.target.value); applyVisualSettings(); });
+compactSelect.addEventListener('change', (e) => { localStorage.setItem('nora_compact', e.target.value); applyVisualSettings(); });
 
-// Main Initialization Function
 async function init() {
     const token = localStorage.getItem('discord_token');
-    
     if (!token) {
         loginView.style.display = 'block';
         return;
@@ -378,29 +498,21 @@ async function init() {
         if (!userRes.ok) throw new Error("Invalid Token");
         const userData = await userRes.json();
 
-        // Populate Sidebar Profile
         document.getElementById('dash-name').textContent = userData.global_name || userData.username;
         document.getElementById('dash-handle').textContent = `@${userData.username}`;
         document.getElementById('dash-avatar').src = `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`;
 
-        // Switch UI state
         loginView.style.display = 'none';
         dashboardView.style.display = 'grid';
 
-        // Apply settings before fetching servers
         loadSettings();
-
-        // Fetch User Guilds (Servers)
         fetchGuilds(token);
-
     } catch (err) {
-        console.error(err);
         localStorage.removeItem('discord_token');
         loginView.style.display = 'block';
     }
 }
 
-// Fetch Servers where the user is Admin
 async function fetchGuilds(token) {
     const serverList = document.getElementById('server-list');
     serverList.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Loading servers...</p>';
@@ -411,9 +523,7 @@ async function fetchGuilds(token) {
         });
         const guilds = await res.json();
         
-        serverList.innerHTML = ''; // Clear loading text
-
-        // Filter for servers where user has MANAGE_GUILD (0x20) or ADMINISTRATOR (0x8)
+        serverList.innerHTML = ''; 
         const adminGuilds = guilds.filter(g => (g.permissions & 0x20) === 0x20 || (g.permissions & 0x8) === 0x8);
 
         if (adminGuilds.length === 0) {
@@ -436,8 +546,21 @@ async function fetchGuilds(token) {
             card.innerHTML = `
                 ${iconHTML}
                 <strong style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${guild.name}</strong>
-                <button class="btn btn-ghost" style="padding: 8px 16px; font-size: 0.8rem; width: 100%; justify-content: center;">Configure</button>
             `;
+            
+            // Build the button dynamically to safely pass the guild data
+            const configBtn = document.createElement('button');
+            configBtn.className = 'btn btn-ghost';
+            configBtn.style.padding = '8px 16px';
+            configBtn.style.fontSize = '0.8rem';
+            configBtn.style.width = '100%';
+            configBtn.style.justifyContent = 'center';
+            configBtn.textContent = 'Configure';
+            
+            // Wire the click event to open the new configuration panel
+            configBtn.onclick = () => openServerConfig(guild.name, iconHTML, guild.id);
+            
+            card.appendChild(configBtn);
             serverList.appendChild(card);
         });
 
