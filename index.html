@@ -320,34 +320,46 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
         </div>
     </section>
 
-    <section>
-        <h2>Latest Nora Updates</h2>
-        <div class="grid" style="grid-template-columns: 1fr; gap: 28px;">
-            <div class="card" style="border-left: 4px solid var(--primary);">
-                <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">LATEST UPDATE — BETA 4.1</div>
-                <h3>The Foundation Rebuild</h3>
-                <p>A major overhaul focusing on stability, AI flexibility, and total server control.</p>
-                <ul class="update-list">
-                    <li><strong>AI Flexibility:</strong> Dual support for ChatGPT and Gemini (Beta), plus the new lightweight <strong>Aura AI</strong> for simple tasks.</li>
-                    <li><strong>Full Control:</strong> New <code>/configure</code> system for toggling features, logging, and verification.</li>
-                    <li><strong>New Utilities:</strong> Improved Purge tools, Giveaways, and a new Counting system.</li>
-                    <li><strong>Voice XP:</strong> Leveling logic refined to include voice activity (multiple users required).</li>
-                    <li><strong>Stability:</strong> Full system rebuild to support future expansions like Nora Studio.</li>
-                </ul>
-            </div>
+   <section>
+    <h2>Latest Nora Updates</h2>
+    <div class="grid" style="grid-template-columns: 1fr; gap: 28px;">
 
-            <div class="card">
-                <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">2026 Update (Releases May 24th)</div>
-                <h3>Nora Studio Manager</h3>
-                <p>Development has begun on Nora Studio Manager, a modern dashboard for server configuration and privacy controls.</p>
+        <!-- New Update - BETA 4.7 -->
+        <div class="card" style="border-left: 4px solid var(--primary);">
+            <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">
+                LATEST UPDATE — BETA 4.7
             </div>
-            <div class="card">
-                <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">2026 Update</div>
-                <h3>Moderation Series N</h3>
-                <p>Series N introduces a new set of moderation commands designed with stronger error handling and predictable behavior.</p>
-            </div>
+            <h3>High‑Security Practice</h3>
+            <p>A major security‑focused update introducing safer user practices, advanced protection systems, and the official release of Nora Studio Manager (Beta).</p>
+
+            <ul class="update-list">
+                <li><strong>Security Enhancements:</strong> Strengthened privacy‑first data handling, safer defaults, and expanded audit logging.</li>
+                <li><strong>Suspicious Behavior Detection:</strong> Improved internal checks to prevent abuse and compromised‑account risks.</li>
+                <li><strong>Nora Studio Manager (Beta):</strong> Officially released with new tools for module control, privacy settings, and server configuration.</li>
+                <li><strong>Anti‑Raid Shield:</strong> New automated raid‑prevention layer to block mass‑join attacks.</li>
+                <li><strong>Anti‑Spam & Botting Prevention:</strong> Adaptive filters and behavior‑based detection to reduce spam and automated abuse.</li>
+                <li><strong>Discord AutoMod API Integration:</strong> Native filtering and rule enforcement powered by Discord’s latest moderation systems.</li>
+            </ul>
         </div>
-    </section>
+
+        <div class="card">
+            <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">
+                2026 Update (Releases May 24th + Premium Access May 3rd)
+            </div>
+            <h3>Nora Studio Manager</h3>
+            <p>The dashboard continues to evolve with new privacy controls, module management tools, and expanded configuration options.</p>
+        </div>
+
+        <div class="card">
+            <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">
+                2026 Update
+            </div>
+            <h3>Moderation Series N</h3>
+            <p>Series N introduces a new generation of moderation commands with stronger error handling and predictable behavior.</p>
+        </div>
+
+    </div>
+</section>
 </main>
 
 <div id="discord-overlay">
@@ -364,6 +376,7 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
     </div>
     <button id="toggle-btn" class="toggle-icon">⇌</button>
 </div>
+
 
 <button id="login-btn" class="btn btn-primary login-btn">
     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" style="width: 20px;">
