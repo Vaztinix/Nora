@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nora | Privacy-First Discord Bot</title>
+<title>Nora | Privacy-First Discord Bot & Dashboard Ecosystem</title>
 
-<meta name="description" content="Nora is a privacy-first Discord moderation and AI assistant bot built for transparency, safety, and full server control.">
-<meta property="og:title" content="Nora — Privacy-First Discord Bot">
-<meta property="og:description" content="Modern AI moderation for Discord with privacy and transparency.">
+<meta name="description" content="Nora is a modern, privacy-first Discord moderation ecosystem powered by ChatGPT and Gemini Beta. Control server settings securely via the Nora Studio dashboard.">
+<meta property="og:title" content="Nora — Privacy-First Discord Bot & Dashboard Ecosystem">
+<meta property="og:description" content="Advanced multi-engine AI moderation, unified configuration, and cross-platform server management via Nora Studio.">
 <meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
 <meta property="og:type" content="website">
 
@@ -41,6 +41,28 @@ body {
     min-height: 100vh;
 }
 
+.move-banner {
+    background: linear-gradient(90deg, rgba(174, 239, 255, 0.15), rgba(122, 162, 255, 0.15));
+    border-bottom: 1px solid rgba(174, 239, 255, 0.3);
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.move-banner a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 700;
+    margin-left: 4px;
+    transition: color 0.2s ease;
+}
+
+.move-banner a:hover {
+    color: var(--text);
+}
+
 header {
     position: sticky;
     top: 0;
@@ -62,7 +84,6 @@ header {
 .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; color: white; }
 .brand img { width: 40px; height: 40px; border-radius: 10px; }
 
-/* FIXED NAV LINKS COLOR */
 .nav-links { 
     display: flex; 
     gap: 22px; 
@@ -144,7 +165,6 @@ section { margin-bottom: 6rem; }
 }
 .update-list li { margin-bottom: 8px; }
 
-/* --- DISCORD WIDGET --- */
 #discord-overlay {
     position: fixed;
     bottom: 20px;
@@ -255,6 +275,11 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
 
 <body>
 
+<div class="move-banner">
+    🚀 Nora has moved to a brand new home! Visit us at our new ecosystem domain: 
+    <a href="https://vaztinix.dev/nora">vaztinix.dev/nora</a>
+</div>
+
 <header>
 <div class="nav">
     <div class="brand">
@@ -273,91 +298,65 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
 
 <main class="container">
     <section class="hero">
-        <div class="badge">PRIVACY-FIRST DISCORD BOT</div>
-        <h1>Moderation & AI Built for Trust</h1>
+        <div class="badge">BETA 4.7 POWERED ECOSYSTEM</div>
+        <h1>Moderation & AI Built for Absolute Trust</h1>
         <p>
-            Nora is a modern Discord moderation and AI assistant bot designed around
-            one simple rule: server data belongs to the server that created it.
-            No hidden logging. No developer access to private content.
-            Communities stay in control.
+            Nora is a modern Discord ecosystem engineered for high-scale servers and the 
+            upcoming Nora Studio web panel. Built on a strict zero-access architecture, 
+            your community data remains localized, isolated, and safe from backdoor developer monitoring.
         </p>
         <div class="cta">
-            <a class="btn btn-primary" href="https://vaztinix.github.io/Nora/install" target="_blank">Install</a>
+            <a class="btn btn-primary" href="https://vaztinix.dev/nora" target="_blank">Go to New Site</a>
             <a class="btn btn-ghost" href="https://top.gg/bot/1375943730951098549/vote" target="_blank">Vote on Top.gg</a>
         </div>
     </section>
 
     <section>
-        <h2>Our Standards</h2>
+        <h2>Core Architecture Standards</h2>
         <div class="grid">
             <div class="card">
-                <h3>Privacy by Default</h3>
-                <p>Nora is built so server content is never accessible to developers. All data remains isolated.</p>
+                <h3>Multi-Engine AI Brain</h3>
+                <p>Toggle natively between ChatGPT, Gemini Beta, and our ultra-low latency utility system, Aura AI, via a single command engine.</p>
             </div>
             <div class="card">
-                <h3>Transparent Systems</h3>
-                <p>Every feature is designed so administrators understand exactly what data exists and how it is used.</p>
+                <h3>Zero-Access Framework</h3>
+                <p>User transparency is enforced. Data isolation protocols guarantee server content is completely blocked from dev viewing panels.</p>
             </div>
             <div class="card">
-                <h3>Prioritized Moderation Design</h3>
-                <p>Moderation tools prioritize reliability and clarity so staff can act quickly and confidently.</p>
+                <h3>Cross-Platform Support</h3>
+                <p>Manage configurations, view real-time animated data cards, and adjust core parameters fluidly across Desktop and Mobile viewports.</p>
             </div>
         </div>
     </section>
 
     <section>
-        <h2>Example Commands</h2>
+        <h2>Streamlined Control Configurations</h2>
         <div class="grid">
-            <div class="card"><div class="cmd">/configure</div><p>Full control over features, logging, and AI selection.</p></div>
-            <div class="card"><div class="cmd">/ban</div><p>Permanantly remove disruptive members from your server.</p></div>
-            <div class="card"><div class="cmd">/mute</div><p>Apply temporary restrictions with clear time limits.</p></div>
-            <div class="card"><div class="cmd">/ask</div><p>Ask Nora AI questions directly inside Discord.</p></div>
-            <div class="card"><div class="cmd">/my card</div><p>View or delete stored data instantly.</p></div>
-            <div class="card"><div class="cmd">/create invite</div><p>Create an invite for your server quickly and efficently.</p></div>
-            <div class="card"><div class="cmd">/leaderboard</div><p>View public leveling statistics and ranking.</p></div>
-            <div class="card"><div class="cmd">/rank</div><p>View server rank and current xp.</p></div>
-            <div class="card"><div class="cmd">/role add</div><p>Quickly add a role to a user.</p></div>
+            <div class="card"><div class="cmd">/configure</div><p>Our single, centralized hub command. Controls modules, anti-raid verification gates, logs, and embeds the ✨ Nora Premium layout directly.</p></div>
+            <div class="card"><div class="cmd">/mycard</div><p>The sovereign user data panel. Allows users to view their active server metrics or instantly execute the irreversible data wipe kill-switch.</p></div>
+            <div class="card"><div class="cmd">/ask</div><p>Interact with contextual multi-model artificial intelligence modules safely inside channels.</p></div>
+            <div class="card"><div class="cmd">/rank</div><p>Displays adaptive XP rankings calculated directly by optimized anti-chat-spam modules.</p></div>
         </div>
     </section>
 
    <section>
-    <h2>Latest Nora Updates</h2>
+    <h2>Ecosystem Release Tracks</h2>
     <div class="grid" style="grid-template-columns: 1fr; gap: 28px;">
 
-        <!-- New Update - BETA 4.7 -->
         <div class="card" style="border-left: 4px solid var(--primary);">
             <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">
-                LATEST UPDATE — BETA 4.7
+                ACTIVE CYCLE — REBUILD 4.1 TO 4.7
             </div>
-            <h3>High‑Security Practice</h3>
-            <p>A major security‑focused update introducing safer user practices, advanced protection systems, and the official release of Nora Studio Manager (Beta).</p>
+            <h3>High‑Security Practices & Dashboard Synchronization</h3>
+            <p>Introduces advanced suspicious behavior parsing models, cross-platform UI optimizations, and foundational token sync configurations mapping directly to Nora Studio Manager (Beta).</p>
 
             <ul class="update-list">
-                <li><strong>Security Enhancements:</strong> Strengthened privacy‑first data handling, safer defaults, and expanded audit logging.</li>
-                <li><strong>Suspicious Behavior Detection:</strong> Improved internal checks to prevent abuse and compromised‑account risks.</li>
-                <li><strong>Nora Studio Manager (Beta):</strong> Officially released with new tools for module control, privacy settings, and server configuration.</li>
-                <li><strong>Anti‑Raid Shield:</strong> New automated raid‑prevention layer to block mass‑join attacks.</li>
-                <li><strong>Anti‑Spam & Botting Prevention:</strong> Adaptive filters and behavior‑based detection to reduce spam and automated abuse.</li>
-                <li><strong>Discord AutoMod API Integration:</strong> Native filtering and rule enforcement powered by Discord’s latest moderation systems.</li>
+                <li><strong>Unified Control Architecture:</strong> Replaced fragmented structural commands into a solitary /configure workspace option.</li>
+                <li><strong>Dynamic Voice Progression:</strong> Active leveling algorithm rewards actual interactions by requiring multi-user voice sessions to gain experience.</li>
+                <li><strong>Anti‑Raid Shield & AutoMod:</strong> Combined behavior-based mass-join mitigation with native integration into Discord's baseline rule layers.</li>
+                <li><strong>Cross-Platform Infrastructure:</strong> Complete optimization enabling seamless responsive scaling for mobile touch screens and wide monitors.</li>
             </ul>
         </div>
-
-        <div class="card">
-            <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">
-                2026 Update (Releases May 24th + Premium Access May 3rd)
-            </div>
-            <h3>Nora Studio Manager</h3>
-            <p>The dashboard continues to evolve with new privacy controls, module management tools, and expanded configuration options.</p>
-        </div>
-
-        <div class="card">
-            <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">
-                2026 Update
-            </div>
-            <h3>Moderation Series N</h3>
-            <p>Series N introduces a new generation of moderation commands with stronger error handling and predictable behavior.</p>
-        </div>
-
     </div>
 </section>
 </main>
@@ -377,14 +376,13 @@ footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: 
     <button id="toggle-btn" class="toggle-icon">⇌</button>
 </div>
 
-
 <button id="login-btn" class="btn btn-primary login-btn">
     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" style="width: 20px;">
     Login
 </button>
 
 <footer>
-© 2026 Nora | Privacy-First AI & Moderation for Discord
+© 2026 Nora | Privacy-First AI & Modern Architecture Ecosystem
 </footer>
 
 <script>
