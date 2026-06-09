@@ -42,25 +42,25 @@ Creator of Nora
 
 ## Team
 
-**strawberry_angel** 
+**strawberry_angel**  
 Co-Owner
 
-**charlieisme**
+**charlieisme**  
 Administrator
 
-**solorads**
+**solorads**  
 Tester
 
-**silasvr8**
+**silasvr8**  
 Administrator
 
-**discounted_chaos**
+**discounted_chaos**  
 Administrator
 
-**.whispxrsoftime**
+**.whispxrsoftime**  
 Administrator
 
-**sanedish**
+**sanedish**  
 Tester
 
 
