@@ -40,20 +40,50 @@ Nora is designed so communities can **start using it quickly** without learning 
 **Vaztinix**  
 Creator of Nora
 
+## Team
+
+**strawberry_angel** 
+Co-Owner
+
+**charlieisme**
+Administrator
+
+**solorads**
+Tester
+
+**silasvr8**
+Administrator
+
+**discounted_chaos**
+Administrator
+
+**.whispxrsoftime**
+Administrator
+
+**sanedish**
+Tester
+
+
 ---
 
-## 🔗 Links
+## 🔗 Vaztinix's Links
 
-Top.gg  
+Top.gg | Vaztinix's Profile  
 https://top.gg/user/593420060990005248
+
+Top.gg | Nora's Listing  
+https://top.gg/bot/1375943730951098549
 
 GitHub  
 https://github.com/Vaztinix
 
+GitHub | Nora Studios  
+https://github.com/Vaztinix/nora-studio
+
 Website  
 https://vaztinix.dev/nora
 
-Looking for the old site?
+Looking for the old site?  
 https://vaztinix.github.io/Nora
 
 Discord  
