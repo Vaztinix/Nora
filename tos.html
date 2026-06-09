@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nora | Legal</title>
+<title>Nora | Legal - Legacy Archive</title>
 
-<meta property="og:title" content="Nora — Team" />
-<meta name="description" content="Nora Terms of Service and Privacy Policy. Transparent privacy-first moderation and automation for Discord.">
+<meta property="og:title" content="Nora — Legal Notice" />
+<meta name="description" content="Nora Terms of Service and Privacy Policy archive panel.">
 <meta property="og:image" content="https://vaztinx.github.io/Nora/nora.png" />
 
 <link rel="icon" type="image/png" href="nora.png">
@@ -24,6 +24,7 @@
 --text:#ffffff;
 --muted:rgba(255,255,255,0.7);
 --radius:18px;
+--warning:#ff7a7a;
 }
 
 *{box-sizing:border-box}
@@ -40,6 +41,32 @@ min-height:100vh;
 }
 
 a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.outdated-banner {
+background: linear-gradient(90deg, rgba(255, 122, 122, 0.15), rgba(255, 122, 122, 0.05));
+border-bottom: 1px solid rgba(255, 122, 122, 0.4);
+padding: 16px 24px;
+text-align: center;
+font-size: 1rem;
+font-weight: 700;
+color: var(--warning);
+letter-spacing: 0.2px;
+}
+
+.outdated-banner a {
+color: #ffffff;
+text-decoration: underline;
+background: rgba(255, 122, 122, 0.25);
+padding: 4px 10px;
+border-radius: 6px;
+margin-left: 6px;
+transition: background 0.2s ease;
+}
+
+.outdated-banner a:hover {
+background: rgba(255, 122, 122, 0.4);
+}
 
 header{
 position:sticky;
@@ -79,7 +106,6 @@ font-weight:600;
 color:var(--muted);
 }
 
-.nav-links a.active,
 .nav-links a:hover{color:var(--primary)}
 
 .container{
@@ -94,11 +120,12 @@ padding:4rem 1.5rem;
 display:inline-block;
 padding:6px 14px;
 border-radius:999px;
-background:rgba(174,239,255,0.12);
-color:var(--primary);
+background:rgba(255, 122, 122, 0.12);
+color:var(--warning);
 font-weight:700;
 font-size:.75rem;
 margin-bottom:18px;
+border: 1px solid rgba(255, 122, 122, 0.2);
 }
 
 .hero h1{font-size:clamp(2.2rem,4vw,3rem);margin-bottom:12px}
@@ -151,6 +178,18 @@ border-radius:var(--radius);
 padding:42px;
 line-height:1.75;
 color:var(--muted);
+position: relative;
+}
+
+.legal-card-overlay-notice {
+background: rgba(255, 122, 122, 0.08);
+border: 1px solid rgba(255, 122, 122, 0.3);
+border-radius: 12px;
+padding: 20px;
+color: #ffffff;
+font-weight: 600;
+margin-bottom: 30px;
+text-align: center;
 }
 
 .legal-card h2{color:var(--primary);margin-top:0}
@@ -171,20 +210,21 @@ color:var(--muted);
 
 <body>
 
+<div class="outdated-banner">
+⚠️ NOTICE: These legal terms no longer apply to Nora. View the active policies at:
+<a href="https://vaztinix.dev/legal">vaztinix.dev/legal</a>
+</div>
+
 <header>
 <div class="nav">
 
 <div class="brand">
-<img src="nora.png">
-<span>Nora</span>
+<img src="nora.png" alt="Nora">
+<span>Nora Legal Node</span>
 </div>
 
 <nav class="nav-links">
-<a href="index.html">Home</a>
-<a href="team.html">Team</a>
-<a href="ai-helper.html">Kite AI</a>
-<a href="AI.html">Nora AI</a>
-<a href="tos.html" class="active">Legal</a>
+<a href="https://vaztinix.dev/legal">Current Terms & Privacy Policy</a>
 </nav>
 
 </div>
@@ -193,11 +233,10 @@ color:var(--muted);
 <main class="container">
 
 <section class="hero">
-<div class="badge">LEGAL</div>
-<h1>Terms of Service & Privacy Policy</h1>
+<div class="badge">LEGACY ARCHIVE</div>
+<h1>Historical Terms & Policies</h1>
 <p>
-These documents explain how Nora operates, how server data is handled,
-and the responsibilities of administrators who use the service.
+The documents below are preserved for historical record references only. They have been superceded by new production architectures.
 </p>
 </section>
 
@@ -210,6 +249,10 @@ and the responsibilities of administrators who use the service.
 </div>
 
 <div class="legal-card" id="tosContent">
+
+<div class="legal-card-overlay-notice">
+🛑 These terms are inactive. To view the legally binding rules governing the current platform, please navigate to <a href="https://vaztinix.dev/legal">vaztinix.dev/legal</a>.
+</div>
 
 <h2>Terms of Service</h2>
 
@@ -322,6 +365,10 @@ or moderation outcomes performed through the system.
 
 <div class="legal-card hidden" id="privacyContent">
 
+<div class="legal-card-overlay-notice">
+🛑 This data map has expired. To read current live user privacy safeguards, please navigate to <a href="https://vaztinix.dev/legal">vaztinix.dev/legal</a>.
+</div>
+
 <h2>Privacy Policy</h2>
 
 <h3>1. Privacy-First Design</h3>
@@ -427,7 +474,7 @@ Updated versions will be published on the Nora website.
 </main>
 
 <footer>
-© 2026 Nora | Privacy-First AI & Moderation for Discord
+© 2026 Nora | Outdated document directory. Active terms located at vaztinix.dev/legal
 </footer>
 
 <script>
