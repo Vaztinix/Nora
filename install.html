@@ -12,8 +12,6 @@
 <meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
 <meta property="og:type" content="website">
 
-
-  
 <link rel="icon" type="image/png" href="nora.png">
 
 <style>
@@ -50,7 +48,6 @@ max-width:420px;
 padding:1.5rem;
 }
 
-
 .card{
 background:var(--card);
 border:1px solid var(--border);
@@ -80,7 +77,6 @@ color:var(--muted);
 line-height:1.6;
 margin-bottom:24px;
 }
-
 
 .btn{
 padding:14px 26px;
@@ -113,7 +109,6 @@ color:var(--muted);
 line-height:1.4;
 }
 
-
 .badge{
 display:inline-block;
 padding:6px 14px;
@@ -145,12 +140,12 @@ margin-bottom:16px;
     <div class="features">
       • Smart moderation commands<br>
       • Privacy-first data handling<br>
-      • Server-controlled systems<br>
+      • Moved to vaztinix.dev/install<br>
       • Fast and reliable responses
     </div>
 
     <button class="btn btn-primary" onclick="installBot()">
-      Continue to Discord
+      Continue to Installation
     </button>
 
     <div class="trust">
@@ -163,13 +158,7 @@ margin-bottom:16px;
 
 <script>
 function installBot() {
-  const url = 
-    "https://discord.com/oauth2/authorize" + 
-    "?client_id=1375943730951098549" + 
-    "&scope=bot%20applications.commands" + 
-    "&permissions=1101927670839"; 
-
-  window.location.href = url;
+  window.location.href = "https://vaztinix.dev/install";
 }
 </script>
 
