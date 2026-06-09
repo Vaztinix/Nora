@@ -3,164 +3,301 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Nora</title>
+<title>Nora | New Ecosystem Domain Notice</title>
 
-<meta name="description" content="Nora is a privacy-first Discord moderation and AI assistant bot built for transparency, safety, and full server control.">
-
-<meta property="og:title" content="Nora — Privacy-First Discord Bot | Install App">
-<meta property="og:description" content="Modern AI moderation for Discord with privacy and transparency.">
+<meta name="description" content="Nora has moved. Find up-to-date information regarding modern Discord moderation ecosystem features, parameters, and layout modules at vaztinix.dev/nora.">
+<meta property="og:title" content="Nora — Up-to-Date Discord Bot Ecosystem Hub">
+<meta property="og:description" content="Advanced multi-engine AI moderation, unified configuration, and cross-platform management have moved to a brand new ecosystem domain.">
 <meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
 <meta property="og:type" content="website">
 
 <link rel="icon" type="image/png" href="nora.png">
 
 <style>
-:root{
---bg:#0b0f1a;
---bg-soft:#12182b;
---card:rgba(255,255,255,0.06);
---card-hover:rgba(255,255,255,0.12);
---border:rgba(255,255,255,0.08);
---primary:#aeefff;
---accent:#7aa2ff;
---text:#ffffff;
---muted:rgba(255,255,255,0.7);
---radius:18px;
+:root {
+    --bg: #0b0f1a;
+    --bg-soft: #12182b;
+    --card: rgba(255, 255, 255, 0.06);
+    --card-hover: rgba(255, 255, 255, 0.12);
+    --border: rgba(255, 255, 255, 0.08);
+    --primary: #aeefff;
+    --accent: #7aa2ff;
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.7);
+    --radius: 18px;
+    --glass-bg: rgba(15, 20, 35, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.15);
 }
 
-body{
-margin:0;
-font-family:"Inter","Segoe UI",system-ui,sans-serif;
-background:
-radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
-radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
-var(--bg);
-color:var(--text);
-display:flex;
-align-items:center;
-justify-content:center;
-min-height:100vh;
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    background: radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
+                radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
+                var(--bg);
+    color: var(--text);
+    min-height: 100vh;
 }
 
-.container{
-width:100%;
-max-width:420px;
-padding:1.5rem;
+.move-banner {
+    background: linear-gradient(90deg, rgba(174, 239, 255, 0.15), rgba(122, 162, 255, 0.15));
+    border-bottom: 1px solid rgba(174, 239, 255, 0.3);
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
 }
 
-.card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:32px;
-text-align:center;
-transition:.25s;
+.move-banner a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 700;
+    margin-left: 4px;
+    transition: color 0.2s ease;
 }
 
-/*Title*/
-h1{
-margin:0 0 10px;
-font-size:1.6rem;
+.move-banner a:hover {
+    color: var(--text);
 }
 
-/*Description*/
-p{
-color:var(--muted);
-font-size:0.95rem;
-margin-bottom:20px;
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    background: rgba(10, 14, 30, 0.75);
+    border-bottom: 1px solid var(--border);
 }
 
-.features{
-text-align:left;
-font-size:0.9rem;
-color:var(--muted);
-line-height:1.6;
-margin-bottom:24px;
+.nav {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.btn{
-padding:14px 26px;
-border-radius:999px;
-font-weight:800;
-border:none;
-cursor:pointer;
-transition:.25s;
-display:inline-flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-width:100%;
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; color: white; }
+.brand img { width: 40px; height: 40px; border-radius: 10px; }
+
+.nav-links { 
+    display: flex; 
+    gap: 22px; 
 }
 
-.btn-primary{
-background:var(--primary);
-color:#000;
-box-shadow:0 10px 30px rgba(174,239,255,.25);
+.nav-links a, .nav-links a:visited {
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.btn-primary:hover{
-transform:translateY(-3px);
+.nav-links a:hover {
+    color: var(--text);
 }
 
-.trust{
-margin-top:16px;
-font-size:0.75rem;
-color:var(--muted);
-line-height:1.4;
+.inline-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+.inline-link:hover {
+    text-decoration: underline;
 }
 
-.badge{
-display:inline-block;
-padding:6px 14px;
-border-radius:999px;
-background:rgba(174,239,255,0.12);
-color:var(--primary);
-font-weight:700;
-font-size:.7rem;
-letter-spacing:.6px;
-margin-bottom:16px;
+.container { max-width: 1200px; margin: auto; padding: 4rem 1.5rem; }
+section { margin-bottom: 6rem; }
+
+.hero { text-align: center; padding-top: 2rem; }
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(174, 239, 255, 0.12);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: .75rem;
+    margin-bottom: 18px;
 }
+
+.hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.1; margin: 0 0 18px; }
+.hero p { max-width: 760px; margin: 0 auto 32px; color: var(--muted); font-size: 1.05rem; }
+
+.cta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.btn {
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    transition: .25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-primary { background: var(--primary); color: #000; box-shadow: 0 10px 30px rgba(174,239,255,.25); text-decoration: none; }
+.btn-primary:hover { transform: translateY(-4px); }
+.btn-ghost { background: transparent; border: 2px solid var(--border); color: white; text-decoration: none; }
+.btn-ghost:hover { border-color: var(--primary); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px;
+    transition: .25s;
+}
+.card:hover { background: var(--card-hover); transform: translateY(-6px); }
+.card p { color: var(--muted); }
+
+.info-notice-footer {
+    font-size: 0.8rem;
+    color: var(--primary);
+    margin-top: 15px;
+    display: block;
+    font-weight: 500;
+}
+
+.cmd {
+    font-family: monospace;
+    background: rgba(0,0,0,.35);
+    padding: 8px 12px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.update-list {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+.update-list li { margin-bottom: 8px; }
+
+footer { border-top: 1px solid var(--border); padding: 32px 1.5rem; text-align: center; color: var(--muted); }
+
+@media(max-width:800px){ .nav-links { display: none; } }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="card">
-
-    <div class="badge">NORA INSTALL</div>
-
-    <h1>Add Nora to your server</h1>
-
-    <p>
-      Set up modern moderation and AI tools with a system designed for privacy,
-      transparency, and full server control.
-    </p>
-
-    <div class="features">
-      • Smart moderation commands<br>
-      • Privacy-first data handling<br>
-      • Moved to vaztinix.dev/install<br>
-      • Fast and reliable responses
-    </div>
-
-    <button class="btn btn-primary" onclick="installBot()">
-      Continue to Installation
-    </button>
-
-    <div class="trust">
-      Nora only requests permissions required for moderation and core features.
-      You can review and adjust access during installation.
-    </div>
-
-  </div>
+<div class="move-banner">
+    🚀 Looking for the newest Nora info? This branch is legacy. For absolute up-to-date details, head to our main instance: 
+    <a href="https://vaztinix.dev/nora">vaztinix.dev/nora</a>
 </div>
 
-<script>
-function installBot() {
-  window.location.href = "https://vaztinix.dev/install";
-}
-</script>
+<header>
+<div class="nav">
+    <div class="brand">
+        <img src="nora.png" alt="Nora">
+        <span>Nora Hub Notice</span>
+    </div>
+    <nav class="nav-links">
+        <a href="https://vaztinix.dev/nora">Ecosystem Dashboard</a>
+        <a href="https://vaztinix.dev/nora">Up-to-Date Docs</a>
+        <a href="https://vaztinix.dev/nora">New Home Portal</a>
+    </nav>
+</div>
+</header>
+
+<main class="container">
+    <section class="hero">
+        <div class="badge">ECOSYSTEM UPDATE NOTICE</div>
+        <h1>Nora Development Has Transferred</h1>
+        <p>
+            The production instance, infrastructure configurations, and complete documentation data suites for the 
+            Nora ecosystem have consolidated. To review active engine mechanics, status parameters, or access live data controls, 
+            please consult the central home portal directly.
+        </p>
+        <div class="cta">
+            <a class="btn btn-primary" href="https://vaztinix.dev/nora" target="_blank">View Up-To-Date Info</a>
+            <a class="btn btn-ghost" href="https://vaztinix.dev/nora" target="_blank">Ecosystem Registry</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>Current Core Architecture Updates</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Multi-Engine AI Brain</h3>
+                <p>Natively link ChatGPT, Gemini, and legacy internal modules seamlessly. Core operational adjustments and model integrations are tracked actively.</p>
+                <span class="info-notice-footer">See latest specs at <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a></span>
+            </div>
+            <div class="card">
+                <h3>Zero-Access Framework</h3>
+                <p>User transparency layers are fully locked in. Privacy protocols have undergone complete upgrades to enhance server perimeter isolation barriers.</p>
+                <span class="info-notice-footer">See latest specs at <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a></span>
+            </div>
+            <div class="card">
+                <h3>Cross-Platform Support</h3>
+                <p>The layout frameworks have expanded to accommodate complex, high-resolution viewport nodes fluidly on modern systems.</p>
+                <span class="info-notice-footer">See latest specs at <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a></span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Up-to-Date Configuration Parameters</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="cmd">/configure</div>
+                <p>Central workspace engine node. Manages server moderation gates, automod limits, audit tracking, and system overrides.</p>
+                <span class="info-notice-footer">Check operational manual on <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a></span>
+            </div>
+            <div class="card">
+                <div class="cmd">/mycard</div>
+                <p>Sovereign member metric interface. Implements live profile data cards and irreversible absolute wipe routines cleanly.</p>
+                <span class="info-notice-footer">Check operational manual on <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a></span>
+            </div>
+            <div class="card">
+                <div class="cmd">/ask</div>
+                <p>High-speed utility prompt channels routing dynamic user contextual statements to premium LLM micro-cores smoothly.</p>
+                <span class="info-notice-footer">Check operational manual on <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a></span>
+            </div>
+            <div class="card">
+                <div class="cmd">/rank</div>
+                <p>Algorithmic calculation panels generating user tier metrics based heavily on secure anti-chat-spam protocols.</p>
+                <span class="info-notice-footer">Check operational manual on <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a></span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Active Ecosystem Release Tracks</h2>
+        <div class="grid" style="grid-template-columns: 1fr; gap: 28px;">
+            <div class="card" style="border-left: 4px solid var(--primary);">
+                <div style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 6px;">
+                    PRODUCTION SUITE SYNC — PLATFORM NOTICE
+                </div>
+                <h3>Active Development Migrated Online</h3>
+                <p>Important: Patch notes, configuration logs, and functional roadmap tracking points have been systematically ported to prevent data fragmentation across host machines.</p>
+
+                <ul class="update-list">
+                    <li><strong>Unified Management Frameworks:</strong> The full architecture has expanded beyond localized tracking trees.</li>
+                    <li><strong>Suspicious Behavior Parsing:</strong> Enhanced pattern models have been implemented directly within the ecosystem runtime.</li>
+                    <li><strong>Security Layer Optimization:</strong> Advanced mass-join mitigations are continuously refined on live cloud networks.</li>
+                    <li><strong>Up-to-Date Status Records:</strong> To read complete logs or track current milestones, please consult the live network index.</li>
+                </ul>
+                <div style="margin-top: 20px; font-weight: 600; font-size: 0.9rem;">
+                    📌 Read the complete release specifications at: <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    © 2026 Nora | Most up-to-date system information can always be verified at <a href="https://vaztinix.dev/nora" class="inline-link">vaztinix.dev/nora</a>
+</footer>
 
 </body>
 </html>
