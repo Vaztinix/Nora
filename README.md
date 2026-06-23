@@ -51,9 +51,6 @@ Administrator
 **solorads**  
 Tester
 
-**silasvr8**  
-Administrator
-
 **discounted_chaos**  
 Administrator
 
