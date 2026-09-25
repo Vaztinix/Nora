@@ -3,9 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moved | Nora Studio</title>
+<title>Dashboard Moved | Archived - Redirecting to vaztinix.dev</title>
 
-<meta name="description" content="Nora Studio has moved to a new domain.">
+<meta name="description" content="Nora Studio login and dashboard have moved. Securely access your server configurations at our new domain: vaztinix.dev/dashboard.">
+<meta property="og:title" content="Dashboard Moved | Nora Archive">
+<meta property="og:description" content="Nora's dashboard portal has migrated to a new ecosystem domain. Redirecting to vaztinix.dev/dashboard.">
+<meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
+<meta property="og:type" content="website">
+
+<!-- Automatic redirect to the new site after 10 seconds -->
+<meta http-equiv="refresh" content="10;url=https://vaztinix.dev/dashboard">
+
 <link rel="icon" type="image/png" href="nora.png">
 
 <style>
@@ -40,35 +48,51 @@ body {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 3rem 2rem;
+    padding: 3.5rem 2.5rem;
     text-align: center;
-    max-width: 500px;
+    max-width: 520px;
     width: 90%;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(14px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    transition: transform 0.25s ease;
+}
+
+.notice-card:hover {
+    transform: translateY(-4px);
+}
+
+.archived-notice {
+    color: #ff9999;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
 }
 
 .lock-icon {
-    font-size: 4rem;
-    margin-bottom: 1.5rem;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
     display: inline-block;
     filter: drop-shadow(0 0 20px rgba(174,239,255,0.4));
 }
 
 h1 {
-    font-size: 2.2rem;
-    margin: 0 0 10px 0;
+    font-size: 2rem;
+    margin: 0 0 16px 0;
+    color: var(--primary);
 }
 
 p {
     color: var(--muted);
     font-size: 1.05rem;
-    line-height: 1.5;
-    margin-bottom: 2rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
 }
 
 .url-highlight {
-    color: var(--primary);
+    color: var(--text);
     font-weight: 600;
 }
 
@@ -81,9 +105,11 @@ p {
     transition: .25s;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     font-size: 1rem;
     text-decoration: none;
+    width: 100%;
 }
 
 .btn-primary {
@@ -97,9 +123,16 @@ p {
     box-shadow: 0 15px 35px rgba(174,239,255,.35);
 }
 
+.redirect-timer {
+    margin-top: 24px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    opacity: 0.8;
+}
+
 footer {
     position: absolute;
-    bottom: 20px;
+    bottom: 24px;
     text-align: center;
     color: var(--muted);
     font-size: 0.85rem;
@@ -111,12 +144,29 @@ footer {
 
 <main class="notice-card">
     <div class="lock-icon">🔒</div>
-    <h1>We've Moved!</h1>
-    <p>Nora has officially moved to a new home at <span class="url-highlight">vaztinix.dev</span>. You can access your new dashboard using the link below.</p>
+    <span class="archived-notice">Archived Site</span>
+    
+    <h1>Dashboard Has Moved</h1>
+    
+    <p>
+        The Nora Studio login and server dashboard have officially migrated to our new central ecosystem. Securely access and manage your configurations at <span class="url-highlight">vaztinix.dev/dashboard</span>.
+    </p>
+    
     <a href="https://vaztinix.dev/dashboard" class="btn btn-primary">Go to New Dashboard</a>
+    
+    <div class="redirect-timer">
+        Automatically redirecting to vaztinix.dev in 10 seconds...
+    </div>
 </main>
 
 <footer>© 2026 Nora | Privacy-First AI & Moderation for Discord</footer>
+
+<script>
+    // Fallback script redirect to ensure the user is routed to the dashboard
+    setTimeout(function() {
+        window.location.href = "https://vaztinix.dev/dashboard";
+    }, 10000);
+</script>
 
 </body>
 </html>
