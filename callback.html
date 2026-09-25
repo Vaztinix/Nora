@@ -3,27 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nora Discord Callback</title>
+<title>Nora Discord Callback | Archived - Redirecting</title>
 <script>
-  // Immediately process the token before rendering anything
-  const hash = window.location.hash.substring(1);
-  const params = new URLSearchParams(hash);
-  const token = params.get('access_token');
-  const tokenType = params.get('token_type');
+  // The site has migrated to a new ecosystem.
+  // We no longer process or store OAuth tokens on this legacy domain.
 
-  if (token) {
-    // Save to localStorage for site-wide, persistent login
-    localStorage.setItem('discord_token', token);
-    if (tokenType) localStorage.setItem('token_type', tokenType);
+  const newDashboardUrl = 'https://vaztinix.dev/dashboard';
 
-    // Redirect to the dashboard using replace() to prevent back-button loops
-    window.location.replace('login.html'); 
-  } else {
-    // If something went wrong, redirect after a brief message
-    document.write('<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0b0f1a;color:white;font-family:sans-serif;"><h2>Discord login failed. Redirecting...</h2></div>');
-    // Redirect back to the login page so they can try again
-    setTimeout(() => window.location.replace('login.html'), 2000);
+  // If there's a token or hash in the URL, wipe it from the browser history 
+  // immediately to prevent token leakage on the archived domain.
+  if (window.location.hash) {
+    window.history.replaceState(null, '', window.location.pathname);
   }
+
+  // Provide a brief, on-brand visual notice before redirecting
+  document.write(`
+    <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;background:#0b0f1a;color:#ffffff;font-family:'Inter', sans-serif;text-align:center;padding:20px;">
+      <span style="color:#ff9999;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Archived Site</span>
+      <h2 style="color:#aeefff;margin:0 0 10px 0;font-size:2rem;">Dashboard Has Moved</h2>
+      <p style="color:rgba(255,255,255,0.7);font-size:1.05rem;">We no longer process logins here. Redirecting you to <strong>vaztinix.dev</strong>...</p>
+    </div>
+  `);
+
+  // Redirect to the new dashboard using replace() to prevent back-button loops
+  setTimeout(() => window.location.replace(newDashboardUrl), 2000);
 </script>
 </head>
 <body></body>
