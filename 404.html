@@ -4,18 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>404 - Page Not Found</title>
+<title>404 - You Seem Lost | Nora Archive</title>
 
-<meta name="description" content="404 — The page you’re looking for doesn’t exist. Return to the Nora homepage.">
-<meta property="og:title" content="404 — Page Not Found | Nora">
-<meta property="og:description" content="This page doesn’t exist. Return safely to Nora.">
+<meta name="description" content="404 — You seem lost. This is an archived version of the site. Nora has officially moved to vaztinix.dev.">
+<meta property="og:title" content="404 — You Seem Lost | Nora Archive">
+<meta property="og:description" content="This is an archived site. Nora has moved to a brand new ecosystem domain. Discover the new features at vaztinix.dev.">
 <meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
 <meta property="og:type" content="website">
+
+<!-- Automatic redirect to the new site after 10 seconds -->
+<meta http-equiv="refresh" content="10;url=https://vaztinix.dev">
 
 <link rel="icon" href="nora.png" type="image/png">
 
 <style>
-
 :root{
 --bg:#0b0f1a;
 --card:rgba(255,255,255,0.06);
@@ -46,7 +48,6 @@ overflow:hidden;
 }
 
 /* Background Glow */
-
 body::before,
 body::after{
 content:"";
@@ -87,7 +88,6 @@ padding:2rem;
 }
 
 /* Logo */
-
 .logo{
 margin-bottom:18px;
 }
@@ -98,22 +98,7 @@ height:60px;
 border-radius:12px;
 }
 
-/* Badge */
-
-.badge{
-display:inline-block;
-padding:6px 14px;
-border-radius:999px;
-background:rgba(174,239,255,0.12);
-color:var(--primary);
-font-weight:700;
-font-size:.75rem;
-letter-spacing:.6px;
-margin-bottom:22px;
-}
-
 /* Card */
-
 .card{
 background:var(--card);
 border:1px solid var(--border);
@@ -129,7 +114,6 @@ transform:translateY(-6px);
 }
 
 /* Typography */
-
 h1{
 font-size:clamp(3.5rem,6vw,5rem);
 margin:0;
@@ -137,8 +121,19 @@ letter-spacing:2px;
 color:var(--primary);
 }
 
+.archived-notice {
+color: #ff9999;
+font-weight: 600;
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-top: -5px;
+margin-bottom: 20px;
+display: block;
+}
+
 h2{
-margin-top:12px;
+margin-top:0;
 font-size:1.6rem;
 font-weight:700;
 }
@@ -151,7 +146,6 @@ line-height:1.5;
 }
 
 /* Buttons */
-
 .actions{
 display:flex;
 gap:16px;
@@ -194,28 +188,22 @@ border-color:var(--primary);
 }
 
 /* Footer */
-
 .footer{
 margin-top:26px;
-font-size:.85rem;
+font-size:.9rem;
 color:var(--muted);
-opacity:.7;
+opacity:.8;
 }
 
 /* Mobile */
-
 @media (max-width:600px){
-
 .card{
 padding:36px 24px;
 }
-
 h2{
 font-size:1.4rem;
 }
-
 }
-
 </style>
 </head>
 
@@ -230,29 +218,41 @@ font-size:1.4rem;
 <div class="card">
 
 <h1>404</h1>
+<span class="archived-notice">Archived Site</span>
 
-<h2>Page Not Found</h2>
+<h2>You Seem Lost...</h2>
 
 <p>
-The page you're looking for doesn't exist, may have moved,
-or you might not have permission to access it.
+The page you're looking for is no longer here because <strong>this is an archived site</strong>. <br><br>
+All active development, dashboard configurations, and live documentation for Nora have officially migrated to our new central ecosystem.
 </p>
 
 <div class="actions">
 
-<a href="index.html" class="btn btn-primary">
-Home
+<a href="https://vaztinix.dev" class="btn btn-primary">
+Go to New Site (vaztinix.dev)
 </a>
 
 <a href="https://discord.gg/cXsZr3cMEB" class="btn btn-ghost" target="_blank">
-Support
+Support Server
 </a>
 
 </div>
 
 </div>
 
+<div class="footer">
+Automatically redirecting to the new hub in 10 seconds...
+</div>
+
 </main>
+
+<script>
+    // Fallback script redirect just in case the meta tag gets blocked by aggressive browsers
+    setTimeout(function() {
+        window.location.href = "https://vaztinix.dev";
+    }, 10000);
+</script>
 
 </body>
 </html>
