@@ -1,10 +1,16 @@
 <div align="center">
 
-# ✨ Nora
+# ✨ Nora Ecosystem
 
 ### Privacy-First AI & Moderation for Discord
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1200&color=A970FF&center=true&vCenter=true&width=500&lines=Moderation+made+simple;Automation+that+respects+privacy;Built+for+Discord+communities" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1200&color=A970FF&center=true&vCenter=true&width=500&lines=Moderation+made+simple;Multi-Engine+AI+integration;Automation+that+respects+privacy;Built+for+Discord+communities" alt="Typing SVG" />
+
+<br>
+
+> **🚀 Nora Development Has Moved!**  
+> All active development, dashboard configurations, patch notes, and live documentation have officially migrated to our new central ecosystem to prevent data fragmentation.  
+> **[Visit our new home at vaztinix.dev](https://vaztinix.dev/nora)**
 
 </div>
 
@@ -12,82 +18,54 @@
 
 ## What is Nora?
 
-**Nora** is a Discord bot focused on something many tools forget:
+**Nora** is a modern Discord moderation ecosystem focused on something many tools forget: **respecting the people who use it.**
 
-**respecting the people who use it.**
+It provides advanced multi-engine AI assistance and unified server configuration while staying **simple, transparent, and privacy-first**. We believe communities shouldn't have to choose between powerful automation and user privacy. 
 
-It provides moderation and helpful automation while staying **simple, transparent, and privacy-first**.
-
-No complicated setup.  
-No unnecessary data collection.  
-Just tools that help communities run smoothly.
+No complicated setups. No unnecessary data collection. No hidden logging. Just tools that help your community run smoothly.
 
 ---
 
-## Features
+## Core Features
 
-• Simple moderation tools  
-• Helpful automation  
-• Privacy-first philosophy  
-• Easy server configuration  
-
-Nora is designed so communities can **start using it quickly** without learning a complicated system.
+- **Multi-Engine AI Brain:** Seamlessly natively link ChatGPT, Gemini, and legacy internal modules for dynamic contextual responses.
+- **Zero-Access Framework:** User transparency layers are fully locked in. Privacy protocols and server perimeter isolation barriers are on by default.
+- **Unified Configuration:** Easily manage server moderation gates, automod limits, audit tracking, and system overrides through a central workspace.
+- **Sovereign Member Metrics:** Live profile data cards with completely irreversible, clean data wipe routines.
 
 ---
 
-## Developer
+## The Team
 
-**Vaztinix**  
-Creator of Nora
+A massive thank you to the team that helps keep the Nora ecosystem running and secure:
 
-## Team
-
-**strawberry_angel**  
-Co-Owner
-
-**charlieisme**  
-Administrator
-
-**solorads**  
-Tester
-
-**discounted_chaos**  
-Administrator
-
-**.whispxrsoftime**  
-Administrator
-
-**sanedish**  
-Tester
-
+- **Vaztinix** — Creator & Lead Developer
+- **strawberry_angel** — Co-Owner
+- **charlieisme** — Administrator
+- **discounted_chaos** — Administrator
+- **.whispxrsoftime** — Administrator
+- **solorads** — Tester
+- **sanedish** — Tester
 
 ---
 
-## 🔗 Vaztinix's Links
+## 🔗 Important Links
 
-Top.gg | Vaztinix's Profile  
-https://top.gg/user/593420060990005248
+### Active Ecosystem
+- **Central Hub:** [vaztinix.dev/nora](https://vaztinix.dev/nora)
+- **Legacy Archive:** [vaztinix.github.io/Nora](https://vaztinix.github.io/Nora)
 
-Top.gg | Nora's Listing  
-https://top.gg/bot/1375943730951098549
+### Bot Listings & Profiles
+- **Add Nora:** [Top.gg Bot Listing](https://top.gg/bot/1375943730951098549)
+- **Vaztinix:** [Top.gg Profile](https://top.gg/user/593420060990005248)
 
-GitHub  
-https://github.com/Vaztinix
+### Source & Development
+- **Vaztinix GitHub:** [github.com/Vaztinix](https://github.com/Vaztinix)
+- **Nora Studios GitHub:** [github.com/Vaztinix/nora-studio](https://github.com/Vaztinix/nora-studio)
 
-GitHub | Nora Studios  
-https://github.com/Vaztinix/nora-studio
-
-Website  
-https://vaztinix.dev/nora
-
-Looking for the old site?  
-https://vaztinix.github.io/Nora
-
-Discord  
-https://discord.com/users/1214048435632603137
-
-Email  
-vaztinixstudios@gmail.com
+### Contact
+- **Discord:** [@vaztinix](https://discord.com/users/1214048435632603137)
+- **Email:** vaztinixstudios@gmail.com
 
 ---
 
