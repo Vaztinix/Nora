@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Nora</title>
+<title>Add Nora | Archived - Moved to vaztinix.dev</title>
 
-<meta name="description" content="Nora is a privacy-first Discord moderation and AI assistant bot built for transparency, safety, and full server control.">
+<meta name="description" content="The Nora installation page has moved. Install the privacy-first Discord moderation bot at our new ecosystem domain: vaztinix.dev/install.">
 
-<meta property="og:title" content="Nora — Privacy-First Discord Bot | Install App">
-<meta property="og:description" content="Modern AI moderation for Discord with privacy and transparency.">
+<meta property="og:title" content="Add Nora | Archived Site">
+<meta property="og:description" content="Nora's installation portal has migrated to a new ecosystem domain. Redirecting to vaztinix.dev/install.">
 <meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png">
 <meta property="og:type" content="website">
+
+<!-- Automatic redirect to the new site after 10 seconds -->
+<meta http-equiv="refresh" content="10;url=https://vaztinix.dev/install">
 
 <link rel="icon" type="image/png" href="nora.png">
 
@@ -44,7 +47,7 @@ min-height:100vh;
 
 .container{
 width:100%;
-max-width:420px;
+max-width:460px;
 padding:1.5rem;
 }
 
@@ -52,30 +55,40 @@ padding:1.5rem;
 background:var(--card);
 border:1px solid var(--border);
 border-radius:var(--radius);
-padding:32px;
+padding:40px 32px;
 text-align:center;
+backdrop-filter: blur(14px);
 transition:.25s;
+}
+
+.card:hover{
+background:var(--card-hover);
+transform:translateY(-4px);
+}
+
+.archived-notice {
+color: #ff9999;
+font-weight: 600;
+font-size: 0.85rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-bottom: 16px;
+display: block;
 }
 
 /*Title*/
 h1{
-margin:0 0 10px;
-font-size:1.6rem;
+margin:0 0 16px;
+font-size:1.8rem;
+color: var(--primary);
 }
 
 /*Description*/
 p{
 color:var(--muted);
-font-size:0.95rem;
-margin-bottom:20px;
-}
-
-.features{
-text-align:left;
-font-size:0.9rem;
-color:var(--muted);
-line-height:1.6;
-margin-bottom:24px;
+font-size:1.05rem;
+line-height: 1.5;
+margin-bottom:28px;
 }
 
 .btn{
@@ -90,6 +103,8 @@ align-items:center;
 justify-content:center;
 gap:10px;
 width:100%;
+text-decoration: none;
+font-size: 1rem;
 }
 
 .btn-primary{
@@ -99,26 +114,16 @@ box-shadow:0 10px 30px rgba(174,239,255,.25);
 }
 
 .btn-primary:hover{
-transform:translateY(-3px);
+transform:translateY(-4px);
+box-shadow:0 15px 40px rgba(174,239,255,0.35);
 }
 
 .trust{
-margin-top:16px;
-font-size:0.75rem;
+margin-top:24px;
+font-size:0.85rem;
 color:var(--muted);
 line-height:1.4;
-}
-
-.badge{
-display:inline-block;
-padding:6px 14px;
-border-radius:999px;
-background:rgba(174,239,255,0.12);
-color:var(--primary);
-font-weight:700;
-font-size:.7rem;
-letter-spacing:.6px;
-margin-bottom:16px;
+opacity: 0.8;
 }
 </style>
 </head>
@@ -128,38 +133,30 @@ margin-bottom:16px;
 <div class="container">
   <div class="card">
 
-    <div class="badge">NORA INSTALL</div>
+    <span class="archived-notice">Archived Site</span>
 
-    <h1>Add Nora to your server</h1>
+    <h1>Installation Has Moved</h1>
 
     <p>
-      Set up modern moderation and AI tools with a system designed for privacy,
-      transparency, and full server control.
+      The Nora ecosystem and bot installation portal have officially transferred to our new domain. To securely add Nora to your server, please proceed to the new site.
     </p>
 
-    <div class="features">
-      • Smart moderation commands<br>
-      • Privacy-first data handling<br>
-      • Moved to vaztinix.dev/install<br>
-      • Fast and reliable responses
-    </div>
-
-    <button class="btn btn-primary" onclick="installBot()">
-      Continue to Installation
-    </button>
+    <a href="https://vaztinix.dev/install" class="btn btn-primary">
+      Continue to New Installation
+    </a>
 
     <div class="trust">
-      Nora only requests permissions required for moderation and core features.
-      You can review and adjust access during installation.
+      Automatically redirecting to vaztinix.dev in 10 seconds...
     </div>
 
   </div>
 </div>
 
 <script>
-function installBot() {
+// Fallback script redirect to ensure the user is routed to the new domain
+setTimeout(function() {
   window.location.href = "https://vaztinix.dev/install";
-}
+}, 10000);
 </script>
 
 </body>
