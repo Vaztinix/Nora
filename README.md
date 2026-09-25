@@ -40,12 +40,14 @@ No complicated setups. No unnecessary data collection. No hidden logging. Just t
 A massive thank you to the team that helps keep the Nora ecosystem running and secure:
 
 - **Vaztinix** — Creator & Lead Developer
-- **strawberry_angel** — Co-Owner
+- **strawberry._0000** — Server Owner & Administrator
 - **charlieisme** — Administrator
 - **discounted_chaos** — Administrator
-- **.whispxrsoftime** — Administrator
-- **solorads** — Tester
-- **sanedish** — Tester
+- **solorads** — Tester & Moderator
+- **Spring_aviationyt** - Moderator
+- **buzzing_editz** - Tester & Moderator
+- **thesmallguy_** - Tester and Moderator
+- **yunex0** - Bug Hunter, Tester, and Moderator
 
 ---
 
