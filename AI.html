@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nora AI</title>
+  
+  <title>Nora AI | Archived - Moved to vaztinix.dev</title>
 
-  <meta name="description" content="Nora AI provides privacy-first AI assistance for moderation, support, and Discord communities." />
-  <meta property="og:title" content="Nora AI" />
-  <meta property="og:description" content="Privacy-first AI assistance for Discord moderation and support." />
+  <meta name="description" content="Nora AI has moved. Access the new privacy-first AI assistance and multi-engine moderation brain at vaztinix.dev." />
+  <meta property="og:title" content="Nora AI | Archived" />
+  <meta property="og:description" content="Nora's AI portal has officially migrated to a new ecosystem domain. Redirecting to vaztinix.dev." />
   <meta property="og:image" content="https://vaztinix.github.io/Nora/nora.png" />
   <meta property="og:type" content="website" />
+  
+  <!-- Automatic redirect to the new site after 10 seconds -->
+  <meta http-equiv="refresh" content="10;url=https://vaztinix.dev">
 
   <link rel="icon" type="image/png" href="nora.png" />
 
@@ -45,24 +49,23 @@
 
     header {
       text-align: center;
-      padding: 2.5rem 1.5rem 1.5rem;
+      padding: 4rem 1.5rem 1.5rem;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(174,239,255,0.12);
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.6px;
-      margin-bottom: 16px;
+    .archived-notice {
+      color: #ff9999;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
     }
 
     header h1 {
       font-size: clamp(2.4rem, 4vw, 3.2rem);
       margin: 0 0 12px;
+      color: var(--primary);
     }
 
     header p {
@@ -70,18 +73,20 @@
       margin: 0 auto;
       color: var(--muted);
       font-size: 1.05rem;
+      line-height: 1.5;
     }
 
     main {
       flex: 1;
       display: flex;
       justify-content: center;
+      align-items: flex-start;
       padding: 2rem 1.5rem 3rem;
     }
 
     .container {
       width: 100%;
-      max-width: 1000px;
+      max-width: 800px;
       display: flex;
       flex-direction: column;
       gap: 28px;
@@ -91,109 +96,78 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 40px;
+      text-align: center;
+      backdrop-filter: blur(14px);
       transition: background 0.25s ease, transform 0.25s ease;
     }
 
     .card:hover {
       background: var(--card-hover);
-      transform: translateY(-6px);
+      transform: translateY(-4px);
     }
 
     .card h3 {
-      margin: 0 0 10px;
-      color: var(--primary);
+      margin: 0 0 16px;
+      font-size: 1.5rem;
     }
 
     .card p {
-      margin: 0;
+      margin: 0 0 24px;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    
+    .redirect-timer {
+      margin-top: 24px !important;
+      font-size: 0.85rem !important;
+      opacity: 0.7;
     }
 
-    .ai-frame {
-      padding: 0;
-      overflow: hidden;
-      height: 70vh;
-    }
-
-    .ai-frame iframe {
-      width: 100%;
-      height: 100%;
+    /* Buttons */
+    .btn {
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 800;
       border: none;
-      border-radius: var(--radius);
+      cursor: pointer;
+      transition: .25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 10px 30px rgba(174,239,255,0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(174,239,255,0.35);
     }
 
     footer {
       border-top: 1px solid var(--border);
       text-align: center;
-      padding: 1.5rem;
+      padding: 2rem 1.5rem;
       font-size: 0.9rem;
       color: var(--muted);
     }
 
-    #floatingMenu {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: flex-end;
-      z-index: 1500;
-    }
-
-    #floatingMenu .menu-toggle {
-      width: 56px;
-      height: 56px;
-      border-radius: 28px;
-      background: var(--primary);
-      color: #000;
-      font-size: 26px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-    }
-
-    #floatingMenu .menu-toggle:hover {
-      transform: scale(1.1);
-    }
-
-    #floatingMenu .menu-items {
-      display: none;
-      flex-direction: column;
-      margin-bottom: 12px;
-    }
-
-    #floatingMenu .menu-items a {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 12px 18px;
-      margin: 6px 0;
-      border-radius: var(--radius);
-      font-weight: 600;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: background 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
-    }
-
-    #floatingMenu .menu-items a:hover {
-      background: var(--card-hover);
-    }
-
-    @media (max-width: 700px) {
-      .ai-frame { height: 65vh; }
-    }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="badge">Nora AI</div>
-  <h1>Privacy-First AI Assistance</h1>
+  <span class="archived-notice">Archived AI Portal</span>
+  <h1>Nora AI Has Moved</h1>
   <p>
-    Nora provides assistance for moderation, support,
-    and community management — without hidden logging or developer access.
+    Nora's privacy-first AI assistance, moderation tools, and community management hubs have officially transferred to a new ecosystem.
   </p>
 </header>
 
@@ -201,26 +175,29 @@
   <div class="container">
 
     <div class="card">
-      <h3>About Nora AI</h3>
+      <h3>Active Development Migrated</h3>
       <p>
-        This AI instance is officially connected with Naura and designed to support
-        Discord communities responsibly. All interactions respect user privacy
-        and moderation.
+        This legacy AI interface is no longer active. To access the live multi-engine AI brain, up-to-date documentation, and the complete unified management framework, please visit our new home directly.
       </p>
-    </div>
-
-    <div class="card ai-frame">
-      <iframe
-        src="https://https://copilot.microsoft.com"
-        allow="microphone">
-      </iframe>
+      
+      <a href="https://vaztinix.dev" class="btn btn-primary">Access Nora AI at vaztinix.dev</a>
+      
+      <p class="redirect-timer">Automatically redirecting to the new hub in 10 seconds...</p>
     </div>
 
   </div>
 </main>
 
 <footer>
-  © 2026 Nora | Privacy-First AI & Moderation for Discord
+  © 2026 Nora | Site migrated. Verify active systems at <a href="https://vaztinix.dev" style="color: var(--primary); font-weight: 600;">vaztinix.dev</a>
 </footer>
 
+<script>
+  // Fallback script redirect to ensure the user is routed to the new domain
+  setTimeout(function() {
+      window.location.href = "https://vaztinix.dev";
+  }, 10000);
+</script>
+
+</body>
 </html>
