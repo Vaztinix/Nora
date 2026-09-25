@@ -1,7 +1,7 @@
 {
-  "name": "nora-web",
+  "name": "nora-web-archive",
   "version": "1.0.0",
-  "description": "Nora web interface and install flow",
+  "description": "Archived Nora web interface - redirects to vaztinix.dev",
   "type": "module",
   "private": true,
   "engines": {
